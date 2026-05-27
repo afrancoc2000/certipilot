@@ -1,0 +1,33 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "deepseek/deepseek-chat",
+  "small_model": "deepseek/deepseek-chat",
+  "provider": {
+    "deepseek": {
+      "npm": "@ai-sdk/deepseek",
+      "options": {
+        "apiKey": "{env:DEEPSEEK_API_KEY}"
+      },
+      "models": {
+        "deepseek-chat": {
+          "name": "DeepSeek V4 Pro (chat)"
+        },
+        "deepseek-reasoner": {
+          "name": "DeepSeek V4 Pro (reasoner)"
+        }
+      }
+    },
+    "openai": {
+      "npm": "@ai-sdk/openai",
+      "options": {
+        "apiKey": "{env:OPENAI_API_KEY}"
+      },
+      "models": {
+        "gpt-5.5": {
+          "name": "GPT-5.5"
+        }
+      }
+    }
+  },
+  "instructions": ["AGENTS.md"]
+}
