@@ -115,8 +115,12 @@ them.
 
 ## Daily plan workflow (copy/paste)
 
+For guidance on creating an effective plan from scratch (starting with a
+50-question mixed mock), see
+[data/study-plans/README.md](data/study-plans/README.md).
+
 Use the sprint plan in
-[data/study-plan-2026-05-27-to-2026-06-15.md](data/study-plan-2026-05-27-to-2026-06-15.md)
+[data/study-plans/study-plan-2026-05-27-to-2026-06-15.md](data/study-plans/study-plan-2026-05-27-to-2026-06-15.md)
 as the source for each session and always persist results to
 [data/progress.md](data/progress.md).
 
@@ -125,9 +129,9 @@ as the source for each session and always persist results to
 Start `copilot`, then paste:
 
 ```text
-Use data/study-plan-2026-05-27-to-2026-06-15.md as the active study plan.
+Use data/study-plans/study-plan-2026-05-27-to-2026-06-15.md as the active study plan.
 Today is YYYY-MM-DD.
-Run a 75-minute sprint session with:
+Run a 2-hour sprint session with:
 1) retrieval warm-up,
 2) focused remediation for today's topic,
 3) mixed interleaved quiz,
@@ -138,7 +142,7 @@ After grading, update data/progress.md.
 ### Copilot CLI (one-shot)
 
 ```bash
-copilot -p "Use data/study-plan-2026-05-27-to-2026-06-15.md as the active plan. Today is YYYY-MM-DD. Run a 75-minute sprint session (retrieval, focused remediation, mixed quiz, review) and update data/progress.md."
+copilot -p "Use data/study-plans/study-plan-2026-05-27-to-2026-06-15.md as the active plan. Today is YYYY-MM-DD. Run a 2-hour sprint session (retrieval, focused remediation, mixed quiz, review) and update data/progress.md."
 ```
 
 ### OpenCode (interactive)
@@ -148,10 +152,10 @@ Start `opencode`, then paste the same prompt used for Copilot interactive mode.
 ### Optional quick variants
 
 - **60-minute day:** replace "75-minute" with "60-minute" in the prompt.
-- **120-minute day:** replace "75-minute" with "120-minute" and request 10
-	extra mixed questions at the end.
+- **120-minute day:** replace "75-minute" with "120-minute" and request 10 extra
+  mixed questions at the end.
 - **Domain focus day:** append "Focus only on <domain> from today's plan, then
-	add 3 retention questions from other domains."
+  add 3 retention questions from other domains."
 
 ## Adding external study material
 

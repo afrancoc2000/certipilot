@@ -3,27 +3,30 @@
 opencode.log
 
 # External study dataset (Valentina's OneDrive material, etc.)
-data/savill/
+# data/savill/
 data/**/*.mp4
 data/**/*.zip
 data/**/*.pdf
 
 # Extracted O'Reilly book content (personal-use only, do not commit)
-data/oreilly/**/*.md
-data/oreilly/**/*.txt
+# data/oreilly/**/*.md
+# data/oreilly/**/*.txt
 !data/oreilly/README.md
 
 # Pluralsight course transcripts (personal-use only, do not commit)
-data/pluralsight/**/*.txt
-data/pluralsight/**/*.md
+# data/pluralsight/**/*.txt
+# data/pluralsight/**/*.md
 !data/pluralsight/README.md
 
 # Graded test-exam runs with personal answers (personal-use only, do not commit)
-data/test-exams/**/*.md
+# data/test-exams/**/*.md
 !data/test-exams/README.md
 
 # Personal study progress / agent memory
 data/progress.md
+
+# Private study plans (local only)
+data/study-plans/study-plan-2026-05-27-to-2026-06-15.md
 
 # Agent-side helper scripts (one-off parsers, formatters) — not study material
 scripts/
