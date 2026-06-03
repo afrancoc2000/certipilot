@@ -22,7 +22,7 @@ committing to an answer):
 
 1. **`course/`** — Spanish-language study notes organized by exam domain. All
    course material lives under this folder; keep agent tooling (`AGENTS.md`,
-   `opencode.json`, `data/`) at the workspace root separate from it. Read on
+  `data/`) at the workspace root separate from it. Read on
    demand:
    - `course/00-introduction/` — course intro
    - `course/01-governance/` — Azure governance (management groups, RBAC,
@@ -284,7 +284,7 @@ When custom agents are available in `.github/agents/`, route by intent:
   AZ-305.
 - Don't modify any files under `course/` unless the user explicitly asks you to
   update notes. Agent-side files at the workspace root (`AGENTS.md`,
-  `opencode.json`, `data/`) are fair game when the user is configuring the agent
+  `data/`) are fair game when the user is configuring the agent
   itself.
 
 ## Getting started prompt

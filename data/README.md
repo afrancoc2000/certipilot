@@ -19,7 +19,7 @@ look in `data/savill/` for John Savill's AZ-305 video transcripts.
 ## Verifying the agent can see it
 
 ```bash
-opencode
+copilot
 # Then ask: "list the files you can see under data/savill"
 ```
 

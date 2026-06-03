@@ -5,14 +5,13 @@ Solutions** exam, powered by a terminal AI agent that quizzes you on the course
 material under [course/](course/).
 
 The agent's behavior is defined in [AGENTS.md](AGENTS.md) and is compatible with
-two CLIs — pick whichever you prefer (or use both).
+GitHub Copilot CLI.
 
 ## Repo layout
 
 ```text
 az-305/
-├── AGENTS.md          ← agent instructions (read by both CLIs)
-├── opencode.json      ← OpenCode provider config (DeepSeek + OpenAI)
+├── AGENTS.md          ← agent instructions for the study agent
 ├── data/              ← external dataset drop zone (e.g. Savill videos)
 ├── course/            ← all study modules (Spanish)
 └── README.md          ← you are here
@@ -20,8 +19,13 @@ az-305/
 
 ## Prerequisites
 
-- Node.js 20+ and npm
+- GitHub Copilot CLI **1.0.11+** (recommended: latest)
+- Windows with `winget` available
 - A terminal (Git Bash, PowerShell, WSL — all fine)
+
+Why 1.0.11+: release 1.0.11 added directory-level discovery for custom
+instructions, skills, MCP servers, and agents from the working directory up to
+the git root, which makes `AGENTS.md` behavior reliable in nested repo layouts.
 
 ## Option 1 — GitHub Copilot CLI (recommended to start)
 
@@ -30,9 +34,17 @@ cost.
 
 ### Install
 
+Minimum recommended version for this repo: **1.0.11+**.
+
 ```bash
-npm install -g @github/copilot
+winget install --id GitHub.Copilot --exact
 copilot --version
+```
+
+To update later:
+
+```bash
+winget upgrade --id GitHub.Copilot --exact
 ```
 
 ### Run
@@ -57,61 +69,6 @@ One-shot mode (no interactive session):
 ```bash
 copilot -p "Quiz me on Cosmos DB consistency levels"
 ```
-
-## Option 2 — OpenCode
-
-Open-source CLI that lets you bring your own provider keys — useful if you want
-to use **DeepSeek V4 Pro** (much cheaper than GPT-5) or run a model Copilot
-doesn't expose.
-
-### Install
-
-```bash
-npm install -g opencode-ai
-opencode --version
-```
-
-### Configure API keys
-
-Set the keys for whichever providers you want to use:
-
-```bash
-# DeepSeek (cheap, default in opencode.json)
-echo 'export DEEPSEEK_API_KEY="sk-..."' >> ~/.bashrc
-
-# OpenAI (optional, for GPT-5.5)
-echo 'export OPENAI_API_KEY="sk-..."' >> ~/.bashrc
-
-source ~/.bashrc
-```
-
-Get a DeepSeek key at [platform.deepseek.com](https://platform.deepseek.com).
-
-### Run
-
-```bash
-cd /c/Users/anafranco/Workspace/learning/az-305
-opencode
-```
-
-OpenCode reads [AGENTS.md](AGENTS.md) (same file as Copilot CLI) plus
-[opencode.json](opencode.json) for the model wiring.
-
-Useful slash commands:
-
-- `/model` — switch between `deepseek/deepseek-chat` and `openai/gpt-5.5`
-- `/help` — full command list
-
-## Which one should I use?
-
-| Need                                             | Pick                       |
-| ------------------------------------------------ | -------------------------- |
-| Already paying for Copilot, want zero setup      | **Copilot CLI**            |
-| Want to grind hundreds of questions cheaply      | **OpenCode** with DeepSeek |
-| Want to A/B different models for the same prompt | Install both               |
-
-Both tools read the same `AGENTS.md`, so the tutor behaves consistently across
-them.
 
 ## Daily plan workflow (copy/paste)
 
@@ -145,10 +102,6 @@ After grading, update data/progress.md.
 copilot -p "Use data/study-plans/study-plan-2026-05-27-to-2026-06-15.md as the active plan. Today is YYYY-MM-DD. Run a 2-hour sprint session (retrieval, focused remediation, mixed quiz, review) and update data/progress.md."
 ```
 
-### OpenCode (interactive)
-
-Start `opencode`, then paste the same prompt used for Copilot interactive mode.
-
 ### Optional quick variants
 
 - **60-minute day:** replace "75-minute" with "60-minute" in the prompt.
@@ -165,5 +118,5 @@ cite from `data/savill/` when present.
 
 ## Updating the agent's behavior
 
-Edit [AGENTS.md](AGENTS.md) directly. Both CLIs re-read it on session start, so
-changes take effect the next time you launch `copilot` or `opencode`.
+Edit [AGENTS.md](AGENTS.md) directly. Copilot CLI re-reads it on session start, so
+changes take effect the next time you launch `copilot`.
