@@ -40,3 +40,4 @@ scripts/
 Thumbs.db
 .DS_Store
 /.vscode
+/data/test-exams/microsoft/certification/**/*.md

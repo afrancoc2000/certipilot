@@ -32,6 +32,8 @@ the git root, which makes `AGENTS.md` behavior reliable in nested repo layouts.
 Uses your existing GitHub Copilot subscription. No extra API keys, no per-token
 cost.
 
+Interactive mode is the recommended default workflow for this repo.
+
 ### Install
 
 Minimum recommended version for this repo: **1.0.11+**.
@@ -64,51 +66,112 @@ Useful slash commands inside the session:
 - `/help` — full command list
 - `/exit` — quit
 
-One-shot mode (no interactive session):
-
-```bash
-copilot -p "Quiz me on Cosmos DB consistency levels"
-```
-
-## Daily plan workflow (copy/paste)
+## Daily plan workflow
 
 For guidance on creating an effective plan from scratch (starting with a
 50-question mixed mock), see
 [data/study-plans/README.md](data/study-plans/README.md).
 
-Use the sprint plan in
-[data/study-plans/study-plan-2026-05-27-to-2026-06-15.md](data/study-plans/study-plan-2026-05-27-to-2026-06-15.md)
-as the source for each session and always persist results to
-[data/progress.md](data/progress.md).
+### Run today's study block
 
-### Copilot CLI (interactive)
+Use the `follow-plan` skill to execute today's block from your active study
+plan. The skill automatically:
 
-Start `copilot`, then paste:
+- Checks today's date against the plan.
+- Runs warm-up, remediation, mixed quiz, and review in order.
+- Updates `data/progress.md` with results.
+- Adapts tomorrow's block and logs the session.
+
+#### Interactive mode
+
+Start `copilot`, then run:
 
 ```text
-Use data/study-plans/study-plan-2026-05-27-to-2026-06-15.md as the active study plan.
-Today is YYYY-MM-DD.
-Run a 2-hour sprint session with:
-1) retrieval warm-up,
-2) focused remediation for today's topic,
-3) mixed interleaved quiz,
-4) concise review + next-day priority.
-After grading, update data/progress.md.
+/follow-plan data/study-plans/study-plan-2026-05-27-to-2026-06-15.md
 ```
 
-### Copilot CLI (one-shot)
+Optional: specify duration (default 120 min):
 
-```bash
-copilot -p "Use data/study-plans/study-plan-2026-05-27-to-2026-06-15.md as the active plan. Today is YYYY-MM-DD. Run a 2-hour sprint session (retrieval, focused remediation, mixed quiz, review) and update data/progress.md."
+```text
+/follow-plan data/study-plans/study-plan-2026-05-27-to-2026-06-15.md --duration 90
 ```
 
-### Optional quick variants
+Or simply say: "Run today's plan" or "Run today's plan for 60 minutes", and the
+skill will find the active plan.
 
-- **60-minute day:** replace "75-minute" with "60-minute" in the prompt.
-- **120-minute day:** replace "75-minute" with "120-minute" and request 10 extra
-  mixed questions at the end.
-- **Domain focus day:** append "Focus only on <domain> from today's plan, then
-  add 3 retention questions from other domains."
+## Study modes
+
+All five operating modes are available. Pick based on your goal.
+
+### 1. Quiz (default)
+
+One exam-style question per turn. The agent grades your answer and updates your
+progress.
+
+**Interactive:**
+
+```text
+copilot
+> Quiz me on Azure VMs
+> Random quiz on AKS
+```
+
+### 2. Tutor
+
+Deep conceptual explanation with a logic-first decision framework (goal →
+decision tree → trade-offs → distractors → rule of thumb) + mental map + one
+transfer question.
+
+**Interactive:**
+
+```text
+copilot
+> Explain Cosmos DB consistency levels (tutor mode)
+> Teach me when to use App Service vs Container Apps
+```
+
+### 3. Mock exam
+
+10 questions with domain-weighted selection, deferred grading, and per-domain
+summary. Automatically updates progress.
+
+**Interactive:**
+
+```text
+copilot
+> Run a mock exam
+> 10-question mock on weak topics
+```
+
+### 4. Sprint
+
+Build a dated study plan from your exam date, weak topics, and available time.
+Default 90–150 min per day with 70% weak / 20% adjacent / 10% retention mix.
+
+**Interactive:**
+
+```text
+copilot
+> Build a sprint plan
+> Create a plan for exam on June 15 with 2 hours/day
+```
+
+### 5. Follow plan
+
+Execute today's study block from your active plan (warm-up → remediation → mixed
+quiz → review). Automatically adapts tomorrow's block and logs the session.
+**Recommended for daily study.**
+
+**Interactive:**
+
+```text
+copilot
+> /follow-plan data/study-plans/study-plan-2026-05-27-to-2026-06-15.md
+> Run today's plan
+> Run today's plan for 60 minutes
+```
+
+For more details on all modes, see [AGENTS.md](AGENTS.md).
 
 ## Adding external study material
 
@@ -118,5 +181,5 @@ cite from `data/savill/` when present.
 
 ## Updating the agent's behavior
 
-Edit [AGENTS.md](AGENTS.md) directly. Copilot CLI re-reads it on session start, so
-changes take effect the next time you launch `copilot`.
+Edit [AGENTS.md](AGENTS.md) directly. Copilot CLI re-reads it on session start,
+so changes take effect the next time you launch `copilot`.
