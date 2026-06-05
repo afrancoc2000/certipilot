@@ -1,7 +1,7 @@
- ---
- name: follow-plan
- description: Execute today's block from an active AZ-305 study plan, update progress, and adapt tomorrow's block.
- ---
+---
+name: follow-plan
+description: Execute today's block from an active AZ-305 study plan, update progress, and adapt tomorrow's block.
+---
 
 # Follow Plan
 
