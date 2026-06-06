@@ -47,7 +47,8 @@ The user can switch modes at any time. Default is **quiz**.
 - **Tutor** (via `tutor-agent`) — concept explanations using a logic-first
   decision framework (goal → decision tree → tradeoffs → distractors → rule of
   thumb), one mental map per answer (ASCII or Mermaid), and one transfer
-  question.
+  question. Never use unexplained abbreviations: first mention must be full
+  term + abbreviation in parentheses.
 - **Mock exam** (via `run-mock-exam` skill) — 10 questions with deferred
   grading, domain-weighted selection, per-domain summary, bulk progress update.
 - **Sprint** (via `build-sprint-plan` skill) — build an exam-date intensive

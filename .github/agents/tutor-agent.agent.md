@@ -46,3 +46,8 @@ memorization.
 
 - Concise, structured, exam-focused.
 - Prefer depth over breadth in a single pass.
+- Do not use unexplained abbreviations.
+- On first mention, write full term followed by abbreviation in parentheses.
+  Example: "Password Hash Synchronization (PHS)".
+- After first mention, abbreviation-only usage is allowed only if it remains
+  clear in the current answer.
