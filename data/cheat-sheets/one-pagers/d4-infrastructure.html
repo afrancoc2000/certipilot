@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AZ-305 · D4 Infrastructure</title>
+    <link rel="stylesheet" href="onepager.css" />
+    <style>
+      .theme-d4 .card {
+        margin-bottom: 3px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+      .theme-d4 .card > h2 {
+        margin-bottom: 3px;
+      }
+    </style>
+  </head>
+  <body class="theme-d4">
+    <div class="banner">
+      <h1>AZ-305 · D4 — Infrastructure (Compute · Networking · Migrations)</h1>
+      <span class="sub">WHERE it runs + HOW it connects · managed/PaaS minimizes admin · Global+HTTP=Front Door · Regional+HTTP=App Gateway · SQL MI subnet=/27</span>
+    </div>
+
+    <div class="grid">
+      <!-- Tree 1 compute -->
+      <section class="card">
+        <h2>🌳 Compute service selection</h2>
+        <div class="tree">
+          <div class="row gate">I have a VM image / need OS control</div>
+          <div class="row lvl2"><span class="cond">Single stateful workload</span><span class="arrow">→</span><span class="ans">Azure VM</span></div>
+          <div class="row lvl2"><span class="cond">Identical scale-out fleet, autoscale</span><span class="arrow">→</span><span class="ans">VMSS</span></div>
+          <div class="row lvl2"><span class="cond">Loose parallel: render, Monte Carlo</span><span class="arrow">→</span><span class="ans">Batch pool</span></div>
+          <div class="row lvl2"><span class="cond">MPI: CFD/weather/FEA + HB/HC + InfiniBand</span><span class="arrow">→</span><span class="ans">Batch MPI</span></div>
+          <div class="row lvl2"><span class="cond">3rd-party scheduler</span><span class="arrow">→</span><span class="ans">CycleCloud</span></div>
+          <div class="row gate">I have a container</div>
+          <div class="row lvl2"><span class="cond">Run one container fast, no orchestrator</span><span class="arrow">→</span><span class="ans">ACI</span></div>
+          <div class="row lvl2"><span class="cond">Scale-to-zero, per-request, HTTP/event, KEDA</span><span class="arrow">→</span><span class="ans">Container Apps</span></div>
+          <div class="row lvl2"><span class="cond">Full Kubernetes (mesh, controllers, multi-team)</span><span class="arrow">→</span><span class="ans">AKS</span></div>
+          <div class="row gate">I have code</div>
+          <div class="row lvl2"><span class="cond">Web app / API, always-on</span><span class="arrow">→</span><span class="ans">App Service</span></div>
+          <div class="row lvl2"><span class="cond">Event-driven, ephemeral, scale-to-zero</span><span class="arrow">→</span><span class="ans">Functions</span></div>
+          <div class="row lvl2"><span class="cond">Workflow / SaaS connectors / no-code</span><span class="arrow">→</span><span class="ans">Logic Apps</span></div>
+        </div>
+        <div class="note"><b>Scale-to-zero:</b> ✅ ACA, Functions Consumption, AKS+KEDA · ❌ Functions Premium, App Service. <b>ACA = Linux only</b> → Windows web tier = App Service (Windows).</div>
+      </section>
+
+      <!-- Tree 2 LB -->
+      <section class="card">
+        <h2>🌳 Load balancer selection</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Global (multi-region) + HTTP/S, CDN, WAF</span><span class="arrow">→</span><span class="ans">Front Door</span></div>
+          <div class="row"><span class="cond">Global + non-HTTP (TCP/UDP), DNS-based</span><span class="arrow">→</span><span class="ans">Traffic Manager</span></div>
+          <div class="row"><span class="cond">Regional + HTTP/S, path/host, WAF, in-VNet</span><span class="arrow">→</span><span class="ans">App Gateway</span></div>
+          <div class="row"><span class="cond">Regional + any TCP/UDP, ultra-low latency</span><span class="arrow">→</span><span class="ans">Load Balancer</span></div>
+        </div>
+        <div class="mnemonic"><span class="m">Global+HTTP=FD · Global+other=TM · Regional+HTTP=AppGW · Regional+other=LB</span></div>
+        <div class="note"><b>Front Door SKUs:</b> Standard = CDN+LB+basic WAF · Premium = +advanced WAF (bot/custom) +Private Link origins.</div>
+        <div class="note"><b>TM routing:</b> Priority = active/passive failover · Weighted = split / canary · Performance = lowest latency · Geographic = data sovereignty · Multivalue = many healthy IPs · Subnet = source-IP → endpoint. <b>TM cannot</b> rate-limit, SSL offload, or WAF.</div>
+      </section>
+
+      <!-- Tree 3 VNet -->
+      <section class="card">
+        <h2>🌳 VNet topology</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Few VNets, single region, full control</span><span class="arrow">→</span><span class="ans">Hub-Spoke (self-managed hub)</span></div>
+          <div class="row"><span class="cond">Many branches/regions, SD-WAN, min admin</span><span class="arrow">→</span><span class="ans">Virtual WAN (managed hub)</span></div>
+        </div>
+        <div class="note"><b>vWAN = Microsoft-managed hub-spoke.</b> Azure Firewall fits both: hub VNet (classic) or <b>Secured Virtual Hub</b> (vWAN).</div>
+        <div class="note">Peering <b>non-transitive</b> → spoke-to-spoke routes via hub (UDR → Firewall/NVA next hop). <b>AMPLS:</b> 1 per workspace boundary; count private endpoints by VNet island — peered VNets share reach, isolated VNets need their own PE.</div>
+      </section>
+
+      <!-- Tree 4 connectivity -->
+      <section class="card">
+        <h2>🌳 Connectivity options</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">≤1 Gbps, internet OK, encrypted IPsec</span><span class="arrow">→</span><span class="ans">Site-to-Site VPN</span></div>
+          <div class="row"><span class="cond">Individual remote user laptop</span><span class="arrow">→</span><span class="ans">Point-to-Site VPN</span></div>
+          <div class="row"><span class="cond">Private, 50 Mbps–100 Gbps, 99.95% SLA, low latency</span><span class="arrow">→</span><span class="ans">ExpressRoute</span></div>
+          <div class="row"><span class="cond">Mission-critical resilience</span><span class="arrow">→</span><span class="ans">ER + VPN failover</span></div>
+          <div class="row"><span class="cond">Many branches w/ SD-WAN</span><span class="arrow">→</span><span class="ans">Virtual WAN</span></div>
+          <div class="row"><span class="cond">VNet ↔ VNet (Azure backbone)</span><span class="arrow">→</span><span class="ans">VNet peering</span></div>
+        </div>
+        <div class="note"><b>ExpressRoute:</b> Direct (no carrier, 10/100G) vs provider model · SKU Local &lt; Standard &lt; Premium (Premium = global).</div>
+      </section>
+
+      <!-- Tree 7 migration R -->
+      <section class="card">
+        <h2>🌳 Migration — "which R?"</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Lift-and-shift to VM as-is</span><span class="arrow">→</span><span class="ans">Rehost</span></div>
+          <div class="row"><span class="cond">Minor changes to use PaaS (SQL VM→SQL DB)</span><span class="arrow">→</span><span class="ans">Refactor</span></div>
+          <div class="row"><span class="cond">Monolith→microservices, big restructuring</span><span class="arrow">→</span><span class="ans">Rearchitect</span></div>
+          <div class="row"><span class="cond">Rewrite cloud-native from scratch</span><span class="arrow">→</span><span class="ans">Rebuild</span></div>
+          <div class="row"><span class="cond">Adopt SaaS equivalent (CRM→Dynamics 365)</span><span class="arrow">→</span><span class="ans">Replace</span></div>
+          <div class="row"><span class="cond">Keep on-prem (compliance)</span><span class="arrow">→</span><span class="ans">Retain</span></div>
+          <div class="row"><span class="cond">Decommission, nobody needs it</span><span class="arrow">→</span><span class="ans">Retire</span></div>
+        </div>
+        <div class="note">Effort low→high: Retain &lt; Rehost &lt; Refactor &lt; Rearchitect &lt; Rebuild ≈ Replace.</div>
+      </section>
+
+      <!-- CAF Migrate phases (dedicated) -->
+      <section class="card">
+        <h2>🌳 CAF Migrate — 3 phases</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Discover, inventory, rightsize, cost estimate</span><span class="arrow">→</span><span class="ans">Assess</span></div>
+          <div class="row"><span class="cond">Replicate, migrate, cutover</span><span class="arrow">→</span><span class="ans">Deploy</span></div>
+          <div class="row"><span class="cond">Stabilize, optimize, decommission on-prem</span><span class="arrow">→</span><span class="ans">Release</span></div>
+        </div>
+        <div class="note">Don't confuse with CAF lifecycle: <b>Strategy→Plan→Ready→Adopt→Govern→Manage</b>. Govern is NOT a migrate phase. Migrate sits in Adopt.</div>
+      </section>
+
+      <!-- Tree 5 DDoS -->
+      <section class="card">
+        <h2>🌳 DDoS protection tier</h2>
+        <table>
+          <thead><tr><th>Tier</th><th>When</th></tr></thead>
+          <tbody>
+            <tr><td>Infrastructure (free)</td><td>Default everyone has</td></tr>
+            <tr><td>IP Protection</td><td>Small footprint (1-10 IPs), cost-sensitive</td></tr>
+            <tr><td>Network Protection</td><td>Enterprise, many IPs, DRR team, WAF discount</td></tr>
+          </tbody>
+        </table>
+        <div class="note"><b>L3/L4 only</b>. L7 (HTTP flood) → App Gateway WAF / Front Door WAF.</div>
+      </section>
+
+      <!-- Tree 8 data migration tools -->
+      <section class="card">
+        <h2>🌳 Data migration — which tool?</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Whole server: DB + app + OS</span><span class="arrow">→</span><span class="ans">Azure Migrate</span></div>
+          <div class="row"><span class="cond">SQL DB only → Azure SQL flavor</span><span class="arrow">→</span><span class="ans">Azure SQL Migration ext</span></div>
+          <div class="row"><span class="cond">Assessment only, no execution</span><span class="arrow">→</span><span class="ans">DMA</span></div>
+          <div class="row"><span class="cond">MySQL / PostgreSQL / MongoDB → Azure</span><span class="arrow">→</span><span class="ans">DMS</span></div>
+          <div class="row"><span class="cond">Bulk files, online</span><span class="arrow">→</span><span class="ans">AzCopy / Storage Explorer</span></div>
+          <div class="row"><span class="cond">Bulk files, offline</span><span class="arrow">→</span><span class="ans">Data Box / Import-Export</span></div>
+        </div>
+        <div class="note"><b>Legacy SQL migration answer:</b> DMS. <b>Online vs offline:</b> &gt;~1 wk over the wire → ship offline.</div>
+      </section>
+
+      <!-- Failure hierarchy -->
+      <section class="card">
+        <h2>🧠 Failure hierarchy &amp; routing</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Region → AZ → Fault Domain → Update Domain → Host</span></div>
+        </div>
+        <div class="note"><b>Availability Set</b> = FD+UD in one datacenter (no AZ protection). <b>Availability Zones</b> = across AZs (datacenter loss). VMSS Flexible spans both.</div>
+      </section>
+
+      <!-- Messaging / eventing patterns -->
+      <section class="card">
+        <h2>🧠 Messaging — which service?</h2>
+        <table>
+          <thead><tr><th>Pattern</th><th>Service</th></tr></thead>
+          <tbody>
+            <tr><td>Pull, massive append stream (M/sec)</td><td class="win">Event Hubs</td></tr>
+            <tr><td>One-to-one, FIFO/sessions/dead-letter</td><td class="win">Service Bus Queue</td></tr>
+            <tr><td>One-to-many pub/sub, filtered future apps</td><td class="win">Service Bus Topic</td></tr>
+            <tr><td>Push, react to discrete event</td><td class="win">Event Grid</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+
+  </body>
+</html>

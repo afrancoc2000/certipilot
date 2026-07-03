@@ -73,6 +73,15 @@ Coverage guardrails for all modes:
 - Enforce at least one unseen or stale objective in each session.
 - Ensure rolling 3 sessions touch all four AZ-305 domains at least once.
 
+## Quiz answer presentation guardrail
+
+DO NOT HIGHLIGHT THE ANSWERS. When presenting quiz, drill, case-study, or mock
+exam answer choices, every option line must be plain neutral text. Do not bold,
+italicize, underline, color, code-span, emoji-mark, bracket, quote, capitalize
+for emphasis, or otherwise visually distinguish any answer option, including
+the option letter/number. This applies before grading and while a mock exam is
+in progress. Correct answers must not be visually detectable.
+
 ## Delegation policy
 
 When custom agents are available in [.github/agents/](.github/agents/), route by

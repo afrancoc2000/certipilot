@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AZ-305 · D3 Business Continuity</title>
+    <link rel="stylesheet" href="onepager.css" />
+    <style>
+      .theme-d3 .card {
+        margin-bottom: 3px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+      .theme-d3 .card > h2 {
+        margin-bottom: 3px;
+      }
+      .theme-d3 .bottom-row {
+        display: flex;
+        gap: 9px;
+        margin-top: 3px;
+        align-items: flex-start;
+      }
+      .theme-d3 .bottom-row .recov {
+        flex: 0 0 calc(2 * (100% - 18px) / 3 + 9px);
+        margin: 0;
+      }
+      .theme-d3 .bottom-row .side-col {
+        flex: 0 0 calc((100% - 18px) / 3);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .theme-d3 .bottom-row .side-col .card {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body class="theme-d3">
+    <div class="banner">
+      <h1>AZ-305 · D3 — Business Continuity</h1>
+      <span class="sub">SURVIVAL · recover data → Backup · keep running → DR · smaller RPO/RTO costs more · ASR = active-passive DRaaS</span>
+    </div>
+
+    <div class="grid">
+      <!-- Tree 1 -->
+      <section class="card">
+        <h2>🌳 Backup vs DR basics</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Recover DATA (PITR, ransomware, accidental delete)</span><span class="arrow">→</span><span class="ans">Backup</span></div>
+          <div class="row"><span class="cond">Keep SERVICE running during region/zone failure</span><span class="arrow">→</span><span class="ans">DR / HA</span></div>
+        </div>
+        <div class="note"><b>RPO</b> = data you can lose (replication gap). <b>RTO</b> = downtime you can tolerate. Smaller = pricier.</div>
+      </section>
+
+      <!-- Tree 2 -->
+      <section class="card">
+        <h2>🌳 Vault selection</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">VMs, on-prem (MARS/MABS), Azure Files, SQL/SAP in VM</span><span class="arrow">→</span><span class="ans">Recovery Services Vault</span></div>
+          <div class="row"><span class="cond">Blobs, Disks, PostgreSQL Flex, AKS</span><span class="arrow">→</span><span class="ans">Backup Vault</span></div>
+        </div>
+        <div class="note">Both managed in <b>Backup Center</b>. Vault soft delete: <b>14 d default, 180 d max</b>; Enhanced soft delete on by default (can't disable).</div>
+      </section>
+
+      <!-- Tree 2c: Azure Migrate -->
+      <section class="card">
+        <h2>🌳 Azure Migrate: tool per goal</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Inventory + dependency map first</span><span class="arrow">→</span><span class="ans">Discovery &amp; assessment</span></div>
+          <div class="row"><span class="cond">Rehost VMs as-is (any source)</span><span class="arrow">→</span><span class="ans">Server Migration</span></div>
+          <div class="row"><span class="cond">Vendor needs native VMware</span><span class="arrow">→</span><span class="ans">Azure VMware Solution</span></div>
+          <div class="row"><span class="cond">Modernize app to PaaS</span><span class="arrow">→</span><span class="ans">App Service Migration Assistant</span></div>
+        </div>
+      </section>
+
+      <!-- Tree 3 -->
+      <section class="card">
+        <h2>🌳 Branch files resilience</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Multi-branch shared files + fast local access</span><span class="arrow">→</span><span class="ans">Azure Files + File Sync</span></div>
+          <div class="row"><span class="cond">Single branch fails</span><span class="arrow">→</span><span class="ans">Cloud share / other caches keep working</span></div>
+        </div>
+        <div class="note">Cloud endpoint is source of truth; each branch server caches hot files locally.</div>
+      </section>
+
+      <!-- Tree 3 -->
+      <section class="card">
+        <h2>🌳 DR multi-region pattern (cheap→costly)</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">RTO hrs-days · no standing compute · cheapest</span><span class="arrow">→</span><span class="ans">Backup &amp; Restore</span></div>
+          <div class="row"><span class="cond">RTO hrs · data replicated · compute at failover</span><span class="arrow">→</span><span class="ans">Pilot Light</span></div>
+          <div class="row"><span class="cond">RTO ~5-15 min · secondary at min, autoscales</span><span class="arrow">→</span><span class="ans">Warm Standby</span></div>
+          <div class="row"><span class="cond">RTO secs · RPO ~0 · both regions serve</span><span class="arrow">→</span><span class="ans">Active-Active</span></div>
+        </div>
+        <div class="note">"Must serve from both regions" / "RTO &lt;60s" → <b>active-active</b>. "15 min OK, cheaper" → warm standby.</div>
+      </section>
+
+      <!-- Tree 4 -->
+      <section class="card">
+        <h2>🌳 Azure Site Recovery scope</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Azure VMs between regions</span><span class="arrow">→</span><span class="ans">✅</span></div>
+          <div class="row"><span class="cond">On-prem VMware/Hyper-V/physical → Azure</span><span class="arrow">→</span><span class="ans">✅</span></div>
+          <div class="row"><span class="cond">SQL Managed Instance cross-region</span><span class="arrow">→</span><span class="ans">❌ Failover Groups</span></div>
+          <div class="row"><span class="cond">PaaS (App Service, SQL DB, Cosmos)</span><span class="arrow">→</span><span class="ans">❌ built-in geo</span></div>
+        </div>
+        <div class="note">ASR is <b>active-passive by design</b>. "DRaaS in Azure" = ASR, always.</div>
+      </section>
+
+      <!-- Tree 2b layers -->
+      <section class="card">
+        <h2>🌳 Recovery: 3 protection layers</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">PREVENT deletion</span><span class="arrow">→</span><span class="ans">Resource Locks</span></div>
+          <div class="row"><span class="cond">UNDO recent deletion</span><span class="arrow">→</span><span class="ans">Soft delete / Versioning / PITR</span></div>
+          <div class="row"><span class="cond">RESTORE from backup</span><span class="arrow">→</span><span class="ans">RSV / Backup Vault</span></div>
+        </div>
+        <div class="note"><b>Soft delete ≠ versioning:</b> soft delete recovers after <b>delete</b>; versioning after <b>overwrite</b>. Real protection = enable both. Blob PITR needs versioning + change feed + soft delete.</div>
+      </section>
+    </div>
+
+    <div class="bottom-row">
+      <section class="card recov">
+        <h2>📋 Recovery windows per workload (exam loves these numbers)</h2>
+        <table>
+          <thead><tr><th>Deleted thing</th><th>Mechanism</th><th>Default</th><th>Max</th></tr></thead>
+          <tbody>
+            <tr><td>Blob / version</td><td>Blob soft delete</td><td>7 d</td><td><b>365 d</b></td></tr>
+            <tr><td>Blob container</td><td>Container soft delete</td><td>7 d</td><td>365 d</td></tr>
+            <tr><td>Overwritten blob</td><td>Blob versioning</td><td colspan="2">until deleted</td></tr>
+            <tr><td>Whole storage acct (block blobs)</td><td>PITR (needs versioning+change feed+soft delete)</td><td>—</td><td>365 d</td></tr>
+            <tr><td>Azure Files content</td><td>Share/file soft delete + snapshots</td><td>7 d</td><td>365 d</td></tr>
+            <tr><td>Managed disk</td><td>Disk soft delete (sub setting)</td><td>7 d</td><td>14 d</td></tr>
+            <tr><td>Key Vault / secret / key</td><td>Soft delete + purge protection</td><td>90 d</td><td>90 d fixed</td></tr>
+            <tr><td>Entra user / group</td><td>Recycle bin</td><td>30 d</td><td>30 d fixed</td></tr>
+            <tr><td>Azure SQL DB / MI</td><td>PITR (+ LTR)</td><td>7 d</td><td>35 d / LTR 10 yrs</td></tr>
+            <tr><td>Cosmos DB</td><td>Continuous backup (PITR)</td><td>—</td><td>30 d</td></tr>
+            <tr><td>Backup item in vault</td><td>Vault soft delete</td><td>14 d</td><td>180 d</td></tr>
+          </tbody>
+        </table>
+        <div class="note"><b>Key Vault purge protection:</b> once on, can't be turned off, items can't be purged before retention (PCI/FedRAMP). <b>Locks don't protect data inside</b> (CanNotDelete on account ≠ blocks blob delete). <b>Immutable blob policy</b> is container-level data protection: time-based retention = N days/years; legal hold = until cleared; not RBAC.</div>
+      </section>
+      <div class="side-col">
+        <section class="card">
+          <h2>🌳 SQL HA (in-region)</h2>
+          <table>
+            <thead><tr><th>Need</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td>Auto-failover in region (PaaS)</td><td class="win">Business Critical / Premium</td></tr>
+              <tr><td>Shared-storage cluster on VMs</td><td class="win">FCI on SQL on VM</td></tr>
+              <tr><td>Survive a zone, no app change</td><td class="win">Zone-redundant (GP/BC)</td></tr>
+              <tr><td>Read scale-out, same region</td><td class="win">BC free read replica</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="card">
+          <h2>🌳 SQL geo-DR (cross-region)</h2>
+          <div class="tree">
+            <div class="row"><span class="cond">≤4 read secondaries, per-DB, manual</span><span class="arrow">→</span><span class="ans">Active geo-replication</span></div>
+            <div class="row"><span class="cond">Stable listener + auto-failover</span><span class="arrow">→</span><span class="ans">Failover group</span></div>
+            <div class="row"><span class="cond">Managed Instance geo-DR</span><span class="arrow">→</span><span class="ans">Failover group (only)</span></div>
+          </div>
+          <div class="note">Both <b>async</b> → RPO&gt;0. Active geo-rep <b>not on MI</b>.</div>
+        </section>
+      </div>
+    </div>
+
+  </body>
+</html>

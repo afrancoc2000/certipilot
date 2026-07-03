@@ -12,7 +12,10 @@ citations.
 
 - The original question and options.
 - The user's answer.
-- The reference answer (from a workspace source or Microsoft Learn).
+- The reference answer. For ExamTopics-sourced questions this is
+  `data/test-exams/examtopics/answer-key.md` — but it is community-sourced and
+  often disputed, so treat it as a candidate, not ground truth. Verify against
+  Microsoft Learn before grading.
 
 ## Procedure
 
@@ -22,7 +25,9 @@ citations.
      or one minor error.
    - ❌ incorrect — wrong primary choice.
 2. Verify the reference answer against Microsoft Learn when the source is
-   Pluralsight, O'Reilly, or older course notes. Flag any discrepancy.
+   ExamTopics, Pluralsight, O'Reilly, or older course notes. Flag any
+   discrepancy explicitly (for example: "⚠️ ExamTopics marks B, but MS Learn
+   supports C — grading against C").
 3. Produce the rationale in this exact shape:
 
    ```
@@ -31,11 +36,16 @@ citations.
    Why: <1-3 sentences explaining the correct choice using AZ-305 decision
    framing (when to choose X over Y, cost/SLA tradeoff, common distractor).>
 
+   Per-option: <one short line per option — why the right one wins and why each
+   distractor fails. Match the style of the graded references under
+   data/test-exams/measureup/, data/test-exams/pluralsight/, and
+   data/oreilly/certification-guide/.>
+
    Cite: <workspace-relative path or MS Learn URL>
    ```
 
-4. Keep total grading output under ~8 lines unless the question is a case
-   study, in which case under ~14 lines.
+4. Keep total grading output under ~10 lines for single-answer items and
+   under ~16 lines for case studies or multi-select.
 5. After grading, invoke `update-progress` with topic, status, and a short
    note on what was missed.
 6. Offer the next step: same topic / different topic / switch mode.

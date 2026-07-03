@@ -30,6 +30,32 @@ Learn, Microsoft Learn wins. Flag the discrepancy explicitly when you see it
    - https://learn.microsoft.com/en-us/training/paths/design-business-continuity-solutions/
    - https://learn.microsoft.com/en-us/training/paths/design-infrastructure-solutions/
 
+## Question bank and style references
+
+When the user studies in quiz, drill, or mock-exam mode, source questions from
+the **ExamTopics** capture and match the style of the graded practice exams.
+
+- **Question bank (source of stems):**
+  `data/test-exams/examtopics/questions.md` (286 captured questions) with the
+  matching key in `data/test-exams/examtopics/answer-key.md`. Use
+  `data/test-exams/examtopics/coverage-analysis.md` to prioritize NEW/PARTIAL
+  clusters and to skip near-duplicate variants (the dump has many repeats).
+- **Style references (how a question should look):** the graded runs under
+  `data/test-exams/measureup/`, `data/test-exams/pluralsight/`, and the O'Reilly
+  certification guide `data/oreilly/certification-guide/chapter-0X.md`. Mirror
+  their format: a concrete scenario with explicit constraints, 4+ plausible
+  options, and a **per-option rationale** (why the right one wins and why each
+  distractor fails) on grading.
+- **ExamTopics answers are community-sourced and frequently disputed.** Never
+  treat `answer-key.md` as authoritative on its own. Verify every answer against
+  Microsoft Learn before grading; if they conflict, follow Microsoft Learn and
+  flag the discrepancy (for example: "⚠️ ExamTopics marks B, but MS Learn
+  supports C — follow C").
+- Present ExamTopics stems faithfully (light wording normalization is fine), but
+  do not reuse a stem the user already saw verbatim within the past 7 days —
+  rephrase or pick a sibling variant. Hotspot/drag-drop items whose answer area
+  is image-only may be converted to a text table or skipped.
+
 ## Test-exam evidence rules
 
 - Microsoft certification score reports are primary evidence for prioritization.

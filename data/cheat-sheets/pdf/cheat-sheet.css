@@ -1,0 +1,114 @@
+/* AZ-305 Exam-Day Cheat Sheet — print styling for md-to-pdf.
+   Goal: dense, readable A4 where ~100-char ASCII decision trees never clip
+   and very wide table rows wrap cleanly inside their cells. */
+
+body {
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.45;
+  color: #1b1b1b;
+  margin: 0;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0 0 6px;
+}
+h2 {
+  font-size: 16px;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 2px;
+  margin: 16px 0 8px;
+}
+h3 {
+  font-size: 13px;
+  margin: 12px 0 6px;
+}
+/* Keep a heading from being orphaned at the bottom of a page. */
+h1,
+h2,
+h3 {
+  break-after: avoid-page;
+}
+
+/* ---- Code blocks (the decision trees) ----------------------------------
+   Small monospace so ~100-char ASCII lines fit A4 width without wrapping,
+   which would destroy the tree alignment. 98 chars * ~5.4px = ~530px,
+   well under the ~700px A4 printable width. */
+pre,
+code,
+kbd,
+samp {
+  font-family: "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+}
+code {
+  font-size: 9.5px;
+  background: #f0f3f6;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+pre {
+  font-size: 9px;
+  line-height: 1.3;
+  white-space: pre; /* never wrap — preserve ASCII alignment */
+  overflow: visible;
+  background: #f6f8fa;
+  border: 1px solid #e3e6ea;
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin: 6px 0;
+  /* Keep a decision tree on one page; if it's taller than a page it will
+     still break, but it starts on a fresh page to maximize what stays together. */
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+pre code {
+  font-size: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+/* ---- Tables ------------------------------------------------------------
+   Denser font; allow long cell content (e.g. the 222-char Blueprints row)
+   to wrap. Keep each table whole — move it to the next page instead of
+   splitting it (which orphaned the header at the bottom of a page). */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9.5px;
+  table-layout: auto;
+  margin: 6px 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+th,
+td {
+  border: 1px solid #d0d7de;
+  padding: 3px 6px;
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+th {
+  background: #f0f3f6;
+}
+
+/* ---- Density tweaks ---------------------------------------------------- */
+ul,
+ol {
+  margin: 4px 0 8px;
+  padding-left: 20px;
+}
+li {
+  margin: 1px 0;
+}
+p {
+  margin: 4px 0;
+}
+hr {
+  border: 0;
+  border-top: 1px solid #dddddd;
+  margin: 10px 0;
+}

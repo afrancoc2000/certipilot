@@ -2,31 +2,42 @@
 .opencode/
 opencode.log
 
+# --- Multi-exam study content lives under exams/<exam>/material and
+# --- exams/<exam>/assets. Patterns below apply across all exams.
+
 # External study dataset (Valentina's OneDrive material, etc.)
-# data/savill/
-data/**/*.mp4
-data/**/*.zip
-data/**/*.pdf
+# exams/*/material/savill/
+exams/**/*.mp4
+exams/**/*.zip
+exams/**/*.pdf
+
+# Do not ignore the cheat sheets PDFs, as they are useful reference material
+!exams/*/material/cheat-sheets/**/*.pdf
 
 # Extracted O'Reilly book content (personal-use only, do not commit)
-# data/oreilly/**/*.md
-# data/oreilly/**/*.txt
-!data/oreilly/README.md
+# exams/*/material/oreilly/**/*.md
+# exams/*/material/oreilly/**/*.txt
+!exams/*/material/oreilly/README.md
 
 # Pluralsight course transcripts (personal-use only, do not commit)
-# data/pluralsight/**/*.txt
-# data/pluralsight/**/*.md
-!data/pluralsight/README.md
+# exams/*/material/pluralsight/**/*.txt
+# exams/*/material/pluralsight/**/*.md
+!exams/*/material/pluralsight/README.md
 
 # Graded test-exam runs with personal answers (personal-use only, do not commit)
-# data/test-exams/**/*.md
-!data/test-exams/README.md
+# exams/*/material/test-exams/**/*.md
+!exams/*/material/test-exams/README.md
 
-# Personal study progress / agent memory
-data/progress.md
+# Personal study progress / agent memory (per exam)
+exams/*/assets/progress.md
 
-# Private study plans (local only)
-data/study-plans/study-plan-2026-05-27-to-2026-06-15.md
+# Private study plans (local only, per exam) — keep the README tracked
+exams/*/assets/study-plans/**/*.md
+!exams/*/assets/study-plans/README.md
+
+# Shared cross-exam study assets (master/mixed plan, local only)
+assets/**/*.md
+!assets/README.md
 
 # Agent-side helper scripts (one-off parsers, formatters) — not study material
 scripts/
@@ -40,4 +51,4 @@ scripts/
 Thumbs.db
 .DS_Store
 /.vscode
-/data/test-exams/microsoft/certification/**/*.md
+/exams/*/material/test-exams/microsoft/certification/**/*.md

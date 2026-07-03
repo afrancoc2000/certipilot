@@ -1,0 +1,341 @@
+/* AZ-305 per-domain one-pager cheat sheets.
+   Target: A4 LANDSCAPE, fit-to-one-page, print to PDF via browser
+   (Ctrl/Cmd+P -> Save as PDF -> enable "Background graphics").
+
+   One signature color per domain is set with a `theme-*` class on <body>:
+     theme-d1 = blue, theme-d2 = green, theme-d3 = amber, theme-d4 = purple. */
+
+/* ---------- Per-domain color tokens ---------- */
+.theme-d1 {
+  --accent: #0072b2;
+  --accent-dk: #005685;
+  --tint: #e6f1f8;
+  --tint2: #cfe3f1;
+  --on-accent: #fff;
+  --arrow: var(--accent);
+}
+.theme-d2 {
+  --accent: #157e31;
+  --accent-dk: #0f6e2d;
+  --tint: #e3f5ef;
+  --tint2: #c4e9dd;
+  --on-accent: #fff;
+  --arrow: var(--accent);
+}
+.theme-d3 {
+  --accent: #c4500a;
+  --accent-dk: #8f3a00;
+  --tint: #fbe8de;
+  --tint2: #f5cdb6;
+  --on-accent: #fff;
+  --arrow: var(--accent);
+}
+.theme-d4 {
+  --accent: #9b3f74;
+  --accent-dk: #7a2f5a;
+  --tint: #f8ebf2;
+  --tint2: #f0d6e4;
+  --on-accent: #fff;
+  --arrow: var(--accent);
+}
+
+/* ---------- Page geometry ---------- */
+@page {
+  size: A4 landscape;
+  margin: 6mm 7mm;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.38;
+  color: #1b1b1b;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@media print {
+  body {
+    min-height: 196mm;
+  }
+}
+
+/* ---------- Banner ---------- */
+.banner {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 5px 9px;
+  border-radius: 5px;
+  margin-bottom: 6px;
+}
+.banner h1 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 700;
+}
+.banner .sub {
+  font-size: 9px;
+  opacity: 0.92;
+  margin-left: auto;
+  text-align: right;
+}
+
+/* ---------- Masonry columns ---------- */
+.grid {
+  column-count: 3;
+  column-gap: 9px;
+  flex: 0 0 auto;
+}
+
+/* ---------- Fill strip (bottom banner that grows to fill the page) ---------- */
+.fillstrip {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+  padding: 7px 16px;
+  border-radius: 6px;
+  color: #fff;
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--accent) 55%, #000) 0%,
+    var(--accent-dk) 100%
+  );
+  overflow: hidden;
+}
+.fillstrip .motif {
+  font-size: 30px;
+  line-height: 1;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+}
+.fillstrip .msg {
+  flex: 1 1 auto;
+  text-align: center;
+}
+.fillstrip .big {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  margin-bottom: 2px;
+}
+.fillstrip .line {
+  font-size: 10px;
+  opacity: 0.95;
+  margin-bottom: 3px;
+}
+.fillstrip .tags {
+  font-size: 9.5px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  padding: 2px 8px;
+  display: inline-block;
+}
+
+/* ---------- Card ---------- */
+.card {
+  break-inside: avoid;
+  border: 1px solid var(--tint2);
+  border-top: 2.5px solid var(--accent);
+  border-radius: 4px;
+  margin: 0 0 5px;
+  padding: 4px 5px 4px;
+  background: #fff;
+}
+.card > h2 {
+  font-size: 12px;
+  margin: 0 0 5px;
+  color: var(--accent-dk);
+  font-weight: 700;
+  letter-spacing: 0.1px;
+}
+.card.wide {
+  /* let a dense card span the full width when it has a big table */
+  column-span: all;
+}
+
+/* ---------- Illustration filler cards ---------- */
+.card.art {
+  text-align: center;
+  background: var(--tint);
+  padding: 7px 6px 6px;
+}
+.card.art svg {
+  display: block;
+  width: 74%;
+  max-height: 84px;
+  height: auto;
+  margin: 0 auto;
+}
+.card.art .cap {
+  margin-top: 5px;
+  font-weight: 800;
+  color: var(--accent-dk);
+  font-size: 10.5px;
+  line-height: 1.25;
+}
+
+/* Two illustrations side by side in one card */
+.card.art-pair {
+  display: flex;
+  gap: 8px;
+  padding: 5px 6px 4px;
+}
+.card.art-pair .art-cell {
+  flex: 1;
+  min-width: 0;
+}
+.card.art-pair svg {
+  width: 52%;
+  max-height: 42px;
+}
+.card.art-pair .cap {
+  margin-top: 2px;
+  font-size: 9px;
+}
+
+/* ---------- Decision tree rows ---------- */
+.tree {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 1px 0;
+}
+.row .cond {
+  flex: 1;
+}
+.row .arrow {
+  color: var(--arrow);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+.ans {
+  flex: 0 0 auto;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  padding: 0.5px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  font-size: 10px;
+}
+/* nesting depth -> indented, color-coded left rail */
+.lvl2 {
+  margin-left: 7px;
+  border-left: 2px solid var(--tint2);
+  padding-left: 5px;
+}
+.lvl3 {
+  margin-left: 14px;
+  border-left: 2px solid var(--tint);
+  padding-left: 5px;
+}
+.gate {
+  font-style: italic;
+  color: var(--accent-dk);
+  font-weight: 600;
+  padding: 1.5px 0 0.5px;
+}
+
+/* ---------- Compact tables ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+th,
+td {
+  border: 1px solid var(--tint2);
+  padding: 1.5px 3px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background: var(--tint);
+  color: var(--accent-dk);
+  font-weight: 700;
+}
+tbody tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+/* ---------- Callouts ---------- */
+.note {
+  background: var(--tint);
+  border-radius: 3px;
+  padding: 3px 5px;
+  margin-top: 4px;
+}
+.note b {
+  color: var(--accent-dk);
+}
+.mnemonic {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: 3px;
+  padding: 3px 5px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+.mnemonic .m {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+ul {
+  margin: 2px 0;
+  padding-left: 12px;
+}
+li {
+  margin: 0.5px 0;
+}
+
+code,
+.kbd {
+  background: var(--tint2);
+  border-radius: 2px;
+  padding: 0 2px;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 7px;
+}
+
+.pill {
+  display: inline-block;
+  background: var(--tint2);
+  color: var(--accent-dk);
+  border-radius: 3px;
+  padding: 0 3px;
+  font-weight: 700;
+  font-size: 7px;
+}
+.win {
+  color: var(--accent-dk);
+  font-weight: 700;
+}
+.trap {
+  color: #b3261e;
+  font-weight: 700;
+}

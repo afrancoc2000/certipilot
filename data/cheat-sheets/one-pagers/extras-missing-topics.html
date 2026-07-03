@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AZ-305 · Extras Missing Topics</title>
+    <link rel="stylesheet" href="onepager.css" />
+    <style>
+      body.extras {
+        --accent: #525252;
+        --accent-dk: #333;
+        --tint: #f2f2f2;
+        --tint2: #d9d9d9;
+        --on-accent: #fff;
+        --arrow: var(--accent);
+      }
+      .extras .card {
+        margin-bottom: 3px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+      .extras .card > h2 {
+        font-size: 11px;
+        margin-bottom: 3px;
+      }
+      .extras .note,
+      .extras .mnemonic {
+        margin-top: 3px;
+      }
+      .extras .tree {
+        gap: 1px;
+      }
+      .extras .d1 {
+        --accent: #0072b2;
+        --accent-dk: #005685;
+        --tint: #e6f1f8;
+        --tint2: #cfe3f1;
+      }
+      .extras .d2 {
+        --accent: #157e31;
+        --accent-dk: #0f6e2d;
+        --tint: #e3f5ef;
+        --tint2: #c4e9dd;
+      }
+      .extras .d3 {
+        --accent: #c4500a;
+        --accent-dk: #8f3a00;
+        --tint: #fbe8de;
+        --tint2: #f5cdb6;
+      }
+      .extras .d4 {
+        --accent: #9b3f74;
+        --accent-dk: #7a2f5a;
+        --tint: #f8ebf2;
+        --tint2: #f0d6e4;
+      }
+      .extras .tagline {
+        font-size: 9px;
+        opacity: 0.9;
+      }
+      .extras .legend {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        margin-top: 2px;
+      }
+      .extras .legend span {
+        border-radius: 3px;
+        color: #fff;
+        font-weight: 800;
+        padding: 1px 5px;
+        font-size: 8px;
+      }
+      .extras .legend .d1-badge { background: #0072b2; }
+      .extras .legend .d2-badge { background: #157e31; }
+      .extras .legend .d3-badge { background: #c4500a; }
+      .extras .legend .d4-badge { background: #9b3f74; }
+      .extras table {
+        font-size: 8.7px;
+      }
+      .extras th,
+      .extras td {
+        padding: 0.5px 2px;
+      }
+      .extras .ans {
+        font-size: 8.6px;
+        padding: 0.5px 3px;
+      }
+      .extras .note {
+        font-size: 9px;
+        line-height: 1.28;
+      }
+      .extras .tight td:first-child {
+        width: 24px;
+        text-align: center;
+        font-weight: 800;
+        color: var(--accent-dk);
+      }
+      .extras .banner {
+        background: linear-gradient(100deg, #525252 0%, #0072b2 26%, #157e31 48%, #c4500a 70%, #9b3f74 100%);
+      }
+      .extras .goodluck-stage {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 86px;
+        margin-top: 4px;
+      }
+      .extras .goodluck-art {
+        width: 235px;
+        max-height: 82px;
+        flex: 0 0 auto;
+        object-fit: contain;
+        background: transparent;
+      }
+    </style>
+  </head>
+  <body class="extras">
+    <div class="banner">
+      <h1>AZ-305 · Extras — Missing Topic Locks</h1>
+      <span class="sub">Overflow facts · color = source domain: D1 blue · D2 green · D3 orange · D4 purple</span>
+    </div>
+
+    <div class="grid">
+      <section class="card d4">
+        <h2>🌳 D4 VM family decoder</h2>
+        <table class="tight">
+          <thead><tr><th>Letter</th><th>Meaning</th><th>Trigger words</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>Ancient/basic</td><td>Cheap dev/test; <b>no AN</b></td></tr>
+            <tr><td>B</td><td>Burstable</td><td>Intermittent CPU</td></tr>
+            <tr><td>D</td><td>Default</td><td>General-purpose</td></tr>
+            <tr><td>E/M</td><td>Extra/massive memory</td><td>DB, cache, analytics / SAP HANA</td></tr>
+            <tr><td>F</td><td>Fast CPU</td><td>Compute optimized</td></tr>
+            <tr><td>L</td><td>Local disk</td><td>Storage IOPS / local NVMe</td></tr>
+            <tr><td>N</td><td>NVIDIA GPU</td><td>NC compute · NV viz · ND deep learning</td></tr>
+            <tr><td>H</td><td>HPC</td><td>MPI, CFD, weather, FEA, InfiniBand</td></tr>
+            <tr><td>DC</td><td>Data confidential</td><td>TEE / secure enclave</td></tr>
+          </tbody>
+        </table>
+        <div class="note"><b>Suffix:</b> <b>s</b>=Premium storage · <b>d</b>=local temp disk · <b>_v#</b>=generation.</div>
+      </section>
+
+      <section class="card d4">
+        <h2>🌳 D4 disk SKU by IOPS</h2>
+        <table>
+          <thead><tr><th>Need</th><th>Pick</th></tr></thead>
+          <tbody>
+            <tr><td>≤500 IOPS, cheapest</td><td class="win">Standard HDD</td></tr>
+            <tr><td>≤6K IOPS (E80 max)</td><td class="win">Standard SSD</td></tr>
+            <tr><td>Tiered ~20K (P30 5K, P40 7.5K, P60 16K)</td><td class="win">Premium SSD</td></tr>
+            <tr><td>Exact IOPS low cost, size decoupled</td><td class="win">Premium SSD v2</td></tr>
+            <tr><td>≥20K IOPS or sub-ms latency</td><td class="win">Ultra Disk</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card d2">
+        <h2>🌳 D2 SQL data protection</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Hide sensitive values at query time</span><span class="arrow">→</span><span class="ans">DDM</span></div>
+          <div class="row"><span class="cond">Encrypt whole DB at rest</span><span class="arrow">→</span><span class="ans">TDE</span></div>
+          <div class="row"><span class="cond">Encrypt column from DBAs</span><span class="arrow">→</span><span class="ans">Always Encrypted</span></div>
+          <div class="row"><span class="cond">Restrict who can query table</span><span class="arrow">→</span><span class="ans">SQL roles</span></div>
+          <div class="row"><span class="cond">Audit who queried what / wire</span><span class="arrow">→</span><span class="ans">Auditing / TLS</span></div>
+        </div>
+        <div class="note">DDM masks results (XXX-XX-1234); RBAC/SQL roles control access, not visibility. TDE is default ON for Azure SQL.</div>
+      </section>
+
+      <section class="card d1">
+        <h2>🌳 D1 boundary + identity location</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Non-Azure infra into ARM</span><span class="arrow">→</span><span class="ans">Arc</span></div>
+          <div class="row"><span class="cond">Cross-tenant RBAC / MSP SSO</span><span class="arrow">→</span><span class="ans">Lighthouse</span></div>
+          <div class="row"><span class="cond">Cross-tenant data snapshot/in-place</span><span class="arrow">→</span><span class="ans">Data Share</span></div>
+          <div class="row"><span class="cond">Azure compute / Arc-enabled / other cloud</span><span class="arrow">→</span><span class="ans">MI / Arc MI / SP</span></div>
+        </div>
+        <div class="note">Real person = user + CA/MFA/PIM. On-prem no Arc or other cloud = SP (cert &gt; secret). Never PATs for app auth.</div>
+      </section>
+
+      <section class="card d3">
+        <h2>🌳 D3 Key Vault DR trio</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">TDE protector key type/sizes</span><span class="arrow">→</span><span class="ans">RSA 2048/3072/4096</span></div>
+          <div class="row"><span class="cond">Never for TDE protector</span><span class="arrow">→</span><span class="ans">AES</span></div>
+          <div class="row"><span class="cond">Auto-failover crypto ops</span><span class="arrow">→</span><span class="ans">Work</span></div>
+          <div class="row"><span class="cond">Auto-failover writes</span><span class="arrow">→</span><span class="ans">Blocked</span></div>
+          <div class="row"><span class="cond">Customer backup/restore</span><span class="arrow">→</span><span class="ans">Same geography*</span></div>
+        </div>
+        <div class="note">Failover = MS-managed paired region, read-only. Get/Wrap/Unwrap/Encrypt/Decrypt work; Set/Create/Delete blocked. *Brazil South ↔ South Central US is the cross-geo backup/restore exception.</div>
+      </section>
+
+      <section class="card d3">
+        <h2>🌳 D3 DB HA / DR tier traps</h2>
+        <table>
+          <thead><tr><th>Requirement</th><th>Pick</th></tr></thead>
+          <tbody>
+            <tr><td>MySQL/PostgreSQL zone outage</td><td class="win">Zone-redundant HA</td></tr>
+            <tr><td>Region fails, min cost</td><td class="win">Geo-redundant backup</td></tr>
+            <tr><td>Lower RTO/RPO regional DR</td><td class="win">Cross-region read replica</td></tr>
+            <tr><td>SQL DB DTU zone redundant</td><td class="win">Premium only</td></tr>
+            <tr><td>SQL DB vCore zone redundant</td><td class="win">GP / BC / Hyperscale</td></tr>
+          </tbody>
+        </table>
+        <div class="note">Exam trap: cheapest region DR for Flexible Server = geo-backup restore, not read replica. BC has sync replicas / zero data loss for AZ failover.</div>
+      </section>
+
+      <section class="card d1">
+        <h2>🌳 D1 app registration + Graph</h2>
+        <table>
+          <thead><tr><th>Blade / suffix</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>App roles</td><td>Roles I offer to callers (API/server)</td></tr>
+            <tr><td>API permissions</td><td>Perms I want to call (client)</td></tr>
+            <tr><td>Expose an API</td><td>Delegated scopes + authorized clients</td></tr>
+            <tr><td>Token config</td><td>Optional claims</td></tr>
+            <tr><td>Enterprise app assignment required</td><td>Yes + assign SPs to app role</td></tr>
+            <tr><td>No suffix / .Shared / .All</td><td>Own data / shared with user / tenant-wide</td></tr>
+          </tbody>
+        </table>
+        <div class="note"><b>Application permissions</b> require admin consent only; no user consent. Use assignment required when only specific service principals may call.</div>
+      </section>
+
+      <section class="card d2">
+        <h2>🌳 D2 SAS + Files auth</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Shared key</span><span class="arrow">→</span><span class="ans">Avoid</span></div>
+          <div class="row"><span class="cond">Account SAS / Service SAS</span><span class="arrow">→</span><span class="ans">Key-signed</span></div>
+          <div class="row"><span class="cond">Revocable Service SAS</span><span class="arrow">→</span><span class="ans">Stored access policy</span></div>
+          <div class="row"><span class="cond">Max security, no key, time-limited</span><span class="arrow">→</span><span class="ans">User delegation SAS</span></div>
+          <div class="row"><span class="cond">Azure Files SMB modern / legacy</span><span class="arrow">→</span><span class="ans">Entra Kerberos / AD DS</span></div>
+        </div>
+        <div class="note">Signer RBAC: Blob Data Reader = read SAS; Contributor = write SAS; Owner = ACL. Entra Domain Services also legacy-ish for SMB.</div>
+      </section>
+
+      <section class="card d1">
+        <h2>🌳 D1 Log Analytics cost levers</h2>
+        <table>
+          <thead><tr><th>Requirement</th><th>Pick</th></tr></thead>
+          <tbody>
+            <tr><td>Hot query default 30d→2y (~$2.30/GB)</td><td class="win">Analytics/Interactive</td></tr>
+            <tr><td>Must ingest all + minimize cost (~75% less)</td><td class="win">Basic Logs</td></tr>
+            <tr><td>Even cheaper / long retention up to 12y</td><td class="win">Auxiliary / Archive</td></tr>
+            <tr><td>Known daily volume discount</td><td class="win">Commitment tiers</td></tr>
+            <tr><td>Drop/edit before ingest</td><td class="win">DCR transform</td></tr>
+            <tr><td>Query Archive / hard drop ceiling</td><td class="win">Search job or Restore / cap</td></tr>
+          </tbody>
+        </table>
+        <div class="note">Basic Logs: cheaper ingest, pay-per-query; Simple Log Alerts supported (≥1-min freq; 100/5K limit for 1-min rules). Archive ≈$0.02/GB-mo; query via Search jobs or Restore.</div>
+      </section>
+
+      <section class="card d4">
+        <h2>🌳 D4 SQL migration + moves</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">AG-source → SQL MI bridge</span><span class="arrow">→</span><span class="ans">MI Link</span></div>
+          <div class="row"><span class="cond">AG-source / cross-OS seconds cutover</span><span class="arrow">→</span><span class="ans">Distributed AG</span></div>
+          <div class="row"><span class="cond">Single SQL online to SQL DB/MI/VM</span><span class="arrow">→</span><span class="ans">DMS online</span></div>
+          <div class="row"><span class="cond">Post-migration SQL MI cross-region DR</span><span class="arrow">→</span><span class="ans">Auto-failover group</span></div>
+          <div class="row"><span class="cond">Small DBs / same-region / cross-region / DR only</span><span class="arrow">→</span><span class="ans">Backup URL / move / RM / ASR</span></div>
+        </div>
+        <div class="note">MI Link uses Distributed AG under the hood. Auto-failover group: Microsoft-managed, planned = no data loss, unplanned may lose recent writes.</div>
+      </section>
+
+      <section class="card d4">
+        <h2>🌳 D4 AKS scaling</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">More pods in existing deployment</span><span class="arrow">→</span><span class="ans">HPA</span></div>
+          <div class="row"><span class="cond">More nodes in a node pool</span><span class="arrow">→</span><span class="ans">Cluster Autoscaler</span></div>
+          <div class="row"><span class="cond">Bursty Linux stateless pods</span><span class="arrow">→</span><span class="ans">Virtual Nodes</span></div>
+          <div class="row"><span class="cond">Event-driven scale-to-zero</span><span class="arrow">→</span><span class="ans">KEDA</span></div>
+        </div>
+        <div class="note">HPA scales pods; Cluster Autoscaler scales nodes; Virtual Nodes burst to ACI (Linux only).</div>
+      </section>
+
+      <section class="card d4">
+        <h2>🌳 D4 App Service plan vs ASE</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Normal web app hosting / shared platform</span><span class="arrow">→</span><span class="ans">App Service plan</span></div>
+          <div class="row"><span class="cond">Need private inbound only</span><span class="arrow">→</span><span class="ans">Private Endpoint</span></div>
+          <div class="row"><span class="cond">Single-tenant dedicated VNet env</span><span class="arrow">→</span><span class="ans">ASE v3</span></div>
+          <div class="row"><span class="cond">&gt;30 instances / high scale / compliance isolation</span><span class="arrow">→</span><span class="ans">ASE v3</span></div>
+        </div>
+        <div class="note">Plan = compute profile for apps; apps in same plan share workers. ASE = isolated App Service stamp in your subnet; uses Isolated v2 plans.</div>
+      </section>
+    </div>
+
+    <div class="goodluck-stage">
+      <img class="goodluck-art" src="img/cute-word-good-luck-cartoon-style-illustration-vector.jpg" alt="Good Luck cartoon lettering with a clover" />
+    </div>
+  </body>
+</html>

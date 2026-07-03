@@ -11,6 +11,11 @@ mock defers grading until all questions are answered.
 ## Inputs
 
 - Optional: target time (default 20 minutes for 10 questions).
+- **ExamTopics question bank:** `data/test-exams/examtopics/questions.md` +
+  `answer-key.md`, prioritized via
+  `data/test-exams/examtopics/coverage-analysis.md`. Draw the 10 stems from
+  here (verify each key against Microsoft Learn), authoring originals in the
+  same style only when no bank stem fits the targeted domain/topic.
 - `data/progress.md` weak/strong topics.
 - `data/test-exams/*/results.md` failed-question indices (avoid verbatim
   repeats per `.github/instructions/sources-and-citations.instructions.md`).
@@ -41,12 +46,34 @@ questions in the same domain.
 2. For each of the 10 questions, call
    [select-next-question](../select-next-question/SKILL.md) with the
    domain target above.
-3. Ask one question per turn. Accept the answer. Do **not** grade or hint.
+3. Ask one question per turn. Accept the answer. Do **not** grade, hint,
+   reveal, restate, or comment on the correct option while the mock is in
+   progress.
 4. Track question, user answer, correct answer, and domain in memory.
 5. After question 10, produce the summary (see Output).
 6. Bulk-invoke [update-progress](../update-progress/SKILL.md):
    - One mistake-log entry per ❌/⚠️.
    - One session-log line with `mode: mock · score: X/10 · domains: ...`.
+
+## Answer formatting
+
+- Present every question and all answer choices in plain neutral text.
+- Never bold, italicize, underline, color, emoji-mark, code-span, or otherwise
+  visually distinguish any option. Every option must share identical
+  formatting so nothing marks the correct one.
+- Never add phrasing that points to, previews, or “helps” identify the correct
+  answer.
+
+## Correct-answer randomization
+
+- For each question, choose the correct option's letter by rolling a uniform
+  random position (A/B/C/D each ~25%) before writing the options; place the
+  correct answer there and fill the other slots with distractors.
+- Do not default to B or any fixed letter. Across the 10 questions the correct
+  letter must be well spread; never let one letter be correct more than twice
+  in a row, and avoid any letter being correct for more than ~4 of 10 items.
+- Keep distractors plausible and of similar length/detail to the correct
+  option so neither position nor verbosity hints at the answer.
 
 ## Output (summary)
 

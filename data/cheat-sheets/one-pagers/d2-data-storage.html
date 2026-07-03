@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AZ-305 · D2 Data Storage</title>
+    <link rel="stylesheet" href="onepager.css" />
+    <style>
+      .theme-d2 .card {
+        margin-bottom: 3px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+      .theme-d2 .card > h2 {
+        margin-bottom: 3px;
+      }
+      .theme-d2 .note {
+        margin-top: 3px;
+      }
+      .theme-d2 .tree {
+        gap: 1px;
+      }
+      .theme-d2 .bottom-row {
+        display: flex;
+        gap: 9px;
+        margin-top: 3px;
+      }
+      .theme-d2 .bottom-row .art-strip {
+        flex: 0 0 calc((100% - 18px) / 3);
+      }
+      .theme-d2 .bottom-row .synapse {
+        flex: 0 0 calc((100% - 18px) / 3);
+        margin: 0;
+      }
+      .theme-d2 .bottom-row .worm {
+        flex: 0 0 calc((100% - 18px) / 3);
+        margin: 0;
+      }
+      .theme-d2 .art-strip {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        border: 1px solid var(--tint2);
+        background: var(--tint);
+        border-radius: 4px;
+      }
+      .theme-d2 .art-strip svg {
+        height: 56px;
+        width: auto;
+      }
+      .theme-d2 .art-strip .cap {
+        font-weight: 700;
+        color: var(--accent-dk);
+        font-size: 13px;
+      }
+      .theme-d2 .mnemonic {
+        background: var(--tint);
+        color: #1b1b1b;
+      }
+      .theme-d2 .mnemonic .k {
+        color: var(--accent-dk);
+      }
+    </style>
+  </head>
+  <body class="theme-d2">
+    <div class="banner">
+      <h1>AZ-305 · D2 — Data Storage</h1>
+      <span class="sub">SHAPE + ACCESS · smallest store that meets SLA · Session default · Columnstore = S3+ · RA-GZRS = read 2nd + zone-safe</span>
+    </div>
+
+    <div class="grid">
+      <!-- Tree 1 -->
+      <section class="card">
+        <h2>🌳 SQL family selection</h2>
+        <div class="tree">
+          <div class="row">
+            <span class="cond">OS access, SQL Agent cross-DB, FileStream, CLR, SSAS/SSRS on box, BYOK HSM</span>
+            <span class="arrow">→</span><span class="ans">SQL on VM (IaaS)</span>
+          </div>
+          <div class="row">
+            <span class="cond">Most SQL features (cross-DB, Agent, Broker, linked servers) + PaaS + VNet</span>
+            <span class="arrow">→</span><span class="ans">SQL MI</span>
+          </div>
+          <div class="row">
+            <span class="cond">Single-DB / SaaS multi-tenant, max PaaS abstraction</span>
+            <span class="arrow">→</span><span class="ans">SQL Database</span>
+          </div>
+        </div>
+        <div class="note">SQL MI = <b>delegated subnet /27</b>. Enterprise / Always On AG lift-shift → <b>Business Critical</b> (built-in HA).</div>
+      </section>
+
+      <!-- Tree 2 -->
+      <section class="card">
+        <h2>🌳 Azure SQL DB tier</h2>
+        <div class="tree">
+          <div class="row gate">DTU model (bundled compute+storage+IO)</div>
+          <div class="row lvl2"><span class="cond">Dev/test</span><span class="arrow">→</span><span class="ans">Basic (5)</span></div>
+          <div class="row lvl2"><span class="cond">Most OLTP (Columnstore = S3+)</span><span class="arrow">→</span><span class="ans">Standard</span></div>
+          <div class="row lvl2"><span class="cond">High IO, in-mem OLTP, sub-2ms, read scale-out</span><span class="arrow">→</span><span class="ans">Premium</span></div>
+          <div class="row gate">vCore model (independent scale + reservations)</div>
+          <div class="row lvl2"><span class="cond">Most workloads</span><span class="arrow">→</span><span class="ans">General Purpose</span></div>
+          <div class="row lvl2"><span class="cond">Local SSD, in-mem OLTP, +1 free readable replica</span><span class="arrow">→</span><span class="ans">Business Critical</span></div>
+          <div class="row lvl2"><span class="cond">&gt;4 TB, near-instant backups, 4 read replicas</span><span class="arrow">→</span><span class="ans">Hyperscale</span></div>
+        </div>
+        <div class="note">DTU floor ≈ IOPS ÷ 3, round <b>up</b>. Hyperscale triggers: "100 TB", "near-instant scaling/restore".</div>
+      </section>
+
+      <!-- Tree 3 -->
+      <section class="card">
+        <h2>🌳 Cosmos DB API selection</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">SQL queries + relational tables + geo-replication</span><span class="arrow">→</span><span class="ans">PostgreSQL</span></div>
+          <div class="row"><span class="cond">Document JSON, greenfield (flagship)</span><span class="arrow">→</span><span class="ans">NoSQL / Core</span></div>
+          <div class="row"><span class="cond">Existing MongoDB app</span><span class="arrow">→</span><span class="ans">MongoDB</span></div>
+          <div class="row"><span class="cond">Existing Cassandra app</span><span class="arrow">→</span><span class="ans">Cassandra</span></div>
+          <div class="row"><span class="cond">Existing Gremlin graph app</span><span class="arrow">→</span><span class="ans">Gremlin</span></div>
+          <div class="row"><span class="cond">Azure Table app + global + autoscale</span><span class="arrow">→</span><span class="ans">Table</span></div>
+        </div>
+        <div class="note">Cosmos is the storage answer for SLA on <b>read/write latency + throughput + consistency + availability</b>.</div>
+      </section>
+
+      <!-- Tree 3b -->
+      <section class="card">
+        <h2>🌳 PostgreSQL: 1 node vs sharded</h2>
+        <div class="tree">
+          <div class="row gate">Fits on one node (vertical scale + read replicas)</div>
+          <div class="row lvl2"><span class="cond">OLTP · web/app backends · single / low-tenant SaaS</span><span class="arrow">→</span><span class="ans">Flexible Server</span></div>
+          <div class="row gate">Outgrew one node → shard writes/storage</div>
+          <div class="row lvl2"><span class="cond">Multi-tenant SaaS (shard by tenant_id) · real-time analytics · high-ingest time-series</span><span class="arrow">→</span><span class="ans">Cosmos for PostgreSQL (Citus)</span></div>
+        </div>
+        <div class="note">Not a Cosmos API pick — <b>vanilla PostgreSQL</b>. Citus only after vertical scale + read replicas run out.</div>
+      </section>
+
+      <!-- Tree 4 -->
+      <section class="card">
+        <h2>🌳 Cosmos consistency level</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Never stale, any latency cost OK</span><span class="arrow">→</span><span class="ans">Strong</span></div>
+          <div class="row"><span class="cond">Bounded lag (time/versions), cheaper than Strong</span><span class="arrow">→</span><span class="ans">Bounded Staleness</span></div>
+          <div class="row"><span class="cond">Read-your-own-writes per user (web) — DEFAULT</span><span class="arrow">→</span><span class="ans">Session</span></div>
+          <div class="row"><span class="cond">Write-order reads, freshness unbounded</span><span class="arrow">→</span><span class="ans">Consistent Prefix</span></div>
+          <div class="row"><span class="cond">No order, cheapest, lowest latency</span><span class="arrow">→</span><span class="ans">Eventual</span></div>
+        </div>
+        <div class="mnemonic"><span class="m">"<span class="k">S</span>ober <span class="k">B</span>artenders <span class="k">S</span>erve <span class="k">C</span>old <span class="k">E</span>ggnog"</span> · Multi-write → Session or weaker.</div>
+      </section>
+
+      <!-- Tree 5 -->
+      <section class="card">
+        <h2>🌳 Storage account type</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">General-purpose, all tiers, modern (default)</span><span class="arrow">→</span><span class="ans">StorageV2</span></div>
+          <div class="row"><span class="cond">High-throughput block blob, low-latency</span><span class="arrow">→</span><span class="ans">BlockBlob (Premium)</span></div>
+          <div class="row"><span class="cond">ADLS Gen2, big-data analytics (HNS)</span><span class="arrow">→</span><span class="ans">V2 + HNS</span></div>
+          <div class="row"><span class="cond">NFS/SMB shares, low latency</span><span class="arrow">→</span><span class="ans">FileStorage (Premium)</span></div>
+          <div class="row"><span class="cond">Classic block+page only</span><span class="arrow">→</span><span class="ans">V1 (don't pick)</span></div>
+        </div>
+        <div class="note"><b>Storage ABAC:</b> RBAC + condition on resource/request/principal attrs. Blobs/ADLS + Queues ✅; Files/Tables ❌.</div>
+      </section>
+
+      <!-- Tree 6 + 6b -->
+      <section class="card">
+        <h2>🌳 Blob access tier + lifecycle</h2>
+        <table>
+          <thead><tr><th>Tier</th><th>Min</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td>Hot</td><td>none</td><td>Frequent</td></tr>
+            <tr><td>Cool</td><td>30 d</td><td>Infrequent, instant</td></tr>
+            <tr><td>Cold</td><td>90 d</td><td>Rare ~90d+, instant</td></tr>
+            <tr><td>Archive</td><td>180 d</td><td>Rare, <b>rehydrate hrs</b></td></tr>
+          </tbody>
+        </table>
+        <div class="note">"Need immediate access" → <b>never Archive</b>. "Automatically tier / based on age or last access / no code" → <b>Lifecycle Mgmt policy</b> (runs ~daily, free; not Functions, not Data Factory). React the instant a blob lands → Event Grid.</div>
+      </section>
+
+      <!-- Tree 7 -->
+      <section class="card">
+        <h2>🌳 Storage redundancy</h2>
+        <table>
+          <thead><tr><th>Type</th><th>Survives</th><th>Read 2nd?</th></tr></thead>
+          <tbody>
+            <tr><td>LRS</td><td>Disk failure</td><td>—</td></tr>
+            <tr><td>ZRS</td><td>Zone or data center failure</td><td>—</td></tr>
+            <tr><td>GRS</td><td>Region</td><td>No</td></tr>
+            <tr><td>GZRS</td><td>Region + AZ</td><td>No</td></tr>
+            <tr><td>RA-GRS</td><td>Region</td><td><b>Yes</b></td></tr>
+            <tr><td>RA-GZRS</td><td>Region + AZ</td><td><b>Yes</b></td></tr>
+          </tbody>
+        </table>
+        <div class="note">"Read 2nd w/o failover" → <b>RA-GRS / RA-GZRS</b>. Ladder: LRS&lt;ZRS&lt;GRS&lt;GZRS; survive a zone → ZRS/GZRS; zone+geo → <b>GZRS family</b>.</div>
+      </section>
+
+      <!-- Tree 8 + Synapse -->
+      <section class="card">
+        <h2>🌳 Data ingestion / integration</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Scheduled batch ETL, many sources</span><span class="arrow">→</span><span class="ans">Data Factory</span></div>
+          <div class="row"><span class="cond">Streaming events + windowed aggregation</span><span class="arrow">→</span><span class="ans">Stream Analytics</span></div>
+          <div class="row"><span class="cond">React to discrete resource event (push)</span><span class="arrow">→</span><span class="ans">Event Grid</span></div>
+          <div class="row"><span class="cond">Massive append-only stream (M/sec), Kafka</span><span class="arrow">→</span><span class="ans">Event Hubs</span></div>
+          <div class="row"><span class="cond">Enterprise msg: FIFO, dead-letter, sessions</span><span class="arrow">→</span><span class="ans">Service Bus</span></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="bottom-row">
+      <section class="art-strip">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Stacked database disks">
+          <g stroke="var(--accent)" stroke-width="3.5" stroke-linejoin="round">
+            <path d="M28 28 V92 a32 11 0 0 0 64 0 V28" fill="var(--tint2)" />
+            <path d="M28 50 a32 11 0 0 0 64 0" fill="none" />
+            <path d="M28 71 a32 11 0 0 0 64 0" fill="none" />
+            <ellipse cx="60" cy="28" rx="32" ry="11" fill="#ffffff" />
+          </g>
+          <circle cx="60" cy="28" r="4" fill="var(--accent)" />
+        </svg>
+        <div class="cap">Right data → right store</div>
+      </section>
+      <section class="card worm">
+        <h2>🌳 Immutable blob (WORM)</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">Fixed compliance window (SEC 17a-4)</span><span class="arrow">→</span><span class="ans">Time-based retention</span></div>
+          <div class="row"><span class="cond">Open-ended litigation / audit hold</span><span class="arrow">→</span><span class="ans">Legal hold</span></div>
+        </div>
+        <div class="note"><b>Locked</b> = compliance state of time-based retention (owner can't shorten).</div>
+      </section>
+      <section class="card synapse">
+        <h2>🌳 Synapse component</h2>
+        <div class="tree">
+          <div class="row"><span class="cond">MPP enterprise data warehouse</span><span class="arrow">→</span><span class="ans">Dedicated SQL</span></div>
+          <div class="row"><span class="cond">Ad-hoc query over lake, pay-per-TB</span><span class="arrow">→</span><span class="ans">Serverless SQL</span></div>
+          <div class="row"><span class="cond">Notebooks · Spark · ML</span><span class="arrow">→</span><span class="ans">Spark pool</span></div>
+          <div class="row"><span class="cond">No-ETL near-real-time from Cosmos/SQL</span><span class="arrow">→</span><span class="ans">Synapse Link</span></div>
+        </div>
+      </section>
+    </div>
+
+  </body>
+</html>

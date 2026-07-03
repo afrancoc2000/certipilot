@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AZ-305 · D1 Identity, Governance, Monitoring</title>
+    <link rel="stylesheet" href="onepager.css" />
+    <style>
+      /* d1-only: tighten spacing ~15px so the extra Alert-type card stays on one page */
+      .theme-d1 .card { margin-bottom: 3px; padding-top: 3px; padding-bottom: 3px; }
+      .theme-d1 .card > h2 { margin-bottom: 3px; }
+    </style>
+  </head>
+  <body class="theme-d1">
+    <div class="banner">
+      <h1>AZ-305 · D1 — Identity, Governance &amp; Monitoring</h1>
+      <span class="sub"
+        >WHO + visibility · rule → CA · risk → Identity Protection · score → Defender · hunt → Sentinel · AMA not MMA · 12 yrs = archive max</span
+      >
+    </div>
+
+    <div class="grid">
+      <!-- Tree 1 -->
+      <section class="card">
+        <h2>🌳 Entra ID SKU selection</h2>
+        <div class="tree">
+          <div class="row">
+            <span class="cond">SSO to gallery SaaS, basic MFA, security defaults</span>
+            <span class="arrow">→</span><span class="ans">FREE</span>
+          </div>
+          <div class="row">
+            <span class="cond"
+              >Conditional Access (rule-based), SSPR writeback, App Proxy, dynamic
+              groups, Connect Health, banned-password protection</span
+            >
+            <span class="arrow">→</span><span class="ans">P1</span>
+          </div>
+          <div class="row">
+            <span class="cond"
+              >PIM (JIT, approval, time-bound roles); Identity Protection
+              (risk-based CA)</span
+            >
+            <span class="arrow">→</span><span class="ans">P2</span>
+          </div>
+          <div class="row">
+            <span class="cond"
+              >Access Reviews (modern), Entitlement Mgmt, Lifecycle Workflows,
+              PIM for Groups</span
+            >
+            <span class="arrow">→</span><span class="ans">Governance</span>
+          </div>
+          <div class="row">
+            <span class="cond">External users / B2B / B2C</span>
+            <span class="arrow">→</span><span class="ans">External ID</span>
+          </div>
+        </div>
+        <div class="note">
+          <b>Confusion lock:</b> CA = <b>rule-based</b> (you write group/location
+          /device conditions) → P1. Identity Protection = <b>risk-based</b> (ML
+          scores user &amp; sign-in) → P2. PIM = elevated roles → P2.
+          <b>MFA enforcement = CA Grant control.</b> Grant = require/block (MFA,
+          hybrid join, compliant device, Terms of Use). Session = sign-in
+          frequency, persistent browser, app-enforced restrictions, CAE. Risk
+          policies only when the requirement says "risky".
+        </div>
+      </section>
+
+      <!-- Tree 2 -->
+      <section class="card">
+        <h2>🌳 Hybrid identity: auth method + sync engine</h2>
+        <div class="tree">
+          <div class="row gate">① Auth method — how users sign in</div>
+          <div class="row lvl2">
+            <span class="cond">Default, simplest, leaked-credential detection</span>
+            <span class="arrow">→</span><span class="ans">PHS</span>
+          </div>
+          <div class="row lvl2">
+            <span class="cond">Password hash must stay on-prem (≥2 agents for HA)</span>
+            <span class="arrow">→</span><span class="ans">PTA</span>
+          </div>
+          <div class="row lvl2">
+            <span class="cond">AD FS-style: smart cards, on-prem MFA, custom claims</span>
+            <span class="arrow">→</span><span class="ans">Federation</span>
+          </div>
+          <div class="row gate">② Sync engine — which tool provisions</div>
+          <div class="row lvl2">
+            <span class="cond">Lightweight, ≤150k objects, multi-forest / disconnected</span>
+            <span class="arrow">→</span><span class="ans">Cloud Sync</span>
+          </div>
+          <div class="row lvl2">
+            <span class="cond">Device sync (Hybrid Join), group writeback, Exchange hybrid</span>
+            <span class="arrow">→</span><span class="ans">Connect Sync</span>
+          </div>
+        </div>
+        <div class="note">
+          <b>PHS works with both engines.</b> Cloud Sync = PHS only; PTA &amp;
+          Federation need Connect Sync. PHS is the default recommendation.
+          <b>Entra DS needs NTLM/Kerberos hashes</b> → enable PHS even with PTA/Fed;
+          cloud-only users reset password once after Entra DS.
+        </div>
+      </section>
+
+      <!-- Tree 3 -->
+      <section class="card">
+        <h2>🌳 Authorization (RBAC / ABAC / custom)</h2>
+        <div class="tree">
+          <div class="row">
+            <span class="cond">Built-in role fits exactly</span>
+            <span class="arrow">→</span><span class="ans">Built-in role</span>
+          </div>
+          <div class="row">
+            <span class="cond">Built-in too broad (Storage / Key Vault)</span>
+            <span class="arrow">→</span><span class="ans">+ ABAC condition</span>
+          </div>
+          <div class="row">
+            <span class="cond">Unique permission set, nothing fits</span>
+            <span class="arrow">→</span><span class="ans">Custom role</span>
+          </div>
+        </div>
+        <div class="note">
+          <b>Least privilege scope:</b> Resource &gt; Resource Group &gt;
+          Subscription &gt; Management Group. Built-in always preferred over
+          custom.
+        </div>
+      </section>
+
+      <!-- Tree 4 -->
+      <section class="card">
+        <h2>🌳 Governance tool picker</h2>
+        <table>
+          <thead>
+            <tr><th>Goal</th><th>Tool</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Restrict <b>WHAT</b> can be created (SKUs, regions, tags)</td><td class="win">Azure Policy</td></tr>
+            <tr><td>Restrict <b>WHO</b> can act</td><td class="win">RBAC</td></tr>
+            <tr><td>Control <b>HOW MUCH</b> can be spent (alerts)</td><td class="win">Budget / Cost Mgmt</td></tr>
+            <tr><td>Prevent accidental delete/modify</td><td class="win">Resource Lock</td></tr>
+            <tr><td>Bundle policies as a set</td><td class="win">Policy Initiative</td></tr>
+            <tr><td>Deploy whole environment (policy+RBAC+ARM)</td><td class="win">Blueprints*</td></tr>
+            <tr><td>Manage delegated Azure subscriptions/RGs across tenants</td><td class="win">Azure Lighthouse</td></tr>
+            <tr><td>Govern on-prem / other-cloud resources through ARM</td><td class="win">Azure Arc</td></tr>
+            <tr><td>Share scheduled data snapshots with partner</td><td class="win">Data Share (D2/D5)</td></tr>
+            <tr><td>Force tag inheritance RG→child</td><td class="win">Policy <code>modify</code> + remediation</td></tr>
+            <tr><td>Enforce deployment (agent, diag settings)</td><td class="win">Policy <code>DeployIfNotExists</code> + remediation</td></tr>
+          </tbody>
+        </table>
+        <div class="note">
+          <b>Trap:</b> Policy assignment alone covers <b>new/updated</b> only —
+          existing resources need a <b>remediation task</b>. *Blueprints
+          deprecating → Deployment Stacks + Template Specs, but AZ-305 still
+          answers Blueprints. Tenant boundary → Lighthouse; environment
+          boundary → Arc; data snapshot boundary → Data Share.
+        </div>
+      </section>
+
+      <!-- Tree 5a -->
+      <section class="card">
+        <h2>🌳 Monitoring agent</h2>
+        <div class="tree">
+          <div class="row">
+            <span class="cond">Modern VM monitoring (Azure or Arc) + DCR, assign via Policy</span>
+            <span class="arrow">→</span><span class="ans">AMA</span>
+          </div>
+          <div class="row">
+            <span class="cond"><span class="trap">MMA / OMS agent</span> — retired Aug 2024</span>
+            <span class="arrow">→</span><span class="ans">DEAD</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tree 5b -->
+      <section class="card">
+        <h2>🌳 Log retention tiers <span style="font-weight:normal;font-size:0.8em;">(Log Analytics workspace)</span></h2>
+        <table>
+          <thead><tr><th>Tier</th><th>Duration</th><th>Latency</th></tr></thead>
+          <tbody>
+            <tr><td>Interactive</td><td>30 d → 2 yrs/table</td><td>Sub-sec KQL</td></tr>
+            <tr><td>Archive</td><td>up to <b>12 yrs</b>/table</td><td>Hours</td></tr>
+            <tr><td>Export to Storage</td><td>Indefinite</td><td>Manual</td></tr>
+          </tbody>
+        </table>
+        <div class="note">
+          "Keep N yrs, occasional access" → interactive hot window + archive.
+          <b>12 yrs = archive max</b>; longer → export to Storage.<br>
+          <b>Archive ≠ queryable:</b> few results → <b>search job</b> (→ new table);
+          interactive analysis of a past window → <b>restore</b> (→ temp <code>_RST</code> table).
+        </div>
+      </section>
+
+      <!-- Tree 6 -->
+      <section class="card">
+        <h2>🌳 Security posture (Defender vs Sentinel)</h2>
+        <div class="tree">
+          <div class="row">
+            <span class="cond">Score / posture / recommendations across hybrid + multi-cloud</span>
+            <span class="arrow">→</span><span class="ans">Defender for Cloud</span>
+          </div>
+          <div class="row">
+            <span class="cond">SIEM/SOAR, collect logs, KQL hunt, playbook on alert</span>
+            <span class="arrow">→</span><span class="ans">Sentinel</span>
+          </div>
+        </div>
+        <div class="note">The <b>verb</b> decides: score → Defender; hunt/respond → Sentinel.<br>
+          <b>Not this trio:</b> <b>Purview</b> = govern/classify the <b>data</b> itself (out of AZ-305 scope, DP/SC).
+          Sentinel watches traffic · Defender scores posture · Purview inventories cargo.</div>
+      </section>
+
+      <!-- Alerts -->
+      <section class="card">
+        <h2>🌳 Alert type picker</h2>
+        <table>
+          <thead><tr><th>Trigger</th><th>Alert type</th></tr></thead>
+          <tbody>
+            <tr><td>Numeric metric threshold (CPU&gt;80%)</td><td class="win">Metric</td></tr>
+            <tr><td>KQL query over Log Analytics</td><td class="win">Log</td></tr>
+            <tr><td>Subscription event (create, RBAC change)</td><td class="win">Activity log</td></tr>
+            <tr><td>Region/service health degradation</td><td class="win">Resource Health</td></tr>
+            <tr><td>ML anomaly in App Insights</td><td class="win">Smart Detection</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Mnemonic / recall -->
+      <section class="card">
+        <h2>🧠 Entra tier quick recall</h2>
+        <ul>
+          <li><b>Free:</b> SSO, basic MFA, security defaults</li>
+          <li><b>P1:</b> Conditional Access, SSPR writeback, App Proxy, dynamic groups, Connect Health</li>
+          <li><b>P2:</b> PIM, Identity Protection (risk-based)</li>
+          <li><b>Governance</b> (add-on): Access Reviews, Entitlement Mgmt, Lifecycle Workflows, PIM for Groups</li>
+        </ul>
+        <div class="mnemonic">
+          JIT role activation → <span class="m">always PIM → always P2</span> ·
+          Access reviews validate RBAC/group/app-role need; scheduled, user/manager
+          attestation, auto-revoke no response; needs P2/Governance.
+        </div>
+      </section>
+
+      <section class="card art art-pair">
+        <div class="art-cell">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Security shield with keyhole">
+            <path d="M60 8 L104 24 V60 C104 88 84 106 60 114 C36 106 16 88 16 60 V24 Z"
+              fill="var(--tint2)" stroke="var(--accent)" stroke-width="4" stroke-linejoin="round" />
+            <circle cx="60" cy="50" r="12" fill="var(--accent)" />
+            <rect x="55" y="56" width="10" height="24" rx="3" fill="var(--accent)" />
+            <path d="M40 88 q20 -16 40 0" stroke="var(--accent-dk)" stroke-width="4" fill="none" stroke-linecap="round" />
+          </svg>
+          <div class="cap">Identity = the new perimeter</div>
+        </div>
+        <div class="art-cell">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Monitoring dashboard with pulse">
+            <rect x="12" y="26" width="96" height="62" rx="8" fill="var(--tint2)" stroke="var(--accent)" stroke-width="4" />
+            <polyline points="20,68 38,68 49,48 61,82 71,58 82,58 100,58" fill="none"
+              stroke="var(--accent-dk)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+            <rect x="44" y="94" width="32" height="6" rx="3" fill="var(--accent)" />
+            <rect x="34" y="100" width="52" height="6" rx="3" fill="var(--accent)" />
+          </svg>
+          <div class="cap">Watch everything · alert on what matters</div>
+        </div>
+      </section>
+    </div>
+
+  </body>
+</html>
