@@ -6,16 +6,16 @@ description: Close a Follow-plan session by adapting tomorrow's block in the act
 # Close session
 
 Use this skill at the end of a Follow-plan session to roll today's
-performance into tomorrow's block in `data/study-plans/`. It is the
+performance into tomorrow's block in `exams/<active-exam>/assets/study-plans/`. It is the
 counterpart to `build-sprint-plan`: that skill builds the whole plan;
 this one patches one day.
 
 ## Inputs
 
 - Today's date.
-- Active plan file under `data/study-plans/` (most recent
+- Active plan file under `exams/<active-exam>/assets/study-plans/` (most recent
   `study-plan-*-sprint.md` or `*-to-*.md`).
-- Today's results — newly added ❌/⚠️ entries in `data/progress.md` plus
+- Today's results — newly added ❌/⚠️ entries in `exams/<active-exam>/assets/progress.md` plus
   the list of activities completed vs. skipped.
 
 ## Procedure
@@ -26,7 +26,7 @@ this one patches one day.
    range (exam day reached or passed), stop and report it.
 3. Compute session signals:
    - **New weak topics**: topics that got ❌ or ⚠️ today and were not
-     already in the weak-topics section of `data/progress.md`.
+     already in the weak-topics section of `exams/<active-exam>/assets/progress.md`.
    - **Twice-missed-this-week**: topics with 2+ misses in the last 7
      days of the mistake log → flag for tutor deep dive (per
      `build-sprint-plan` step 7).
@@ -58,6 +58,6 @@ this one patches one day.
 - Never edit days before tomorrow.
 - Never touch milestones or the dress-rehearsal day.
 - Preserve the plan's existing format (table or per-day headings).
-- Never invent weak topics not present in `data/progress.md`.
+- Never invent weak topics not present in `exams/<active-exam>/assets/progress.md`.
 - If today's signals are empty (clean session), still log a session-log
   line but make no plan changes.

@@ -1,11 +1,11 @@
 ---
 name: update-progress
-description: Apply a safe, surgical update to data/progress.md after grading an answer or finishing a session.
+description: Apply a safe, surgical update to exams/<active-exam>/assets/progress.md after grading an answer or finishing a session.
 ---
 
 # Update progress
 
-Use this skill to mutate `data/progress.md` consistently across quiz, tutor,
+Use this skill to mutate `exams/<active-exam>/assets/progress.md` consistently across quiz, tutor,
 planner, and mock-exam flows.
 
 ## Inputs
@@ -17,7 +17,7 @@ planner, and mock-exam flows.
 
 ## Procedure
 
-1. Read `data/progress.md`. If it does not exist, create it with sections:
+1. Read `exams/<active-exam>/assets/progress.md`. If it does not exist, create it with sections:
    `## Weak topics`, `## Strong topics`, `## Mistake log`, `## Session log`.
 2. Apply the rules from
    `.github/instructions/progress-tracking.instructions.md`:

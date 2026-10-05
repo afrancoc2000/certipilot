@@ -1,6 +1,6 @@
 ---
 name: build-sprint-plan
-description: Produce a dated AZ-305 sprint plan from exam date, daily time, and current weak topics.
+description: Produce a dated certification sprint plan from exam date, daily time, and current weak topics.
 ---
 
 # Build sprint plan
@@ -12,8 +12,8 @@ time and wants a calendar-based plan.
 
 - Exam date (required).
 - Daily available minutes (default: 90–150).
-- `data/progress.md` weak/strong topics.
-- `data/test-exams/*/results.md` failed-question indices.
+- `exams/<active-exam>/assets/progress.md` weak/strong topics.
+- `exams/<active-exam>/material/test-exams/*/results.md` failed-question indices.
 
 ## Procedure
 
@@ -23,7 +23,7 @@ time and wants a calendar-based plan.
      2–3 highest-weighted weak topics.
 2. Offer a baseline mock exam to calibrate the plan:
    - Ask: "Want to start with a 10-question mock exam to measure your
-     current level? (recommended if `data/progress.md` is empty or stale)."
+     current level? (recommended if `exams/<active-exam>/assets/progress.md` is empty or stale)."
    - If yes, invoke `run-mock-exam`, then use its per-domain summary as the
      primary signal for ranking weak topics in step 3.
    - If no, or if `progress.md` already has recent evidence (last 7 days),
@@ -50,7 +50,7 @@ time and wants a calendar-based plan.
 
 - A dated plan from tomorrow through exam day, with explicit timeboxes,
   measurable completion criteria, and risk flags / fallbacks for missed days.
-- Save the plan under `data/study-plans/<exam-date>-sprint.md` when the user
+- Save the plan under `exams/<active-exam>/assets/study-plans/<exam-date>-sprint.md` when the user
   asks to persist it.
 - Append a one-line entry to the session log via `update-progress`.
 

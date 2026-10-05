@@ -1,11 +1,11 @@
 ---
 name: grade-answer
-description: Grade an AZ-305 quiz answer and produce a concise, cited rationale. Invoke after the user responds to a quiz question.
+description: Grade a certification quiz answer and produce a concise, cited rationale. Invoke after the user responds to a quiz question.
 ---
 
 # Grade answer
 
-Use this skill to grade a single AZ-305 answer with consistent format and
+Use this skill to grade a single answer for the active exam with consistent format and
 citations.
 
 ## Inputs
@@ -13,7 +13,7 @@ citations.
 - The original question and options.
 - The user's answer.
 - The reference answer. For ExamTopics-sourced questions this is
-  `data/test-exams/examtopics/answer-key.md` — but it is community-sourced and
+  `exams/<active-exam>/material/test-exams/examtopics/answer-key.md` — but it is community-sourced and
   often disputed, so treat it as a candidate, not ground truth. Verify against
   Microsoft Learn before grading.
 
@@ -33,13 +33,13 @@ citations.
    ```
    Result: <✅|⚠️|❌>
 
-   Why: <1-3 sentences explaining the correct choice using AZ-305 decision
+   Why: <1-3 sentences explaining the correct choice using the active exam's
    framing (when to choose X over Y, cost/SLA tradeoff, common distractor).>
 
    Per-option: <one short line per option — why the right one wins and why each
    distractor fails. Match the style of the graded references under
-   data/test-exams/measureup/, data/test-exams/pluralsight/, and
-   data/oreilly/certification-guide/.>
+   exams/<active-exam>/material/test-exams/measureup/, exams/<active-exam>/material/test-exams/pluralsight/, and
+   exams/<active-exam>/material/oreilly/certification-guide/.>
 
    Cite: <workspace-relative path or MS Learn URL>
    ```

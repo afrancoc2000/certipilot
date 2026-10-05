@@ -1,48 +1,43 @@
 ---
 applyTo: "**"
-description: Source hierarchy, citation, language, and MS Learn priority for AZ-305 study agents
+description: Source hierarchy, citations, and language for certification study agents
 ---
 
 # Sources, citations, and language
 
 ## Source-of-truth rule
 
-Microsoft Learn is the authoritative source for Azure capabilities, limits,
-SKUs, default behaviors, and current best practices. Other workspace sources
-are study material that may be outdated. When they conflict with Microsoft
-Learn, Microsoft Learn wins. Flag the discrepancy explicitly when you see it
-(for example: "⚠️ the course notes say X, but Microsoft Learn now documents Y
-— follow Y").
+Use the authoritative first-party sources listed in the active exam's
+`exam.md`. Microsoft Learn is authoritative for the official skills outline
+and Azure behavior; GitHub Docs is authoritative for GitHub product behavior.
+Workspace sources may be outdated. When they conflict with current first-party
+documentation, the first-party source wins and the discrepancy must be flagged.
 
 ## Lookup order
 
-1. `course/` — Spanish-language study notes per exam domain (`README.md`,
+1. `exams/<active-exam>/material/course/` — Spanish-language study notes per exam domain (`README.md`,
    `q&a.md`, `usecase/`).
-2. `data/savill/` — John Savill transcripts.
-3. `data/pluralsight/<Course>/transcript.txt` — Pluralsight transcripts.
-4. `data/oreilly/certification-guide/chapter-0X.md` — O'Reilly guide.
-5. `data/test-exams/<source>/<exam-id>/...` — graded practice/exam captures.
-6. **Microsoft Learn (source of truth).** Use Microsoft Learn MCP first when
-   available; otherwise cite the official URLs:
-   - https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/
-   - https://learn.microsoft.com/en-us/training/paths/design-identity-governance-monitor-solutions/
-   - https://learn.microsoft.com/en-us/training/paths/design-data-storage-solutions/
-   - https://learn.microsoft.com/en-us/training/paths/design-business-continuity-solutions/
-   - https://learn.microsoft.com/en-us/training/paths/design-infrastructure-solutions/
+2. `exams/<active-exam>/material/savill/` — John Savill transcripts.
+3. `exams/<active-exam>/material/pluralsight/<Course>/transcript.txt` — Pluralsight transcripts.
+4. `exams/<active-exam>/material/oreilly/certification-guide/chapter-0X.md` — O'Reilly guide.
+5. `exams/<active-exam>/material/test-exams/<source>/<exam-id>/...` — graded practice/exam captures.
+6. **Authoritative first-party documentation.** Use Microsoft Learn MCP first
+  when available, then the official product documentation and exam URLs in
+  `exams/<active-exam>/exam.md`.
 
 ## Question bank and style references
 
-When the user studies in quiz, drill, or mock-exam mode, source questions from
-the **ExamTopics** capture and match the style of the graded practice exams.
+When the user studies in quiz, drill, or mock-exam mode, read the question-bank
+and style-reference inventory in the active exam's `exam.md` first.
 
-- **Question bank (source of stems):**
-  `data/test-exams/examtopics/questions.md` (286 captured questions) with the
-  matching key in `data/test-exams/examtopics/answer-key.md`. Use
-  `data/test-exams/examtopics/coverage-analysis.md` to prioritize NEW/PARTIAL
+- **When ExamTopics is declared for the active exam:**
+  `exams/<active-exam>/material/test-exams/examtopics/questions.md` (count in the active exam's `exam.md`) with the
+  matching key in `exams/<active-exam>/material/test-exams/examtopics/answer-key.md`. Use
+  `exams/<active-exam>/material/test-exams/examtopics/coverage-analysis.md` to prioritize NEW/PARTIAL
   clusters and to skip near-duplicate variants (the dump has many repeats).
-- **Style references (how a question should look):** the graded runs under
-  `data/test-exams/measureup/`, `data/test-exams/pluralsight/`, and the O'Reilly
-  certification guide `data/oreilly/certification-guide/chapter-0X.md`. Mirror
+- **When these style references exist:** the graded runs under
+  `exams/<active-exam>/material/test-exams/measureup/`, `exams/<active-exam>/material/test-exams/pluralsight/`, and the O'Reilly
+  certification guide `exams/<active-exam>/material/oreilly/certification-guide/chapter-0X.md`. Mirror
   their format: a concrete scenario with explicit constraints, 4+ plausible
   options, and a **per-option rationale** (why the right one wins and why each
   distractor fails) on grading.
@@ -58,7 +53,7 @@ the **ExamTopics** capture and match the style of the graded practice exams.
 
 ## Test-exam evidence rules
 
-- Microsoft certification score reports are primary evidence for prioritization.
+- Official certification score reports are primary evidence for prioritization.
 - Microsoft Learn practice sets are supporting evidence.
 - Verify Pluralsight stated answers against Microsoft Learn before trusting
   them; flag discrepancies.
@@ -67,15 +62,29 @@ the **ExamTopics** capture and match the style of the graded practice exams.
 
 ## Citation rules
 
-- Always cite as workspace-relative paths (for example `course/02 compute/README.md`
-  or `data/test-exams/pluralsight/exam-2026-05-25/results.md#qN`).
+- Always cite as workspace-relative paths (for example `exams/<active-exam>/material/course/02 compute/README.md`
+  or `exams/<active-exam>/material/test-exams/pluralsight/exam-2026-05-25/results.md#qN`).
 - Never fabricate citations.
 - If a topic is not covered in workspace sources, say so explicitly and tag
   the answer with "⚠️ no workspace citation, sourced from Microsoft Learn"
   with the URL.
 - Do not cite random blogs or aggregator pages.
-- `data/pluralsight/` and `data/oreilly/` are personal-use copies — never
-  commit or share their content.
+
+## Sharing / commit policy
+
+The repo is shared with a small, trusted team so they can study from the same
+material. The split is enforced in `.gitignore`:
+
+- **Commit and share — study material** under `exams/<exam>/material/`: course
+  notes, Savill/Pluralsight transcripts, O'Reilly excerpts (text and PDFs), and
+  the ExamTopics/practice question banks (questions, answer keys, coverage).
+- **Never commit — personal-use files** (keep local): everything under
+  `exams/<exam>/assets/` (`progress.md`, `study-plans/`), the cross-exam
+  `assets/` master plan, and under `material/test-exams/` the graded
+  `results.md`, any `score-report.*`, and the real `certification/**` score
+  reports.
+- If the user asks to commit something that matches a personal-use pattern,
+  pause and confirm before overriding `.gitignore`.
 
 ## Language
 
@@ -88,12 +97,15 @@ the **ExamTopics** capture and match the style of the graded practice exams.
 ## Output style
 
 - Clean Markdown only; never raw HTML/CSS.
-- Concise, exam-focused: emphasize when to choose X over Y, cost/SLA
-  trade-offs, and the design decision framework Microsoft expects on AZ-305.
+- Concise, exam-focused: emphasize distinctions, trade-offs, and the decision
+  framework expected by the active exam.
 
 ## File-edit guardrails
 
-- Do not modify files under `course/` unless the user explicitly asks.
-- Agent-side files (`AGENTS.md`, `.github/`, `data/progress.md`,
-  `data/study-plans/`) are fair game when configuring the agent or tracking
-  progress.
+- Do not modify study material under `exams/<exam>/material/` unless the user
+  explicitly asks.
+- Agent-side files (`AGENTS.md`, `.github/`, `exams/<exam>/assets/progress.md`,
+  `exams/<exam>/assets/study-plans/`) are fair game when configuring the agent
+  or tracking progress.
+- Never commit personal-use files — follow the sharing/commit policy above and
+  the patterns in `.gitignore`.

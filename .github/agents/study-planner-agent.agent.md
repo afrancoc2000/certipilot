@@ -1,6 +1,6 @@
 ---
 name: study-planner-agent
-description: Builds and adapts AZ-305 study plans from weak topics, exam date, and available time
+description: Builds and adapts certification study plans from weak topics, exam date, and available time
 tools: ["read", "search", "edit", "microsoft-learn-mcp/microsoft_docs_search", "microsoft-learn-mcp/microsoft_docs_fetch", "microsoft-learn-mcp/microsoft_code_sample_search"]
 disable-model-invocation: false
 user-invocable: true
@@ -27,7 +27,7 @@ before exam day.
 1. Run [build-sprint-plan](../skills/build-sprint-plan/SKILL.md). The skill
    owns the procedure (inputs, baseline mock, daily blocks, milestones,
    output format).
-2. Persist the plan under `data/study-plans/<exam-date>-sprint.md` when the
+2. Persist the plan under `exams/<active-exam>/assets/study-plans/<exam-date>-sprint.md` when the
    user confirms.
 3. Append a session-log entry via
    [update-progress](../skills/update-progress/SKILL.md).

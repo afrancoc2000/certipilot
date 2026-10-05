@@ -1,22 +1,22 @@
 ---
 name: follow-plan
-description: Execute today's block from an active AZ-305 study plan, update progress, and adapt tomorrow's block.
+description: Execute today's block from an active certification study plan, update progress, and adapt tomorrow's block.
 ---
 
 # Follow Plan
 
 ## Purpose
 
-Execute today's block from an active AZ-305 study plan, orchestrating warm-up, remediation, mixed quiz, and review. Then update progress and close the session with plan adaptation.
+Execute today's block from the active exam's study plan, orchestrating warm-up, remediation, mixed quiz, and review. Then update progress and close the session with plan adaptation.
 
 ## Usage
 
 Invoke when the user runs a Follow plan session:
 - `/follow-plan` or `/follow-plan [plan-file]`
-- Optional: `--duration <minutes>` (default 120 min). Example: `/follow-plan data/study-plans/plan.md --duration 90`
+- Optional: `--duration <minutes>` (default 120 min). Example: `/follow-plan exams/<active-exam>/assets/study-plans/plan.md --duration 90`
 - Or when user says: "Run today's plan", "Execute today's block", "Follow plan session", or "Run today's plan for 60 minutes"
 
-## Coverage ledger contract (`data/progress.md`)
+## Coverage ledger contract (`exams/<active-exam>/assets/progress.md`)
 
 The coverage ledger must live under the heading:
 
@@ -35,13 +35,13 @@ Required sub-sections and formats:
 
 Bootstrap rule:
 - If `## Coverage ledger (breadth guardrail)` is missing, create this section before selecting coverage objectives.
-- If sub-sections exist but entries are malformed, normalize only the affected lines (do not rewrite unrelated parts of `data/progress.md`).
+- If sub-sections exist but entries are malformed, normalize only the affected lines (do not rewrite unrelated parts of `exams/<active-exam>/assets/progress.md`).
 
 ## Workflow
 
 1. **Locate the plan**
    - If plan-file is provided, use it.
-   - Otherwise, scan `data/study-plans/` for the active plan (most recently modified or explicitly marked active).
+   - Otherwise, scan `exams/<active-exam>/assets/study-plans/` for the active plan (most recently modified or explicitly marked active).
    - If no plan exists, ask the user to provide an exam date, weak topics, and available time; create a baseline plan first.
 
 2. **Check today's date**
@@ -56,12 +56,12 @@ Bootstrap rule:
 
 4. **Enforce breadth guardrails before execution**
    - Reserve a coverage slot (10-15 min, or ~15% of session) for one unseen or stale objective (not seen in the last 7-10 days).
-   - Select coverage objective from `data/progress.md` coverage ledger first.
+   - Select coverage objective from `exams/<active-exam>/assets/progress.md` coverage ledger first.
    - If ledger does not exist yet, bootstrap it using the contract above, then select objective.
    - If backlog is empty, infer one objective from low-frequency domains and append it to backlog with `status: unseen`.
    - Prioritize objectives that prevent domain starvation (for example migrations, hybrid identity/AD Connect, monitoring).
    - Enforce session mix target: ~60% weak remediation, ~25% retention/adjacent, ~15% unseen/stale.
-   - Ensure rolling 3 sessions touch all four AZ-305 domains at least once.
+   - Ensure rolling 3 sessions touch all of the active exam's domains at least once.
 
 5. **Execute the block in order**
    - Use `quiz-agent` for warm-up and mixed quiz phases.
@@ -71,7 +71,7 @@ Bootstrap rule:
 
 6. **Update progress**
    - After the final quiz/review, call `update-progress` skill to log answers and bump weak/strong topics.
-   - Update only under `## Coverage ledger (breadth guardrail)` in `data/progress.md` (do not create alternative coverage section names).
+   - Update only under `## Coverage ledger (breadth guardrail)` in `exams/<active-exam>/assets/progress.md` (do not create alternative coverage section names).
    - In that section, update: domain last-seen dates, objective `last seen` date, and objective status transitions (`unseen/stale -> done` when completed).
 
 7. **Close the session**
@@ -88,7 +88,7 @@ Bootstrap rule:
 ## Outputs
 
 - Session transcript with all quiz responses, explanations, and grades.
-- Updated `data/progress.md` with today's performance.
-- Updated coverage ledger in `data/progress.md` (domain/objective last-seen and unseen backlog status).
-- Updated `data/study-plans/[plan-file]` with tomorrow's block adapted to today's results.
-- One-line session log entry appended to `data/progress.md`.
+- Updated `exams/<active-exam>/assets/progress.md` with today's performance.
+- Updated coverage ledger in `exams/<active-exam>/assets/progress.md` (domain/objective last-seen and unseen backlog status).
+- Updated `exams/<active-exam>/assets/study-plans/[plan-file]` with tomorrow's block adapted to today's results.
+- One-line session log entry appended to `exams/<active-exam>/assets/progress.md`.

@@ -1,6 +1,6 @@
 ---
 name: select-next-question
-description: Choose the next AZ-305 quiz topic and question style based on data/progress.md and test-exam evidence.
+description: Choose the next certification quiz topic and question style based on exams/<active-exam>/assets/progress.md and test-exam evidence.
 ---
 
 # Select next question
@@ -11,21 +11,21 @@ without losing breadth.
 
 ## Inputs
 
-- `data/progress.md` (weak topics, strong topics, mistake log).
-- **ExamTopics question bank:** `data/test-exams/examtopics/questions.md` (286
-  stems) + `data/test-exams/examtopics/answer-key.md`, prioritized via
-  `data/test-exams/examtopics/coverage-analysis.md` (NEW/PARTIAL clusters,
+- `exams/<active-exam>/assets/progress.md` (weak topics, strong topics, mistake log).
+- **ExamTopics question bank:** `exams/<active-exam>/material/test-exams/examtopics/questions.md` (count
+  in the active exam's `exam.md`) + `exams/<active-exam>/material/test-exams/examtopics/answer-key.md`, prioritized via
+  `exams/<active-exam>/material/test-exams/examtopics/coverage-analysis.md` (NEW/PARTIAL clusters,
   duplicate map).
-- Optional: failed-question indices under `data/test-exams/*/results.md`.
-- Optional: active sprint plan under `data/study-plans/` (most recent file
+- Optional: failed-question indices under `exams/<active-exam>/material/test-exams/*/results.md`.
+- Optional: active sprint plan under `exams/<active-exam>/assets/study-plans/` (most recent file
   whose date range covers today).
 - Optional: user-requested domain or topic.
 
 ## Procedure
 
-1. Read `data/progress.md` and the most recent `results.md` failed-question
+1. Read `exams/<active-exam>/assets/progress.md` and the most recent `results.md` failed-question
    index.
-2. Look for an active sprint plan in `data/study-plans/`. If one exists and
+2. Look for an active sprint plan in `exams/<active-exam>/assets/study-plans/`. If one exists and
    today's date falls within its range, extract today's planned topics.
 3. If the user explicitly requested a topic or domain, honor it (overrides
    the plan).
@@ -60,13 +60,19 @@ without losing breadth.
    Microsoft Learn before asking, per
    `.github/instructions/sources-and-citations.instructions.md`. ExamTopics keys
    are disputed often; Microsoft Learn wins on conflict.
-9. When you author the options, randomize the correct answer's position:
-   - Roll a uniform random slot (A/B/C/D each ~25%) and place the correct
-     option there; fill the remaining slots with distractors.
-   - Do not default to B or any fixed letter; vary the correct letter across
-     turns and never repeat the same correct letter more than twice in a row.
-   - Keep all options in plain text and of similar length/detail so neither
-     formatting, position, nor verbosity signals the answer.
+9. When you author the options, use the next position from the session's locked
+   answer-position deck:
+   - If no deck exists, mechanically generate one with an actual random-number
+     tool (for example, PowerShell `Get-Random`), not language-model intuition.
+     For an open-ended quiz, use a shuffled 12-position deck with three each of
+     A/B/C/D; reject any shuffle containing three identical positions in a row.
+   - Persist the deck before writing the question, consume one position per item,
+     and never change it in response to the user's selections.
+   - Place the correct option in that position and fill the remaining slots with
+     distractors. Keep all options in plain text and of similar length/detail so
+     neither formatting, position, nor verbosity signals the answer.
+   - At session end, report correct-position counts separately from the user's
+     answer-selection counts.
 
 ## Output
 

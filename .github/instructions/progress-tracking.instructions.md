@@ -1,16 +1,16 @@
 ---
-applyTo: "data/progress.md"
-description: How to read and update data/progress.md across all AZ-305 agents
+applyTo: "exams/*/assets/progress.md"
+description: How to read and update exams/<active-exam>/assets/progress.md across all certification study agents
 ---
 
 # Progress tracking rules
 
-`data/progress.md` is the agent's persistent notebook across sessions. Treat
+`exams/<active-exam>/assets/progress.md` is the agent's persistent notebook across sessions. Treat
 it as a study log, not a database. Keep edits surgical and the file readable.
 
 ## At session start
 
-1. Read `data/progress.md` first.
+1. Read `exams/<active-exam>/assets/progress.md` first.
 2. Greet with a one-line summary of weak topics and last session result
    (for example: "Última sesión: 7/10 en mock. Pendiente reforzar: AKS,
    ExpressRoute, Cosmos consistency.").
@@ -24,7 +24,7 @@ it as a study log, not a database. Keep edits surgical and the file readable.
 
 Hard coverage rules:
 - Include at least one unseen/stale objective in every session.
-- Ensure rolling 3 sessions touch all four AZ-305 domains at least once.
+- Ensure rolling 3 sessions touch all of the active exam's domains at least once.
 
 Never quiz exclusively on weak topics. Avoid re-asking a mistake-log question
 verbatim within the same week — rephrase or pick a sibling subtopic.

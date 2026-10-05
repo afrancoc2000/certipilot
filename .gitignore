@@ -2,42 +2,36 @@
 .opencode/
 opencode.log
 
-# --- Multi-exam study content lives under exams/<exam>/material and
-# --- exams/<exam>/assets. Patterns below apply across all exams.
+# === Sharing policy =========================================================
+# Study MATERIAL (course notes, transcripts, book excerpts, question banks) is
+# committed so the team can study from it. Only PERSONAL-USE files — your exam
+# results, progress log, and study plans — stay local and are never committed.
+# Content lives under exams/<exam>/material and exams/<exam>/assets.
+# ===========================================================================
 
-# External study dataset (Valentina's OneDrive material, etc.)
-# exams/*/material/savill/
+# Large media / archives are kept local (bloat, not needed to study from repo)
 exams/**/*.mp4
 exams/**/*.zip
-exams/**/*.pdf
 
-# Do not ignore the cheat sheets PDFs, as they are useful reference material
-!exams/*/material/cheat-sheets/**/*.pdf
-
-# Extracted O'Reilly book content (personal-use only, do not commit)
-# exams/*/material/oreilly/**/*.md
-# exams/*/material/oreilly/**/*.txt
-!exams/*/material/oreilly/README.md
-
-# Pluralsight course transcripts (personal-use only, do not commit)
-# exams/*/material/pluralsight/**/*.txt
-# exams/*/material/pluralsight/**/*.md
-!exams/*/material/pluralsight/README.md
-
-# Graded test-exam runs with personal answers (personal-use only, do not commit)
-# exams/*/material/test-exams/**/*.md
-!exams/*/material/test-exams/README.md
+# --- PERSONAL-USE files: never commit ---
 
 # Personal study progress / agent memory (per exam)
 exams/*/assets/progress.md
 
-# Private study plans (local only, per exam) — keep the README tracked
+# Private study plans (local only, per exam) — keep the README as a template
 exams/*/assets/study-plans/**/*.md
 !exams/*/assets/study-plans/README.md
 
-# Shared cross-exam study assets (master/mixed plan, local only)
+# Shared cross-exam study assets: master/mixed plan is personal — keep README
 assets/**/*.md
 !assets/README.md
+
+# Your real Microsoft certification score reports (private)
+exams/*/material/test-exams/**/certification/**
+
+# Graded practice-exam runs that record your own answers/scores (private)
+exams/*/material/test-exams/**/results.md
+exams/*/material/test-exams/**/score-report.*
 
 # Agent-side helper scripts (one-off parsers, formatters) — not study material
 scripts/
@@ -51,4 +45,4 @@ scripts/
 Thumbs.db
 .DS_Store
 /.vscode
-/exams/*/material/test-exams/microsoft/certification/**/*.md
+/exams/az-305/material/test-exams/measureup/imgs

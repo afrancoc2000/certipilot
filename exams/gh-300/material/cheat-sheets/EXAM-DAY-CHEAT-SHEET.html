@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GH-300 · Exam-Day Cheat Sheet</title>
+<style>
+  :root{
+    --ink:#1b1b2f; --muted:#5b6180; --line:#e6e3f5; --bg:#faf8ff;
+    --d1:#7c5cff; --d2:#00a6a6; --d3:#f26d5b; --d4:#f0a202; --d5:#3aa76d; --d6:#d6336c;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:28px 20px 60px;
+    background:
+      radial-gradient(900px 500px at 10% -10%, #efe9ff 0%, transparent 60%),
+      radial-gradient(800px 500px at 100% 0%, #e3fbf8 0%, transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+
+  header{
+    background:linear-gradient(120deg,#7c5cff,#00a6a6);
+    color:#fff;border-radius:22px;padding:26px 30px;
+    box-shadow:0 14px 34px rgba(124,92,255,.28);
+    display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;
+  }
+  header h1{margin:0;font-size:27px;letter-spacing:-.4px}
+  header p{margin:6px 0 0;opacity:.93;font-size:14px}
+  .pills{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);
+    padding:6px 13px;border-radius:999px;font-size:12.5px;font-weight:600;backdrop-filter:blur(4px)}
+
+  .note{margin:18px 0 22px;padding:13px 18px;border-left:5px solid var(--d4);
+    background:#fff8e8;border-radius:0 12px 12px 0;font-size:14px;color:#6b4e00}
+
+  .grid{columns:2;column-gap:20px}
+  @media(max-width:900px){.grid{columns:1}}
+
+  .card{
+    break-inside:avoid;background:var(--card);border:1px solid var(--line);
+    border-radius:18px;padding:18px 20px 16px;margin:0 0 20px;
+    box-shadow:0 3px 14px rgba(27,27,47,.05);
+  }
+  .card h2{
+    margin:0 0 12px;font-size:15.5px;letter-spacing:.2px;display:flex;align-items:center;gap:9px;
+  }
+  .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto}
+  .c1 .dot{background:var(--d1)} .c2 .dot{background:var(--d2)}
+  .c3 .dot{background:var(--d3)} .c4 .dot{background:var(--d4)}
+  .c5 .dot{background:var(--d5)} .c6 .dot{background:var(--d6)}
+  .c1{border-top:4px solid var(--d1)} .c2{border-top:4px solid var(--d2)}
+  .c3{border-top:4px solid var(--d3)} .c4{border-top:4px solid var(--d4)}
+  .c5{border-top:4px solid var(--d5)} .c6{border-top:4px solid var(--d6)}
+
+  ol,ul{margin:0;padding-left:20px}
+  li{margin:5px 0}
+  strong{font-weight:700}
+  .k{background:#f1edff;color:#5b3bd6;border-radius:6px;padding:1px 6px;
+    font:600 12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:4px 0 2px}
+  th{text-align:left;color:var(--muted);font-size:11.5px;text-transform:uppercase;
+    letter-spacing:.6px;padding:0 8px 6px 0;border-bottom:1px solid var(--line)}
+  td{padding:7px 8px 7px 0;border-bottom:1px dashed var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td:last-child{font-weight:650}
+
+  pre{background:#1b1b2f;color:#e9e6ff;border-radius:12px;padding:13px 15px;
+    font:12.3px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-x:auto;margin:8px 0}
+  pre .a{color:#8be9c8}
+
+  .lock{margin-top:11px;background:#f4f1ff;border:1px dashed #cfc4ff;border-radius:12px;
+    padding:9px 13px;font-size:13.3px;color:#4a3aa8}
+  .lock b{color:#3a2a90}
+
+  .trap{background:linear-gradient(135deg,#fff1f5,#ffe9ef);border:1px solid #ffc9d8}
+  .trap h2{color:#b0245a}
+
+  .num{display:flex;justify-content:space-between;gap:10px;padding:6px 0;
+    border-bottom:1px dashed var(--line);font-size:13.5px}
+  .num:last-child{border-bottom:none}
+  .num b{font-variant-numeric:tabular-nums;color:var(--d1)}
+
+  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+  .heart{color:var(--d6)}
+
+  @media print{
+    body{background:#fff;padding:0;font-size:11.4px}
+    header{box-shadow:none;border-radius:0}
+    .card{box-shadow:none;break-inside:avoid}
+    .grid{columns:2}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div>
+    <h1>GH-300 · Exam-Day Cheat Sheet</h1>
+    <p>Read once, slowly. Then walk in. No new material. ✨</p>
+  </div>
+  <div class="pills">
+    <span class="pill">📅 Fri Aug 28, 2026</span>
+    <span class="pill">🎯 Pass 700/1000</span>
+    <span class="pill">⏱️ ~8 min read</span>
+    <span class="pill">📊 Scope: Aug 7, 2026</span>
+  </div>
+</header>
+
+<div class="note">
+  <strong>If two options both look right</strong> — pick the one that matches the
+  exact wording of the stem. The exam rewards discriminator words, not depth.
+</div>
+
+<div class="grid">
+
+  <section class="card c1">
+    <h2><span class="dot"></span>① The five rules that decide most questions</h2>
+    <ol>
+      <li><strong>Human accountability never transfers.</strong> Copilot output is a draft: review, test, validate. A filter reduces risk — it never certifies correctness, security, or licensing.</li>
+      <li><strong>Who is the customer?</strong> Individual → Free / Pro / Pro+. Organization → Business / Enterprise.</li>
+      <li><strong>Governance starts at Business:</strong> org policies, content exclusions, audit logs, seat management, no-training commitment, conditional IP indemnity. <strong>Enterprise</strong> = Business + GitHub Enterprise Cloud + knowledge bases.</li>
+      <li><strong>Where does the work run?</strong> Editor + synchronous → completions / ask / Edits / agent mode. GitHub + asynchronous → coding agent.</li>
+      <li><strong>Copilot advises, humans gate.</strong> Copilot code review never approves; branch protection and rulesets enforce human review.</li>
+    </ol>
+  </section>
+
+  <section class="card c2">
+    <h2><span class="dot"></span>② Which mode? Discriminator words</h2>
+    <table>
+      <tr><th>Stem phrase</th><th>Answer</th></tr>
+      <tr><td>"as I type", ghost text, no prompt</td><td>Code completions</td></tr>
+      <tr><td>"explain it, I'll apply it myself"</td><td>Ask mode</td></tr>
+      <tr><td>"I know the files, change them together"</td><td>Copilot Edits</td></tr>
+      <tr><td>multi-step, picks files, runs commands, <em>locally</em>, "I watch"</td><td>Agent mode</td></tr>
+      <tr><td>"assign an issue", @copilot, background, draft PR</td><td>Coding agent</td></tr>
+    </table>
+    <div class="lock"><b>Lock:</b> "locally" + "I'll watch" = agent mode. "Assigned issue" + async + draft PR = coding agent — and it cannot approve its own PR.</div>
+  </section>
+
+  <section class="card c2">
+    <h2><span class="dot"></span>③ Which context surface?</h2>
+    <table>
+      <tr><th>Need</th><th>Answer</th></tr>
+      <tr><td>Always-on project rules for a whole repo</td><td>Repo custom instructions</td></tr>
+      <tr><td>Reusable, on-demand task</td><td>Prompt file</td></tr>
+      <tr><td>Live external data or tools</td><td>MCP server / extension</td></tr>
+      <tr><td>Reusable bundle of repos, files, notes</td><td>Copilot Space</td></tr>
+      <tr><td>Curated internal docs on github.com</td><td>Knowledge base (Enterprise)</td></tr>
+      <tr><td>One-off targeted context</td><td><span class="k">#file</span> <span class="k">#selection</span></td></tr>
+    </table>
+    <div class="lock"><b>Lock:</b> <span class="k">@</span> routes expertise · <span class="k">#</span> attaches context · <span class="k">/</span> shortcuts a task.</div>
+  </section>
+
+  <section class="card c3">
+    <h2><span class="dot"></span>④ Suggestion lifecycle — draw it</h2>
+<pre>IDE gathers context
+  (current file, cursor, neighboring tabs,
+   custom instructions, exclusion policy)
+   <span class="a">↓</span>  prompt assembled client-side, HTTPS
+       (the model does NOT run locally)
+   <span class="a">↓</span>  PROXY: exclusions + INPUT filter
+       (prompt injection, toxic language)
+   <span class="a">↓</span>  hosted model generates
+   <span class="a">↓</span>  OUTPUT filters: public-code match (~150 ch),
+       harmful content, insecure patterns,
+       empty / repetitive discard
+   <span class="a">↓</span>  suggestion shown → accept / reject → telemetry</pre>
+    <div class="lock"><b>Retention:</b> Business/Enterprise code is <b>never</b> used for training · completions are discarded after return · <b>Chat is retained</b> for conversation context · individual plans may be used unless opted out. "Not trained on" ≠ "no telemetry".</div>
+  </section>
+
+  <section class="card c4">
+    <h2><span class="dot"></span>⑤ Prompt engineering</h2>
+    <p style="margin:0 0 8px"><strong>Anatomy:</strong> goal + context + expectations + source of truth.</p>
+    <ul>
+      <li>Zero-shot = no example · One-shot = one · <strong>Few-shot = several</strong> (best for internal patterns absent from public code).</li>
+      <li>Bad answer? Diagnose in order: <strong>under-specified → over-scoped → missing context</strong>.</li>
+      <li>Generic output → few-shot examples or custom instructions.</li>
+      <li>Wrong file → attach it explicitly.</li>
+      <li>Drifted after many turns → new thread, restate constraints.</li>
+    </ul>
+  </section>
+
+  <section class="card c5">
+    <h2><span class="dot"></span>⑥ Productivity plays</h2>
+<pre>Legacy code, no tests → explain → <span class="a">characterization tests FIRST</span>
+                        → refactor incrementally
+Need tests            → happy path → edge cases, boundaries, errors
+Need docs             → generate from code → verify real behavior
+Security finding      → fix + explanation → validate
+                        (CodeQL autofix is separate)
+Performance issue     → measure → targeted fix → re-measure
+Deprecated API        → re-prompt with target version → check docs</pre>
+  </section>
+
+  <section class="card c6">
+    <h2><span class="dot"></span>⑦ Privacy &amp; safeguards</h2>
+    <p style="margin:0 0 6px"><strong>Content exclusion does 4 things:</strong> no inline suggestions in the file · the file does not inform suggestions elsewhere · it does not inform Chat · it is not reviewed by Copilot code review.</p>
+    <p style="margin:10px 0 4px"><strong>The 5 leak paths 🔓</strong></p>
+    <ol>
+      <li><strong>Edit mode and Agent mode</strong> of Chat in VS Code and other editors</li>
+      <li><strong>Semantic info from the IDE</strong> — types, hover definitions, build config</li>
+      <li><strong>Symlinks</strong></li>
+      <li><strong>Remote filesystems</strong></li>
+      <li><strong>Not retroactive, not a security boundary</strong> — identical content elsewhere can still surface</li>
+    </ol>
+    <p style="margin:10px 0 0"><strong>Who configures:</strong> repo admins, org owners, enterprise owners. <strong>Plans:</strong> Business and Enterprise only. github.com and Mobile = public preview. Xcode/Eclipse = inline only, no Chat. Azure Data Studio = unsupported. The client sends the repo URL to fetch the policy; those URLs are not logged.</p>
+    <div class="lock">
+      <b>IP indemnity is CONDITIONAL</b> on the duplication-detection / public-code filter being enabled — disable it and coverage is forfeited.<br>
+      <b>Public ≠ free:</b> licenses may impose copyleft; no license = all rights reserved.<br>
+      <b>Hierarchy:</b> enterprise policies cannot be overridden by org owners.
+    </div>
+  </section>
+
+  <section class="card c1">
+    <h2><span class="dot"></span>⑧ Numbers &amp; weights</h2>
+    <div class="num"><span>Public-code match window</span><b>~150 chars</b></div>
+    <div class="num"><span>Activity report retention</span><b>90 days</b></div>
+    <div class="num"><span>Copilot audit log retention</span><b>180 days</b></div>
+    <div class="num"><span>Copilot Memory unused facts</span><b>28 days</b></div>
+    <div class="num"><span>Exclusion propagation to loaded IDEs</span><b>30 min</b></div>
+    <table style="margin-top:12px">
+      <tr><th>Domain</th><th>Weight</th></tr>
+      <tr><td>D2 Copilot features</td><td>25–30%</td></tr>
+      <tr><td>D1 Responsible use</td><td>15–20%</td></tr>
+      <tr><td>D3 Data &amp; architecture</td><td>10–15%</td></tr>
+      <tr><td>D4 Prompt engineering</td><td>10–15%</td></tr>
+      <tr><td>D5 Productivity</td><td>10–15%</td></tr>
+      <tr><td>D6 Privacy &amp; safeguards</td><td>10–15%</td></tr>
+    </table>
+  </section>
+
+  <section class="card c6 trap">
+    <h2><span class="dot"></span>⑨ Your personal trap list 🎯</h2>
+    <ul>
+      <li>Content exclusion limits — recall <strong>the 5 leak paths</strong>, not generic controls.</li>
+      <li><strong>Business</strong> is the lowest tier with org policies, exclusions, and audit logs. Pro+ is still individual.</li>
+      <li>Agent mode vs coding agent — decide by <em>locally / synchronous</em> vs <em>assigned issue / async</em>.</li>
+      <li>Indemnity requires the public-code filter to be <strong>ON</strong>.</li>
+    </ul>
+    <div class="lock" style="background:#fff;border-color:#ffc9d8;color:#b0245a">
+      Day-2 results: warm-up 3/4 · exclusion drill 5/5 · D3 6/6 · D4 4/4 · D5 3/3 · <b>mock #2 10/10</b>. You're ready. 💪
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Sources: Microsoft Learn GH-300 study guide · GitHub Docs (plans, code suggestions,
+  code referencing, prompt engineering, content exclusion, policies, audit logs,
+  coding agent, code review).<br>
+  Made for one nervous morning <span class="heart">♥</span>
+</footer>
+
+</div>
+</body>
+</html>
