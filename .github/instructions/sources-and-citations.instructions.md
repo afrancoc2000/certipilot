@@ -34,10 +34,9 @@ without learner penalty when a defect is established.
 
 1. `exams/<active-exam>/material/course/` — Spanish-language study notes per exam domain (`README.md`,
    `q&a.md`, `usecase/`).
-2. `exams/<active-exam>/material/savill/` — John Savill transcripts.
-3. `exams/<active-exam>/material/pluralsight/<Course>/transcript.txt` — Pluralsight transcripts.
-4. `exams/<active-exam>/material/oreilly/certification-guide/chapter-0X.md` — O'Reilly guide.
-5. `exams/<active-exam>/material/test-exams/<source>/<exam-id>/...` — graded practice/exam captures.
+2. `exams/<active-exam>/material/cheat-sheets/` — original one-page summaries.
+3. `exams/<active-exam>/material/test-exams/<exam-id>/results.md` — the learner's own
+   local practice results (never committed).
 
 This local lookup order does not delay or replace first-party verification.
 
@@ -46,40 +45,29 @@ This local lookup order does not delay or replace first-party verification.
 When the user studies in quiz, drill, or mock-exam mode, read the question-bank
 and style-reference inventory in the active exam's `exam.md` first.
 
-- **When ExamTopics is declared for the active exam:**
-  `exams/<active-exam>/material/test-exams/examtopics/questions.md` (count in the active exam's `exam.md`) with the
-  matching key in `exams/<active-exam>/material/test-exams/examtopics/answer-key.md`. Use
-  `exams/<active-exam>/material/test-exams/examtopics/coverage-analysis.md` to prioritize NEW/PARTIAL
-  clusters and to skip near-duplicate variants (the dump has many repeats).
-- **When these style references exist:** the graded runs under
-  `exams/<active-exam>/material/test-exams/measureup/`, `exams/<active-exam>/material/test-exams/pluralsight/`, and the O'Reilly
-  certification guide `exams/<active-exam>/material/oreilly/certification-guide/chapter-0X.md`. Mirror
-  their format: a concrete scenario with explicit constraints, four plausible
-  options (A-D) for single-answer items (multi-select follows its own format), and a **per-option rationale** (why the right one wins and why each
+- Write original questions from the exam's skills outline and Microsoft
+  Learn. Do not reproduce third-party question banks, exam dumps, or paid
+  practice-test content.
+- Format: a concrete scenario with explicit constraints, four plausible
+  options (A-D) for single-answer items (multi-select follows its own format),
+  and a **per-option rationale** (why the right one wins and why each
   distractor fails) on grading.
-- **ExamTopics answers are community-sourced and frequently disputed.** Never
-  treat `answer-key.md` as authoritative on its own. Apply the preparation and
-  verification contract above; if they conflict, follow Microsoft Learn and
-  flag the discrepancy (for example: "⚠️ ExamTopics marks B, but MS Learn
-  supports C — follow C").
-- Present ExamTopics stems faithfully (light wording normalization is fine), but
-  do not reuse a stem the user already saw verbatim within the past 7 days —
-  rephrase or pick a sibling variant. Hotspot/drag-drop items whose answer area
-  is image-only may be converted to a text table or skipped.
+- Do not reuse a stem the user already saw verbatim within the past 7 days —
+  rephrase or pick a sibling variant.
 
 ## Test-exam evidence rules
 
 - Official certification score reports are primary evidence for prioritization.
 - Microsoft Learn practice sets are supporting evidence.
-- Verify Pluralsight stated answers under the same preparation contract and
-  flag discrepancies; source brands do not change verification scope.
+- Verify any practice-set stated answer under the same preparation contract
+  and flag discrepancies.
 - Never re-ask a verbatim question from `results.md`; rephrase or use a sibling
   subtopic.
 
 ## Citation rules
 
 - Always cite as workspace-relative paths (for example `exams/<active-exam>/material/course/02 compute/README.md`
-  or `exams/<active-exam>/material/test-exams/pluralsight/exam-2026-05-25/results.md#qN`).
+  or `exams/<active-exam>/material/test-exams/<exam-id>/results.md#qN`).
 - Never fabricate citations.
 - If a topic is not covered in workspace sources, say so explicitly and tag
   the answer with "⚠️ no workspace citation, sourced from Microsoft Learn"
@@ -91,15 +79,17 @@ and style-reference inventory in the active exam's `exam.md` first.
 The repo is shared with a small, trusted team so they can study from the same
 material. The split is enforced in `.gitignore`:
 
-- **Commit and share — study material** under `exams/<exam>/material/`: course
-  notes, Savill/Pluralsight transcripts, O'Reilly excerpts (text and PDFs), and
-  the ExamTopics/practice question banks (questions, answer keys, coverage).
+- **Commit and share — original study material** under `exams/<exam>/material/`:
+  the team's own course notes and cheat sheets.
+- **Never commit — third-party content**: books, course or video transcripts,
+  slide captures, practice-test or exam-dump questions and answer keys. Link
+  to the official source instead.
 - **Never commit — personal-use files** (keep local): everything under
   `exams/<exam>/assets/` (`progress.md`, `study-plans/`), the cross-exam
   `assets/` master plan (except the shared `README.md` templates that
-  `.gitignore` re-includes), and under `material/test-exams/` the graded
-  `results.md`, any `score-report.*`, and the real `certification/**` score
-  reports.
+  `.gitignore` re-includes), and everything under `material/test-exams/`
+  (graded `results.md`, any `score-report.*`, and the real `certification/**`
+  score reports).
 - If the user asks to commit something that matches a personal-use pattern,
   pause and confirm before overriding `.gitignore`.
 

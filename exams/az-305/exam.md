@@ -39,25 +39,15 @@ Verification covers published English scope; localized updates can differ.
 ## Source hierarchy (lookup order)
 
 1. `exams/az-305/material/course/` — Spanish-language study notes per domain.
-2. `exams/az-305/material/savill/` — John Savill transcripts.
-3. `exams/az-305/material/pluralsight/<Course>/transcript.txt` — Pluralsight transcripts.
-4. `exams/az-305/material/oreilly/certification-guide/chapter-0X.md` — O'Reilly guide.
-5. `exams/az-305/material/test-exams/<source>/<exam-id>/...` — graded practice/exam captures.
-6. Microsoft Learn (authoritative — wins on conflict; flag discrepancies).
+2. `exams/az-305/material/cheat-sheets/` — original decision-tree one-pagers.
+3. `exams/az-305/material/test-exams/<exam-id>/results.md` — your own local
+   practice results (never committed).
+4. Microsoft Learn (authoritative — wins on conflict; flag discrepancies).
 
-## Question banks
+## Question style
 
-- **Primary (source of stems):** ExamTopics —
-  `exams/az-305/material/test-exams/examtopics/questions.md` (286 stems) +
-  `answer-key.md`, prioritized via `coverage-analysis.md`. Community-sourced
-  keys: verify against Microsoft Learn before grading.
-- **Secondary drill banks (definitional / graded-run derived):**
-  - MeasureUp — `exams/az-305/material/test-exams/measureup/exam-2026-02-26/questions.md`
-    (152 AKB questions) + `answer-key.md`.
-  - Pluralsight — `exams/az-305/material/test-exams/pluralsight/exam-2026-05-25/questions.md`
-    (60 questions) + `answer-key.md`.
-- **Style references:** the graded runs under `measureup/` and `pluralsight/`
-  and the O'Reilly certification guide.
-
-Personal graded runs (`results.md`, `score-report.*`, `certification/**`) stay
-local and are not a shareable question source.
+No third-party question bank is used. Author original scenario questions from
+the official skills outline and Microsoft Learn, following the style rules in
+`.github/instructions/sources-and-citations.instructions.md`. Personal graded
+runs (`results.md`, `score-report.*`, `certification/**`) stay local and are
+not a shareable question source.

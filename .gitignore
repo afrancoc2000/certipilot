@@ -3,9 +3,10 @@
 opencode.log
 
 # === Sharing policy =========================================================
-# Study MATERIAL (course notes, transcripts, book excerpts, question banks) is
-# committed so the team can study from it. Only PERSONAL-USE files — your exam
-# results, progress log, and study plans — stay local and are never committed.
+# Only ORIGINAL study material (our own course notes and cheat sheets) is
+# committed. Third-party content (books, course transcripts, slide captures,
+# practice-test or exam-dump questions) is never committed. PERSONAL-USE files —
+# your exam results, progress log, and study plans — also stay local.
 # Content lives under exams/<exam>/material and exams/<exam>/assets.
 # ===========================================================================
 
@@ -27,12 +28,8 @@ exams/**/*.zip
 !/assets/**/
 !/assets/README.md
 
-# Your real Microsoft certification score reports (private)
-exams/*/material/test-exams/**/certification/**
-
-# Graded practice-exam runs that record your own answers/scores (private)
-exams/*/material/test-exams/**/results.md
-exams/*/material/test-exams/**/score-report.*
+# Practice-exam captures, graded runs, and real score reports (local only)
+exams/*/material/test-exams/**
 
 # Agent-side helper scripts (one-off parsers, formatters) — not study material
 scripts/
@@ -52,4 +49,3 @@ scripts/
 Thumbs.db
 .DS_Store
 /.vscode
-/exams/az-305/material/test-exams/measureup/imgs

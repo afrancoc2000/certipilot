@@ -7,7 +7,7 @@ description: How every study agent resolves the active exam and its exam-relativ
 
 This repo now serves multiple certification exams (each a folder under
 `exams/`, e.g. `exams/az-305/`, `exams/az-104/`). Before reading any
-exam-specific file (progress, study plans, question banks, material), the agent
+exam-specific file (progress, study plans, material), the agent
 MUST determine the **active exam**. Everything the agent reads or writes for a
 study session is scoped to that one exam.
 
@@ -54,13 +54,13 @@ Once resolved, `<active-exam>` is the folder name under `exams/` (for example
 | Progress / agent memory | `exams/<active-exam>/assets/progress.md` |
 | Canonical evidence / private checkpoint | `exams/<active-exam>/assets/coverage.json`, `exams/<active-exam>/assets/session.json` |
 | Study plans | `exams/<active-exam>/assets/study-plans/` |
-| Study material | `exams/<active-exam>/material/` (course, savill, pluralsight, oreilly, cheat-sheets) |
-| Question banks & graded runs | `exams/<active-exam>/material/test-exams/` |
+| Study material | `exams/<active-exam>/material/` (course, cheat-sheets) |
+| Local practice results (never committed) | `exams/<active-exam>/material/test-exams/` |
 | Cross-exam master / mixed plan | `assets/` (top level) |
 
 Wherever a skill or instruction writes `exams/<active-exam>/…`, substitute the
 resolved exam folder. **Read `exams/<active-exam>/exam.md` first** to load that
-exam's domains, source hierarchy, MS Learn URLs, and which question banks exist
+exam's domains, source hierarchy, MS Learn URLs, and which local references exist
 — those differ per exam and are the authority for the session.
 
 ## Guardrails

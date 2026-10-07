@@ -3,13 +3,9 @@
 Exam config for the AZ-104 study agent. Read this first when AZ-104 is the
 active exam (see `.github/instructions/active-exam.instructions.md`).
 
-> ⚠️ AZ-104 material is partially populated: the O'Reilly certification guide
-> (chapters 1-6), Pluralsight transcripts (one per domain plus exam
-> preparation), a Microsoft Learn practice-assessment capture, and the
-> ExamTopics question bank (574 questions, no answer key) are available.
-> Course notes are not added yet, and the ExamTopics answers must be resolved
-> against Microsoft Learn (flagged as "no workspace citation" where needed).
-> Do not borrow AZ-305 content.
+> ⚠️ AZ-104 course notes are not added yet. Author original questions from
+> the official skills outline and Microsoft Learn (flag answers as "no
+> workspace citation" where needed). Do not borrow AZ-305 content.
 
 ## Domains (official skills outline)
 
@@ -44,30 +40,14 @@ the timing of localized exam updates.
 ## Source hierarchy (lookup order)
 
 1. `exams/az-104/material/course/` — study notes per domain (to be added).
-2. `exams/az-104/material/oreilly/certification-guide/chapter-0X.md` — O'Reilly
-   AZ-104 certification guide, chapters 1-6 (extracted from PDF via Azure
-   Document Intelligence, cleaned).
-3. `exams/az-104/material/pluralsight/<course>/transcript.txt` and other
-   `exams/az-104/material/<source>/...` transcripts / guides.
-4. `exams/az-104/material/test-exams/<source>/<exam-id>/...` — practice captures.
-5. Microsoft Learn (authoritative — wins on conflict; flag discrepancies).
+2. `exams/az-104/material/test-exams/<exam-id>/results.md` — your own local
+   practice results (never committed).
+3. Microsoft Learn (authoritative — wins on conflict; flag discrepancies).
 
-## Question banks
+## Question style
 
-- **ExamTopics** — `exams/az-104/material/test-exams/examtopics/`:
-  - Stems: `questions.md` (574 questions, global Q1-Q574; ExamTopics restarts
-    numbering per topic set). Types: 357 multiple-choice, 175 hotspot,
-    21 drag-drop, 21 case-study.
-  - Answer key: `answer-key.md` — ⚠️ the ExamTopics export contains NO answers
-    (no "Correct Answer", no community vote data). Every entry is a placeholder;
-    resolve each answer against Microsoft Learn before grading. Do not treat the
-    key as authoritative.
-  - Raw capture: `AZ-104 Exam.md` (Document Intelligence prebuilt-layout output).
-  - HOTSPOT / DRAG DROP items list their answer-area options but not the correct
-    selection.
-- **Microsoft Learn Practice Assessment** —
-  `exams/az-104/material/test-exams/microsoft/learn-practice/`:
-  - User-provided assessment captures organized by date.
-  - Treat the assessment's displayed result and explanation as the candidate
-    answer, then verify service behavior against current Microsoft Learn before
-    reusing an item for quizzes.
+No third-party question bank is used. Author original scenario questions from
+the official skills outline and Microsoft Learn, following the style rules in
+`.github/instructions/sources-and-citations.instructions.md`. The free
+[Microsoft Learn practice assessment](https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/practice/assessment?assessment-type=practice&assessmentId=21)
+is a supporting self-check; do not copy its items into the repo.

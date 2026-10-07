@@ -1,8 +1,7 @@
 # GH-300 Resource Index
 
-Curated on August 26, 2026. No GH-300 ExamTopics PDF was found in the supplied
-company search results. The resources below are training and practice aids,
-not exam dumps.
+Curated on August 26, 2026. The resources below are training and practice
+aids, not exam dumps.
 
 ## Internal training
 

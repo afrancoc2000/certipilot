@@ -15,9 +15,8 @@ the [quiz presentation/deck contract](../../agents/quiz-agent.agent.md#correct-a
 ## Inputs
 
 - Optional: target time (default 20 minutes for 10 questions).
-- Question banks and style references declared in
-  `exams/<active-exam>/exam.md`. When no bank exists, author original questions
-  from the listed authoritative first-party sources.
+- Style references declared in `exams/<active-exam>/exam.md`. Author original
+  questions from the listed authoritative first-party sources.
 - `exams/<active-exam>/assets/progress.md` weak/strong topics.
 - Active exam catalog and read-only audit, with subskill IDs, revision,
   uncovered scope, and pending checks. Load the
