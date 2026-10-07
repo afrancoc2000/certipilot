@@ -16,6 +16,20 @@ The Microsoft Learn skills-at-a-glance list currently repeats a second
 the six unique domains above. Do not treat the duplicate line as a seventh
 domain.
 
+## Blueprint catalog
+
+Use [blueprint.json](./blueprint.json) for the complete, source-mapped objective
+and subskill inventory when building or following an approved study plan.
+All 41 detailed official bullets were reconciled with the August 7, 2026
+English outline on October 4, 2026. Weights use the six detailed domains above,
+not the duplicated summary line. The certification page offers GH-300 exam
+scheduling.
+Check `revision`, `verified`, `verification_note`, and source dates before use.
+`derived: true` marks teaching decomposition, not extra official bullets.
+Keep existing objective and subskill IDs stable when revising wording; do not
+recycle removed IDs. Scope verification does not verify changing product
+availability or subscription entitlements; check GitHub Docs for those.
+
 ## Authoritative sources
 
 - [Certification page](https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/)

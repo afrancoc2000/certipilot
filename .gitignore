@@ -15,16 +15,17 @@ exams/**/*.zip
 
 # --- PERSONAL-USE files: never commit ---
 
-# Personal study progress / agent memory (per exam)
-exams/*/assets/progress.md
+# Private by default: progress, mock state, evidence, backups, and dated plans.
+# Keep directories traversable so only these shared README templates are allowed.
+/exams/*/assets/**
+!/exams/*/assets/**/
+!/exams/*/assets/README.md
+!/exams/*/assets/study-plans/README.md
 
-# Private study plans (local only, per exam) — keep the README as a template
-exams/*/assets/study-plans/**/*.md
-!exams/*/assets/study-plans/README.md
-
-# Shared cross-exam study assets: master/mixed plan is personal — keep README
-assets/**/*.md
-!assets/README.md
+# Cross-exam personal state follows the same rule, regardless of file extension.
+/assets/**
+!/assets/**/
+!/assets/README.md
 
 # Your real Microsoft certification score reports (private)
 exams/*/material/test-exams/**/certification/**
@@ -35,6 +36,12 @@ exams/*/material/test-exams/**/score-report.*
 
 # Agent-side helper scripts (one-off parsers, formatters) — not study material
 scripts/
+!.github/skills/coverage-audit/scripts/
+!.github/skills/coverage-audit/scripts/coverage.py
+!.github/skills/coverage-audit/scripts/session.py
+
+# Generated Python bytecode for the local coverage checker
+.github/skills/coverage-audit/**/__pycache__/
 
 # Secrets
 .env

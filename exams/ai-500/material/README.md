@@ -2,7 +2,7 @@
 
 Start with the official resources in [exam.md](../exam.md). Local notes should
 be organized by domain under `course/` and record the source URL plus the date
-checked — AI-500 is a beta exam over fast-moving services (Microsoft Foundry,
+checked — AI-500 covers fast-moving services (Microsoft Foundry,
 Microsoft Agent Framework, Model Context Protocol), so material ages quickly.
 
 Suggested layout:

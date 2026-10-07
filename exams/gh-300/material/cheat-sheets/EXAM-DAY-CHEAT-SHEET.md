@@ -18,8 +18,10 @@ Read this once, slowly, before you walk in. Nothing else. No new material.
    Organization → Business / Enterprise.
 3. **Governance starts at Business** — org policies, content exclusions, audit
    logs, seat management, no-training commitment, conditional IP indemnity.
-   **Enterprise** = Business + GitHub Enterprise Cloud + github.com-native
-   grounding (knowledge bases).
+   **Enterprise** is for enterprises using GitHub Enterprise Cloud and includes
+   Business features plus additional enterprise capabilities. Check the
+   [current plan comparison](https://docs.github.com/en/copilot/get-started/plans)
+   for changing entitlements; Copilot Spaces is not Enterprise-exclusive.
 4. **Where does the work run?** Editor + synchronous → completions / ask /
    Edits / agent mode. GitHub + asynchronous → Copilot coding agent.
 5. **Copilot advises, humans gate.** Copilot code review never counts as an
@@ -53,8 +55,13 @@ draft PR = coding agent. The coding agent cannot approve its own PR.
 | Reusable, on-demand task | Prompt file |
 | Live external data or tools | MCP server / extension |
 | Reusable bundle of repos, files, and notes | Copilot Space |
-| Curated internal docs grounding on github.com (Enterprise) | Knowledge base |
+| Curated internal documentation as shared Copilot context | Copilot Space (not Enterprise-exclusive) |
 | One-off targeted context | `#file`, `#selection`, `#codebase` |
+
+**Lifecycle correction (checked 2026-10-04):** Copilot knowledge bases were
+retired on November 1, 2025 and replaced by Spaces. Treat references to knowledge
+bases in older material as historical, not a current Enterprise differentiator.
+See the [official retirement notice](https://github.blog/changelog/2025-08-20-sunset-notice-copilot-knowledge-bases/).
 
 **Lock:** `@` routes expertise (`@github`, `@azure`, `@terminal`, `@vscode`) ·
 `#` attaches context · `/` shortcuts a task (`/explain`, `/fix`, `/tests`,

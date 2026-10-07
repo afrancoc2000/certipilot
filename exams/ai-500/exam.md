@@ -2,21 +2,43 @@
 
 Exam config for the AI-500 study agent. Read this first when AI-500 is active.
 
-Credential: **Microsoft Certified: Multi-Agent AI Solutions Expert (beta)**.
-Level: Expert. Passing score: 700. Exam is in **beta** — scores are not released
-immediately and the outline can change; re-check the study guide before every
-sprint.
+Credential: **Microsoft Certified: Multi-Agent AI Solutions Expert**.
+Level: Expert. As checked on October 4, 2026, the official exam and certification
+pages no longer label this credential beta. The exam page lists retirement
+date "none" and says its Practice Assessment is not currently available.
+Neither page explicitly dates a general-availability transition; do not infer
+a transition date or score-release timing. The current exam page does not
+state a passing score. Re-check official status before every sprint.
 
-**Prerequisite:** the certification requires completing one prerequisite
-associate-level credential (Azure AI Apps and Agents Developer path). Confirm
-the current prerequisite on the certification page before scheduling.
+**Prerequisite:** the certification page confirms **Microsoft Certified:
+Azure AI Apps and Agents Developer Associate** as the required prerequisite,
+checked October 4, 2026 and re-confirmed October 7, 2026. That associate
+credential is earned by passing a single exam, **AI-103** (the certification
+page links the AI-103 study guide, and the AI-103 exam URL resolves to that
+same certification page). So the practical path is **AI-103 → AI-500**.
+Re-check before scheduling.
 
-## Domains (skills measured as of the 2026-06-30 study guide)
+## Domains (current published skills outline, checked 2026-10-04)
 
 1. **Architect multi-agent solutions** (D1) - 15-20%
 2. **Develop multi-agent solutions in Azure** (D2) - 30-35%
 3. **Evaluate, optimize, and monitor multi-agent solutions** (D3) - 20-25%
 4. **Secure, govern, and deploy multi-agent solutions** (D4) - 20-25%
+
+## Blueprint catalog
+
+Use [blueprint.json](./blueprint.json) for the complete, source-mapped objective
+and subskill inventory when building or following an approved study plan.
+All 55 detailed official bullets and the weights above were reconciled on
+October 4, 2026. The guide does not state an effective revision date: June 30
+is its metadata date, and July 16 is its metadata update, not an effective-date
+claim. No future effective outline was found.
+Check `revision`, `verified`, `verification_note`, and source dates before use.
+`derived: true` marks teaching decomposition, not additional official bullets.
+Keep existing objective and subskill IDs stable when revising wording; do not
+recycle removed IDs. The catalog decomposes named technologies and operations
+that the summary below groups together. Scope verification does not guarantee
+framework behavior, service availability, or unpublished exam content.
 
 ### D1 - Architect multi-agent solutions (15-20%)
 
@@ -141,5 +163,5 @@ No local question bank exists yet. Author original scenario questions from the
 authoritative sources, cite each graded answer, and never borrow questions or
 evidence from another exam (AZ-305, AZ-104, GH-300, GH-600).
 
-Because the exam is in beta, flag any answer that depends on a preview feature
-and state the date the source was checked.
+Flag any answer that depends on a preview feature and state the date the
+source was checked, independently of the exam's release status.

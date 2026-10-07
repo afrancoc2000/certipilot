@@ -3,11 +3,38 @@
 1. Create `exams/<exam-id>/exam.md` with the official title, skills outline,
    domain weights, authoritative sources, local source order, and available
    question banks.
-2. Create `material/README.md` and add only legally shareable notes, links,
+2. Create `exams/<exam-id>/blueprint.json` and link it from `exam.md`. Reconcile
+   every published objective against the current official study guide, record
+   source URLs and revision/check dates, and decompose broad objectives into
+   assessable subskills with stable IDs. Mark the catalog verified only after
+   that reconciliation; unknown scope is not complete. Follow the
+   [catalog schema](../.github/skills/coverage-audit/references/evidence.md#catalog).
+3. Create `material/README.md` and add only legally shareable notes, links,
    transcripts, and question banks.
-3. Create `assets/progress.md` using the starter format below. It remains local.
-4. Create `assets/study-plans/README.md`; dated plans in that folder remain local.
-5. Name the exam explicitly in chat to activate it.
+4. Create `assets/progress.md` using the starter format below. It remains local.
+5. Create `assets/study-plans/README.md`; dated plans in that folder remain local.
+6. From the repository root, validate the catalog and initialize private
+   evidence with the commands below. `init` creates `assets/coverage.json`
+   with unknown learning evidence and refuses to overwrite an existing ledger.
+   Do not copy another exam's mastery records or assume a catalog proves learning.
+7. Activate the exam by naming it explicitly in chat, or let a dated study plan
+   covering today select it when no exam is named. Explicit intent takes
+   precedence; if multiple exams have active plans, choose which to study.
+   Follow the [active-exam resolver](../.github/instructions/active-exam.instructions.md)
+   for the complete selection and resume rules.
+
+Replace `<exam-id>` with the new exam's folder name:
+
+```powershell
+python .github\skills\coverage-audit\scripts\coverage.py audit --exam <exam-id>
+python .github\skills\coverage-audit\scripts\coverage.py init --exam <exam-id>
+python .github\skills\coverage-audit\scripts\coverage.py audit --exam <exam-id>
+python -B -m unittest discover -s .github\skills\coverage-audit\tests -p test_repository.py
+```
+
+Resolve any nonzero exit status before using the exam. Audit success validates
+catalog structure and evidence consistency, not the semantic accuracy of the
+official-source mapping; that reconciliation is required separately.
 
 Minimum progress headings:
 
@@ -15,6 +42,7 @@ Minimum progress headings:
 # <Exam> Progress
 
 ## Status
+## Coverage summary
 ## Weak topics
 ## Strong topics
 ## Mistake log

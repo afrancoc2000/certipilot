@@ -1,0 +1,16 @@
+[run]
+branch = True
+source = .github
+omit = .github/skills/coverage-audit/tests/*
+relative_files = True
+data_file = ${COVERAGE_FILE?}
+
+[report]
+show_missing = True
+precision = 2
+
+[json]
+output = ${CI_REPORT_DIR?}/coverage.json
+
+[xml]
+output = ${CI_REPORT_DIR?}/coverage.xml

@@ -1,0 +1,2 @@
+# Test instrumentation only; the study helpers have no runtime dependencies.
+coverage==7.10.7

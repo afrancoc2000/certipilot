@@ -13,7 +13,24 @@ and Azure behavior; GitHub Docs is authoritative for GitHub product behavior.
 Workspace sources may be outdated. When they conflict with current first-party
 documentation, the first-party source wins and the discrepancy must be flagged.
 
-## Lookup order
+## Preparation and verification
+
+Prepare and verify an answer before presenting the question. Use Microsoft
+Learn MCP when available for Microsoft claims, then the official URLs in the
+active exam's `exam.md`; GitHub Docs governs GitHub behavior. Local notes and
+community keys provide candidates, explanations, and style, not authority.
+
+Keep the claim, decisive constraints, first-party URL, verification date, and
+supporting rationale in the private prepared-session state. Reuse that verified
+snapshot during the same prepared session when the claim and constraints are
+unchanged, including grading; a fresh fetch for each answer is unnecessary.
+Reverify new claims, changed constraints, disputes, and stale source metadata.
+No unchecked cross-session cache. Missing or ambiguous verification blocks a
+definitive grade, not permission to trust a community key. Apply the canonical
+[invalid-item correction](progress-tracking.instructions.md#corrections-without-learner-penalty)
+without learner penalty when a defect is established.
+
+## Local explanation and style lookup
 
 1. `exams/<active-exam>/material/course/` — Spanish-language study notes per exam domain (`README.md`,
    `q&a.md`, `usecase/`).
@@ -21,9 +38,8 @@ documentation, the first-party source wins and the discrepancy must be flagged.
 3. `exams/<active-exam>/material/pluralsight/<Course>/transcript.txt` — Pluralsight transcripts.
 4. `exams/<active-exam>/material/oreilly/certification-guide/chapter-0X.md` — O'Reilly guide.
 5. `exams/<active-exam>/material/test-exams/<source>/<exam-id>/...` — graded practice/exam captures.
-6. **Authoritative first-party documentation.** Use Microsoft Learn MCP first
-  when available, then the official product documentation and exam URLs in
-  `exams/<active-exam>/exam.md`.
+
+This local lookup order does not delay or replace first-party verification.
 
 ## Question bank and style references
 
@@ -38,12 +54,12 @@ and style-reference inventory in the active exam's `exam.md` first.
 - **When these style references exist:** the graded runs under
   `exams/<active-exam>/material/test-exams/measureup/`, `exams/<active-exam>/material/test-exams/pluralsight/`, and the O'Reilly
   certification guide `exams/<active-exam>/material/oreilly/certification-guide/chapter-0X.md`. Mirror
-  their format: a concrete scenario with explicit constraints, 4+ plausible
-  options, and a **per-option rationale** (why the right one wins and why each
+  their format: a concrete scenario with explicit constraints, four plausible
+  options (A-D) for single-answer items (multi-select follows its own format), and a **per-option rationale** (why the right one wins and why each
   distractor fails) on grading.
 - **ExamTopics answers are community-sourced and frequently disputed.** Never
-  treat `answer-key.md` as authoritative on its own. Verify every answer against
-  Microsoft Learn before grading; if they conflict, follow Microsoft Learn and
+  treat `answer-key.md` as authoritative on its own. Apply the preparation and
+  verification contract above; if they conflict, follow Microsoft Learn and
   flag the discrepancy (for example: "⚠️ ExamTopics marks B, but MS Learn
   supports C — follow C").
 - Present ExamTopics stems faithfully (light wording normalization is fine), but
@@ -55,8 +71,8 @@ and style-reference inventory in the active exam's `exam.md` first.
 
 - Official certification score reports are primary evidence for prioritization.
 - Microsoft Learn practice sets are supporting evidence.
-- Verify Pluralsight stated answers against Microsoft Learn before trusting
-  them; flag discrepancies.
+- Verify Pluralsight stated answers under the same preparation contract and
+  flag discrepancies; source brands do not change verification scope.
 - Never re-ask a verbatim question from `results.md`; rephrase or use a sibling
   subtopic.
 
@@ -80,7 +96,8 @@ material. The split is enforced in `.gitignore`:
   the ExamTopics/practice question banks (questions, answer keys, coverage).
 - **Never commit — personal-use files** (keep local): everything under
   `exams/<exam>/assets/` (`progress.md`, `study-plans/`), the cross-exam
-  `assets/` master plan, and under `material/test-exams/` the graded
+  `assets/` master plan (except the shared `README.md` templates that
+  `.gitignore` re-includes), and under `material/test-exams/` the graded
   `results.md`, any `score-report.*`, and the real `certification/**` score
   reports.
 - If the user asks to commit something that matches a personal-use pattern,

@@ -4,10 +4,12 @@ Exam config for the AZ-104 study agent. Read this first when AZ-104 is the
 active exam (see `.github/instructions/active-exam.instructions.md`).
 
 > ⚠️ AZ-104 material is partially populated: the O'Reilly certification guide
-> (chapters 1-6) and the ExamTopics question bank (574 questions, no answer key)
-> are available. Course notes and other transcripts are not added yet, and the
-> ExamTopics answers must be resolved against Microsoft Learn (flagged as "no
-> workspace citation" where needed). Do not borrow AZ-305 content.
+> (chapters 1-6), Pluralsight transcripts (one per domain plus exam
+> preparation), a Microsoft Learn practice-assessment capture, and the
+> ExamTopics question bank (574 questions, no answer key) are available.
+> Course notes are not added yet, and the ExamTopics answers must be resolved
+> against Microsoft Learn (flagged as "no workspace citation" where needed).
+> Do not borrow AZ-305 content.
 
 ## Domains (official skills outline)
 
@@ -17,8 +19,22 @@ active exam (see `.github/instructions/active-exam.instructions.md`).
 4. **Implement and manage virtual networking** (D4) — ~15–20%
 5. **Monitor and maintain Azure resources** (D5) — ~10–15%
 
-⚠️ Verify the exact domains and weightings against the current Microsoft Learn
-AZ-104 exam page before relying on them — Microsoft updates outlines over time.
+These domain weights match the detailed Microsoft Learn outline effective
+April 17, 2026, checked on October 4, 2026. The certification page currently
+offers exam scheduling; re-check it before booking.
+
+## Blueprint catalog
+
+Use [blueprint.json](./blueprint.json) for the complete, source-mapped objective
+and subskill inventory when building or following an approved study plan.
+It covers all 82 detailed official bullets, not question-bank content.
+Check `revision`, `verified`, `verification_note`, and source dates before use.
+`derived: true` identifies teaching decomposition beyond explicitly named
+components, not additional official exam bullets. Keep existing objective and
+subskill IDs stable when revising wording; do not recycle removed IDs.
+Weights come from the detailed guide, not local question frequencies.
+Verification covers published English scope, not every possible exam topic or
+the timing of localized exam updates.
 
 ## Microsoft Learn (source of truth)
 
@@ -31,7 +47,8 @@ AZ-104 exam page before relying on them — Microsoft updates outlines over time
 2. `exams/az-104/material/oreilly/certification-guide/chapter-0X.md` — O'Reilly
    AZ-104 certification guide, chapters 1-6 (extracted from PDF via Azure
    Document Intelligence, cleaned).
-3. `exams/az-104/material/<source>/...` — other transcripts / guides (to be added).
+3. `exams/az-104/material/pluralsight/<course>/transcript.txt` and other
+   `exams/az-104/material/<source>/...` transcripts / guides.
 4. `exams/az-104/material/test-exams/<source>/<exam-id>/...` — practice captures.
 5. Microsoft Learn (authoritative — wins on conflict; flag discrepancies).
 

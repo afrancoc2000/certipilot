@@ -20,6 +20,22 @@ GitHub as the system of record and control plane.
 5. **Orchestrate multi-agent coordination** (D5) - 15-20%
 6. **Implement guardrails and accountability** (D6) - 10-15%
 
+## Blueprint catalog
+
+Use [blueprint.json](./blueprint.json) for the complete, source-mapped objective
+and subskill inventory when building or following an approved study plan.
+All 65 detailed official bullets and the domain weights above were reconciled
+on October 4, 2026. The guide does not state an effective revision date;
+its May 4 metadata date and July 9 update are not effective-date claims.
+The certification page offers GH-600 scheduling. No future outline was found.
+Check `revision`, `verified`, `verification_note`, and source dates before use.
+`derived: true` marks teaching decomposition, not additional official bullets.
+The guide's malformed approval-gate sentence is interpreted as requiring a
+checked and approved plan before action; this interpretation is recorded in
+the catalog rather than presented as corrected official wording.
+Keep existing objective and subskill IDs stable when revising wording; do not
+recycle removed IDs. Scope verification is not a product-behavior guarantee.
+
 ### D1 - Prepare agent architecture and SDLC processes (15-20%)
 
 Integrate agents into the SDLC:

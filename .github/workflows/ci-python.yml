@@ -1,0 +1,90 @@
+name: CI Python
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.13']
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONPATH: ${{ github.workspace }}/.github/skills/coverage-audit/tests
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Prepare report directory
+        run: |
+          $reportDir = Join-Path $env:RUNNER_TEMP "python-ci"
+          New-Item -ItemType Directory -Force $reportDir | Out-Null
+          "CI_REPORT_DIR=$reportDir" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "COVERAGE_FILE=$(Join-Path $reportDir '.coverage')" |
+            Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install test dependency
+        run: python -B -m pip install --disable-pip-version-check -r requirements-dev.txt
+
+      - name: Run unittest with branch coverage
+        id: tests
+        run: |
+          python -B -m coverage run -m unittest discover -s .github/skills/coverage-audit/tests -v 2>&1 |
+            Tee-Object -FilePath "$env:CI_REPORT_DIR/unittest.txt"
+          exit $LASTEXITCODE
+
+      - name: Generate coverage reports
+        if: ${{ always() && steps.tests.outcome != 'skipped' }}
+        run: |
+          python -B -m coverage json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -B -m coverage xml
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -B -m coverage report |
+            Tee-Object -FilePath "$env:CI_REPORT_DIR/coverage.txt"
+          exit $LASTEXITCODE
+
+      - name: Enforce per-file line and branch coverage
+        if: ${{ always() && steps.tests.outcome != 'skipped' }}
+        run: python -B .github/check_coverage.py "$env:CI_REPORT_DIR/coverage.json"
+
+      - name: Upload test and coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-tests-${{ matrix.os }}-${{ matrix.python-version }}
+          path: |
+            ${{ runner.temp }}/python-ci/unittest.txt
+            ${{ runner.temp }}/python-ci/coverage.json
+            ${{ runner.temp }}/python-ci/coverage.xml
+            ${{ runner.temp }}/python-ci/coverage.txt
+          if-no-files-found: warn
+          retention-days: 7
