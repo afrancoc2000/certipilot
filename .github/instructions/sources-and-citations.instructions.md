@@ -32,8 +32,8 @@ without learner penalty when a defect is established.
 
 ## Local explanation and style lookup
 
-1. `exams/<active-exam>/material/course/` — Spanish-language study notes per exam domain (`README.md`,
-   `q&a.md`, `usecase/`).
+1. `exams/<active-exam>/material/course/` — the learner's own study notes per exam domain, if they
+   have added any (optional; not shipped with the repo).
 2. `exams/<active-exam>/material/cheat-sheets/` — original one-page summaries.
 3. `exams/<active-exam>/material/test-exams/<exam-id>/results.md` — the learner's own
    local practice results (never committed).
@@ -66,7 +66,7 @@ and style-reference inventory in the active exam's `exam.md` first.
 
 ## Citation rules
 
-- Always cite as workspace-relative paths (for example `exams/<active-exam>/material/course/02 compute/README.md`
+- Always cite as workspace-relative paths (for example `exams/<active-exam>/material/cheat-sheets/<file>`
   or `exams/<active-exam>/material/test-exams/<exam-id>/results.md#qN`).
 - Never fabricate citations.
 - If a topic is not covered in workspace sources, say so explicitly and tag
@@ -80,7 +80,7 @@ The repo is shared with a small, trusted team so they can study from the same
 material. The split is enforced in `.gitignore`:
 
 - **Commit and share — original study material** under `exams/<exam>/material/`:
-  the team's own course notes and cheat sheets.
+  the author's own notes and cheat sheets.
 - **Never commit — third-party content**: books, course or video transcripts,
   slide captures, practice-test or exam-dump questions and answer keys. Link
   to the official source instead.

@@ -38,7 +38,9 @@ Verification covers published English scope; localized updates can differ.
 
 ## Source hierarchy (lookup order)
 
-1. `exams/az-305/material/course/` — Spanish-language study notes per domain.
+1. `exams/az-305/material/course/` — your own study notes per domain, if you add any
+   (optional; not shipped with the repo). Public case-study practice material:
+   [MicrosoftLearning AZ-305 case studies](https://github.com/MicrosoftLearning/AZ-305-DesigningMicrosoftAzureInfrastructureSolutions/tree/master/Instructions/CaseStudy).
 2. `exams/az-305/material/cheat-sheets/` — original decision-tree one-pagers.
 3. `exams/az-305/material/test-exams/<exam-id>/results.md` — your own local
    practice results (never committed).

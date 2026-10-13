@@ -5,7 +5,7 @@ wins on conflict.
 
 ```text
 material/
-├── course/       # Spanish-language study notes per domain
+├── course/       # Optional: your own study notes per domain
 ├── cheat-sheets/ # Decision trees
 └── test-exams/   # Local-only practice results (never committed)
 ```
