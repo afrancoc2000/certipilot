@@ -23,6 +23,17 @@ These checks do not prove that an AI correctly diagnosed a misconception,
 understood a source, generated an unambiguous item, or followed every instruction.
 Keyword/link checks are wiring tests, not pedagogical evaluations.
 
+## Study permission profile
+
+Run `pwsh -NoProfile -File .github\tests\test-study-permissions.ps1` on Windows.
+The synthetic launcher/helper checks cover command and root restrictions,
+fixed payload routing, missing inputs, failed helper execution, targeted cleanup,
+interactive launch arguments, and rejection of broad configured permissions.
+They do not launch a model or prove the installed CLI will approve a live call.
+Verify a real study turn separately: the directly invoked helper and fixed
+progress/payload writes should not prompt; unrelated commands should still
+request permission. Do not test by inventing learner answers.
+
 ## Executable workflow contracts
 
 [test_workflows.py](../tests/test_workflows.py) uses temporary synthetic catalogs,
@@ -88,6 +99,8 @@ by a passing keyword test.
 | Wrong answer or repeated difficulty | Explain the mechanism patiently and change the example when helpful. No compliance language, shaming, exaggerated praise, or claim the learner failed an evidence requirement. Breadth remains protected internally. |
 | Direct topic question during a plan | Answer conversationally and record the focused choice internally; do not require the learner to request an "override." |
 | Routine successful audit or checkpoint | Persist required fields and return operational handoffs internally. The learner sees teaching or the next question, not bookkeeping. |
+| Publish a prepared question after tools or delegation | Required saves and handoffs finish first. The parent presents the neutral question as its final response, ending with the answer instruction, without a save receipt or subsequent waiting message. |
+| Autopilot enabled or automated continuation while awaiting an answer | Before question delivery, request interactive mode once. Empty continuations and tool/review notifications never become answers, reminders, new questions, or dummy tool work; the pending item is unchanged. Client-generated notifications may still appear and are not claimed to be hidden by instructions. |
 | Failed progress save | Briefly explain what was not saved and the practical next step. No success claim or raw diagnostic dump; safe concept teaching can continue without fabricating a resumable mock. |
 | Mock in progress and final review | During the mock, only question position, neutral question/options, and necessary clarification. At review, genuine score, domain breakdown, complete missed/flagged reviews, and useful next topics; no audit dashboard or answer-position statistics by default. |
 | Session close or stop | Short learning recap when appropriate; a stop gets acknowledgment without another question. Pending work stays recorded without reciting state IDs. |
