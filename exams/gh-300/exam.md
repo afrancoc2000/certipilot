@@ -49,11 +49,12 @@ feature availability.
 2. `exams/gh-300/material/resources.md` - curated internal training and
    official resource links.
 3. `exams/gh-300/material/github-docs/` - local summaries of GitHub Docs.
-4. `exams/gh-300/material/test-exams/` - future practice captures.
+4. `exams/gh-300/material/test-exams/` - local-only personal practice results
+   and score reports (never committed).
 5. Microsoft Learn and GitHub Docs URLs above (authoritative).
 
-## Question banks
+## Original questions and style
 
-No local question bank is available yet. Author original scenario questions
-from the authoritative sources, cite each graded answer, and do not borrow
+Always author original scenario questions from the authoritative first-party
+sources, cite each graded answer, and do not borrow
 questions or evidence from another exam.

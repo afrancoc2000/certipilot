@@ -152,15 +152,16 @@ Microsoft Learn remains authoritative for what the exam measures.
 ## Source hierarchy (lookup order)
 
 1. `exams/ai-500/material/course/` - local notes mapped to D1-D4.
-2. `exams/ai-500/material/test-exams/` - practice captures (none yet).
+2. `exams/ai-500/material/test-exams/` - local-only personal practice results
+   and score reports (never committed).
 3. Microsoft Learn URLs above (authoritative).
 4. Official framework documentation for non-Microsoft components, flagged as
    such in the citation.
 
-## Question banks
+## Original questions and style
 
-No local question bank exists yet. Author original scenario questions from the
-authoritative sources, cite each graded answer, and never borrow questions or
+Always author original scenario questions from the authoritative first-party
+sources, cite each graded answer, and never borrow questions or
 evidence from another exam (AZ-305, AZ-104, GH-300, GH-600).
 
 Flag any answer that depends on a preview feature and state the date the

@@ -40,14 +40,16 @@ without learner penalty when a defect is established.
 
 This local lookup order does not delay or replace first-party verification.
 
-## Question bank and style references
+## Original questions and style references
 
-When the user studies in quiz, drill, or mock-exam mode, read the question-bank
-and style-reference inventory in the active exam's `exam.md` first.
+When the user studies in quiz, drill, case-study, or mock-exam mode, read the
+skills outline, authoritative sources, and question-style guidance in the
+active exam's `exam.md` first.
 
-- Write original questions from the exam's skills outline and Microsoft
-  Learn. Do not reproduce third-party question banks, exam dumps, or paid
-  practice-test content.
+- In every mode, write original questions from the exam's skills outline and
+  its declared authoritative first-party sources, including Microsoft Learn
+  and GitHub Docs as appropriate. Do not reproduce third-party question banks,
+  exam dumps, or paid practice-test content.
 - Format: a concrete scenario with explicit constraints, four plausible
   options (A-D) for single-answer items (multi-select follows its own format),
   and a **per-option rationale** (why the right one wins and why each
