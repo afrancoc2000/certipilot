@@ -13,7 +13,10 @@
    official resources. Do not commit third-party books, course or video
    transcripts, slide captures, practice-test or exam-dump questions, or answer
    keys. Mark `material/test-exams/` as local-only for personal practice results
-   and score reports; never commit its contents. Follow the
+   and score reports; never commit its contents. Keep any legally obtained
+   third-party local references under ignored `material/third-party/`, not
+   alongside original notes. Ignore rules cannot detect authorship, so review
+   provenance before staging. Follow the
    [source contract](../.github/instructions/sources-and-citations.instructions.md#sharing--commit-policy).
 4. Create `assets/progress.md` using the starter format below. It remains local.
 5. Create `assets/study-plans/README.md`; dated plans in that folder remain local.

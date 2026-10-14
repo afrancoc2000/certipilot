@@ -79,13 +79,22 @@ active exam's `exam.md` first.
 ## Sharing / commit policy
 
 The repo is shared with a small, trusted team so they can study from the same
-material. The split is enforced in `.gitignore`:
+material. `.gitignore` protects personal state, designated third-party
+directories, and common ebook/transcript formats; it cannot determine
+authorship or licensing from a filename:
 
 - **Commit and share — original study material** under `exams/<exam>/material/`:
   the author's own notes and cheat sheets.
 - **Never commit — third-party content**: books, course or video transcripts,
   slide captures, practice-test or exam-dump questions and answer keys. Link
   to the official source instead.
+  Any legally obtained local reference files belong under
+  `exams/<exam>/material/third-party/` (ignored at every depth), not alongside
+  original notes. The `books/`, `transcripts/`, `slide-captures/`,
+  `question-banks/`, and `exam-dumps/` directories under material are also
+  ignored. Original notes and cheat-sheet PDFs remain shareable; review their
+  provenance before staging. Ignore rules do not protect already tracked files
+  or prevent a forced add.
 - **Never commit — personal-use files** (keep local): everything under
   `exams/<exam>/assets/` (`progress.md`, `study-plans/`), the cross-exam
   `assets/` master plan (except the shared `README.md` templates that

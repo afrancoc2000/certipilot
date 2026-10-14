@@ -245,6 +245,37 @@ class RepositoryTests(unittest.TestCase):
             self.assertIn(rule, close)
         self.assertNotIn("(most recent", close)
 
+    def test_third_party_material_is_ignored_without_blocking_original_notes(self):
+        cases = []
+        for exam in ("az-104", "az-305", "gh-300", "ai-103", "future-exam"):
+            root = f"exams/{exam}/material"
+            for directory in (
+                "third-party", "books", "transcripts", "slide-captures",
+                "question-banks", "exam-dumps",
+            ):
+                for parent in (root, f"{root}/course"):
+                    cases.append((f"{parent}/{directory}/nested/sample.md", True))
+                    cases.append((f"{parent}/{directory}/sample.pdf", True))
+            for extension in ("epub", "mobi", "azw", "azw3", "srt", "vtt"):
+                cases.append((f"{root}/course/sample.{extension}", True))
+            cases.extend((f"{root}/{name}", False) for name in (
+                "README.md", "course/original-notes.md",
+                "cheat-sheets/original.md", "cheat-sheets/original.pdf",
+                "cheat-sheets/one-pagers/original.html",
+                "cheat-sheets/one-pagers/original.pdf",
+            ))
+            cases.append((f"{root}/test-exams/run/results.md", True))
+        result = subprocess.run(
+            ["git", "check-ignore", "--no-index", "--stdin", "-z"],
+            input=("\0".join(path for path, _ in cases) + "\0").encode("utf-8"),
+            cwd=ROOT, check=False, capture_output=True,
+        )
+        self.assertIn(result.returncode, (0, 1), result.stderr)
+        ignored = set(result.stdout.decode("utf-8").split("\0"))
+        for path, expected in cases:
+            with self.subTest(path=path):
+                self.assertEqual(path in ignored, expected)
+
     def test_assets_are_private_by_default_except_shared_templates(self):
         cases = [
             ("assets/master-plan.json", True),
