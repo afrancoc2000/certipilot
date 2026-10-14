@@ -42,4 +42,5 @@ aids, not exam dumps.
   with first-party documentation, follow the first-party source and flag the
   discrepancy.
 - Do not treat these resources as a local question bank. Author original,
-  cited practice questions until a legitimate GH-300 bank is added.
+  cited practice questions from the official study guide and first-party
+  documentation, regardless of whether local practice material exists.

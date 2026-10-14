@@ -92,7 +92,8 @@ authorship or licensing from a filename:
   `exams/<exam>/material/third-party/` (ignored at every depth), not alongside
   original notes. The `books/`, `transcripts/`, `slide-captures/`,
   `question-banks/`, and `exam-dumps/` directories under material are also
-  ignored. Original notes and cheat-sheet PDFs remain shareable; review their
+  ignored, as are the legacy `savill/`, `pluralsight/`, and `oreilly/`
+  reference directories. Original notes and cheat-sheet PDFs remain shareable; review their
   provenance before staging. Ignore rules do not protect already tracked files
   or prevent a forced add.
 - **Never commit — personal-use files** (keep local): everything under
