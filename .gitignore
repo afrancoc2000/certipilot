@@ -22,11 +22,6 @@ exams/*/material/**/slide-captures/
 exams/*/material/**/question-banks/
 exams/*/material/**/exam-dumps/
 
-# Legacy provider folders formerly used for transcripts and book excerpts.
-exams/*/material/**/savill/
-exams/*/material/**/pluralsight/
-exams/*/material/**/oreilly/
-
 # Ebook and subtitle/transcript formats; original cheat-sheet PDFs remain shareable.
 exams/*/material/**/*.epub
 exams/*/material/**/*.mobi

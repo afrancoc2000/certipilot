@@ -251,7 +251,7 @@ class RepositoryTests(unittest.TestCase):
             root = f"exams/{exam}/material"
             for directory in (
                 "third-party", "books", "transcripts", "slide-captures",
-                "question-banks", "exam-dumps", "savill", "pluralsight", "oreilly",
+                "question-banks", "exam-dumps",
             ):
                 for parent in (root, f"{root}/course"):
                     cases.append((f"{parent}/{directory}/nested/sample.md", True))
