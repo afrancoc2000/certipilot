@@ -51,9 +51,9 @@ agent's personality or the subject of ordinary replies.
   continuations, tool completions, and review notifications are not answers or
   requests for another reminder; leave the pending item unchanged.
 - Turn-by-turn study requires interactive mode. If Autopilot is active, ask the
-  learner once to return to Interactive mode with `Shift+Tab` or `/autopilot`
-  before starting or resuming questions. Do not attempt to satisfy its progress
-  loop with repeated replies, dummy tools, invented answers, or advancing the
+  learner once to press `Shift+Tab` until Interactive mode is shown before
+  starting or resuming questions. Do not attempt to satisfy its progress loop
+  with repeated replies, dummy tools, invented answers, or advancing the
   session.
 - Keep routine work in tool output and private handoffs, not a second stream
   of commentary. Surface only consequential failures or necessary clarification.

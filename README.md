@@ -60,8 +60,8 @@ sandbox: Copilot can use the same files, commands, and network access available
 to your account. Repeating `/allow-all` does not disable it; use `/permissions`
 to change permission mode or start a fresh session for a clean state.
 
-Use `Shift+Tab` or `/autopilot` to switch Autopilot on or off. Before starting
-or resuming turn-by-turn study, return to Interactive mode. The
+Use `Shift+Tab` to cycle back from Autopilot to Interactive mode before starting
+or resuming turn-by-turn study. The
 [question-last contract](AGENTS.md#question-last-delivery) keeps required saves
 and handoffs before the question, then waits for a genuine learner response.
 
