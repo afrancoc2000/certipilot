@@ -7,7 +7,7 @@ description: How every study agent resolves the active exam and its exam-relativ
 
 This repo now serves multiple certification exams (each a folder under
 `exams/`, e.g. `exams/az-305/`, `exams/az-104/`). Before reading any
-exam-specific file (progress, study plans, question banks, material), the agent
+exam-specific file (progress, study plans, material), the agent
 MUST determine the **active exam**. Everything the agent reads or writes for a
 study session is scoped to that one exam.
 
@@ -50,17 +50,17 @@ Once resolved, `<active-exam>` is the folder name under `exams/` (for example
 
 | Resource | Path |
 | --- | --- |
-| Exam config (domains, sources, URLs, banks) | `exams/<active-exam>/exam.md` |
+| Exam config (domains, authoritative sources, question-style guidance) | `exams/<active-exam>/exam.md` |
 | Progress / agent memory | `exams/<active-exam>/assets/progress.md` |
 | Canonical evidence / private checkpoint | `exams/<active-exam>/assets/coverage.json`, `exams/<active-exam>/assets/session.json` |
 | Study plans | `exams/<active-exam>/assets/study-plans/` |
-| Study material | `exams/<active-exam>/material/` (course, savill, pluralsight, oreilly, cheat-sheets) |
-| Question banks & graded runs | `exams/<active-exam>/material/test-exams/` |
+| Original study material | `exams/<active-exam>/material/` |
+| Local practice results (never committed) | `exams/<active-exam>/material/test-exams/` |
 | Cross-exam master / mixed plan | `assets/` (top level) |
 
 Wherever a skill or instruction writes `exams/<active-exam>/…`, substitute the
 resolved exam folder. **Read `exams/<active-exam>/exam.md` first** to load that
-exam's domains, source hierarchy, MS Learn URLs, and which question banks exist
+exam's domains, source hierarchy, MS Learn URLs, and which local references exist
 — those differ per exam and are the authority for the session.
 
 ## Guardrails
@@ -70,8 +70,9 @@ exam's domains, source hierarchy, MS Learn URLs, and which question banks exist
   Ask only if state is ambiguous, stale, conflicting, or differs from explicit
   exam intent. Never switch exams silently.
 
-- Never mix material across exams in one session: while AZ-104 is active, do not
-  quiz from AZ-305 banks or cite AZ-305 material, and vice versa.
-- If the active exam's `exam.md` is missing or a referenced bank does not exist
-  yet, say so and fall back to Microsoft Learn (flagged) rather than borrowing
-  another exam's content.
+- Never mix material across exams in one session: use only the active exam's
+  material and declared authoritative sources to author questions or
+  explanations. Do not use another exam's material.
+- If the active exam's `exam.md` or optional original study material is missing,
+  say so and fall back to authoritative first-party documentation for that exam
+  (flagged) rather than borrowing another exam's content.

@@ -11,9 +11,15 @@ Suggested layout:
 material/
 ├── course/       # Original notes by D1-D4
 ├── cheat-sheets/ # Decision trees: orchestration patterns, memory tiers, auth flows
-└── test-exams/   # Practice captures and question banks
+└── test-exams/   # Local-only practice results (never committed)
 ```
 
-No local question bank exists yet. Until material is added, the tutor generates
-original questions from Microsoft Learn and the official framework
-documentation, and cites the page used to grade.
+Only original study material is shared under the
+[source contract](../../../.github/instructions/sources-and-citations.instructions.md);
+third-party content is never committed. Personal practice results under
+`test-exams/` and personal state under `../assets/` stay local, except for the
+shared asset README templates.
+
+The tutor always generates original questions from Microsoft Learn and the
+official framework documentation, and cites the first-party page used to
+grade, whether or not local notes exist.

@@ -22,10 +22,9 @@ and persistence, without a second agent solely to rerun known commands.
 - Active exam/catalog revision, required subskill IDs, session/attempt IDs,
   actual response reference and timestamp, assistance, and context. Follow the
   [canonical evidence contract](../../instructions/progress-tracking.instructions.md).
-- The reference answer. For ExamTopics-sourced questions this is
-  `exams/<active-exam>/material/test-exams/examtopics/answer-key.md` — but it is community-sourced and
-  often disputed, so treat it as a candidate, not ground truth. Use the prepared
-  first-party verification snapshot under the source contract.
+- The reference answer from the prepared first-party verification snapshot
+  under the source contract. Any practice-set key is a candidate, not ground
+  truth.
 
 ## Procedure
 
@@ -68,9 +67,8 @@ and persistence, without a second agent solely to rerun known commands.
    framing (when to choose X over Y, cost/SLA tradeoff, common distractor).>
 
    Per-option: <one short line per option — why the right one wins and why each
-   distractor fails. Match the style of the graded references under
-   exams/<active-exam>/material/test-exams/measureup/, exams/<active-exam>/material/test-exams/pluralsight/, and
-   exams/<active-exam>/material/oreilly/certification-guide/.>
+   distractor fails, following the style rules in
+   .github/instructions/sources-and-citations.instructions.md.>
 
    Cite: <workspace-relative path or MS Learn URL>
 

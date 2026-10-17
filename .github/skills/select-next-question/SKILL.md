@@ -20,10 +20,6 @@ selected scope, and reload or re-audit when the contract's freshness checks fail
 - Active exam config, `blueprint.json`, and the `coverage-audit` report
   (`coverage_queue`, next allocation, breadth gaps, pending checks).
 - `exams/<active-exam>/assets/progress.md` (derived summary and mistake log).
-- **ExamTopics question bank, only if declared in this exam's config:** `exams/<active-exam>/material/test-exams/examtopics/questions.md` (count
-  in the active exam's `exam.md`) + `exams/<active-exam>/material/test-exams/examtopics/answer-key.md`, prioritized via
-  `exams/<active-exam>/material/test-exams/examtopics/coverage-analysis.md` (NEW/PARTIAL clusters,
-  duplicate map).
 - Optional: failed-question indices under `exams/<active-exam>/material/test-exams/*/results.md`.
 - Optional: today's plan, resolved by
   [active-exam](../../instructions/active-exam.instructions.md) (date range covers
@@ -58,16 +54,12 @@ selected scope, and reload or re-audit when the contract's freshness checks fail
      Carry unfinished allocation across sessions and surface breadth gaps.
    - For mock preloading, instead use the official domain quotas supplied by
      `run-mock-exam`; normal allocation and topic overrides do not apply.
-5. Map chosen required subskill IDs to a concrete stem in a declared bank:
-   - Prefer questions tagged NEW or PARTIAL in `coverage-analysis.md` for the
-     target topic; collapse near-duplicate variants to a single representative.
-   - Bank NEW/PARTIAL tags guide stem choice, not official scope completion.
-   - If no declared stem fits the subskill, author an original scenario in the
-     same style (see style references in
+5. Map chosen required subskill IDs to a concrete stem:
+   - Author an original scenario for the subskill (see style references in
      `.github/instructions/sources-and-citations.instructions.md`).
 6. Avoid:
    - Verbatim repeats of any question in the mistake log within the past 7
-     days (rephrase the ExamTopics stem or pick a sibling variant).
+     days (rephrase the stem or pick a sibling variant).
    - Re-asking the same weak topic two turns in a row unless the user opted
      into focused practice.
 7. Pick the question style:

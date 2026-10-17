@@ -1,16 +1,22 @@
 # Adding a Certification
 
 1. Create `exams/<exam-id>/exam.md` with the official title, skills outline,
-   domain weights, authoritative sources, local source order, and available
-   question banks.
+   domain weights, authoritative sources, local source order, and original
+   question-style guidance.
 2. Create `exams/<exam-id>/blueprint.json` and link it from `exam.md`. Reconcile
    every published objective against the current official study guide, record
    source URLs and revision/check dates, and decompose broad objectives into
    assessable subskills with stable IDs. Mark the catalog verified only after
    that reconciliation; unknown scope is not complete. Follow the
    [catalog schema](../.github/skills/coverage-audit/references/evidence.md#catalog).
-3. Create `material/README.md` and add only legally shareable notes, links,
-   transcripts, and question banks.
+3. Create `material/README.md` for original notes, cheat sheets, and links to
+   official resources. Do not commit third-party books, course or video
+   transcripts, slide captures, practice-test or exam-dump questions, or answer
+   keys. Mark `material/test-exams/` as local-only for personal practice results
+   and score reports; never commit its contents. Keep copied third-party
+   material out of the repository workspace; link to official resources
+   instead. Follow the
+   [source contract](../.github/instructions/sources-and-citations.instructions.md#sharing--commit-policy).
 4. Create `assets/progress.md` using the starter format below. It remains local.
 5. Create `assets/study-plans/README.md`; dated plans in that folder remain local.
 6. From the repository root, validate the catalog and initialize private
@@ -49,5 +55,6 @@ Minimum progress headings:
 ## Session log
 ```
 
-Do not reuse another exam's sources. When no local bank exists, generate
-original questions from the authoritative sources declared in `exam.md`.
+Do not reuse another exam's sources. Always generate original questions from
+the authoritative first-party sources declared in `exam.md`, regardless of
+whether local practice results exist.

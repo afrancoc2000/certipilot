@@ -5,16 +5,13 @@ wins on conflict.
 
 ```text
 material/
-├── course/       # Spanish-language study notes per domain
-├── savill/       # John Savill transcripts
-├── pluralsight/  # <Course>/transcript.txt
-├── oreilly/      # certification-guide/chapter-0X.md
+├── course/       # Optional: your own study notes per domain
 ├── cheat-sheets/ # Decision trees
-└── test-exams/   # Practice captures and question banks
+└── test-exams/   # Local-only practice results (never committed)
 ```
 
-Study material is shared under the
+Only original study material is shared under the
 [source contract](../../../.github/instructions/sources-and-citations.instructions.md);
-graded results under `test-exams/` and everything under `../assets/` (progress,
+everything under `test-exams/` and everything under `../assets/` (progress,
 evidence, dated plans) stay local. Store study plans in
 `../assets/study-plans/`, not here.

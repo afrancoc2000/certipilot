@@ -1,8 +1,7 @@
 # GH-300 Resource Index
 
-Curated on August 26, 2026. No GH-300 ExamTopics PDF was found in the supplied
-company search results. The resources below are training and practice aids,
-not exam dumps.
+Curated on August 26, 2026. The resources below are training and practice
+aids, not exam dumps.
 
 ## Internal training
 
@@ -43,4 +42,5 @@ not exam dumps.
   with first-party documentation, follow the first-party source and flag the
   discrepancy.
 - Do not treat these resources as a local question bank. Author original,
-  cited practice questions until a legitimate GH-300 bank is added.
+  cited practice questions from the official study guide and first-party
+  documentation, regardless of whether local practice material exists.

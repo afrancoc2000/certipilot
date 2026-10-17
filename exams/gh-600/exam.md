@@ -157,7 +157,8 @@ availability.
 
 1. `exams/gh-600/material/course/` - local notes mapped to D1-D6.
 2. `exams/gh-600/material/github-docs/` - local summaries of GitHub Docs.
-3. `exams/gh-600/material/test-exams/` - practice captures (none yet).
+3. `exams/gh-600/material/test-exams/` - local-only personal practice results
+   and score reports (never committed).
 4. Microsoft Learn and GitHub Docs URLs above (authoritative).
 
 ## Relationship to GH-300
@@ -169,8 +170,8 @@ evaluation, multi-agent orchestration, and guardrails. Do not reuse GH-300
 questions or cite GH-300 material during a GH-600 session — each session stays
 scoped to one exam.
 
-## Question banks
+## Original questions and style
 
-No local question bank exists yet. Author original scenario questions from the
-authoritative sources and cite the first-party page used to grade. Agent
+Always author original scenario questions from the authoritative first-party
+sources and cite the first-party page used to grade. Agent
 features change fast: record the date each source was checked.

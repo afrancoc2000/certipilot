@@ -28,10 +28,12 @@ units before new normal work. Resume pending items rather than selecting anew.
 
 ## Question source and style
 
-- Read the question-bank inventory in `exams/<active-exam>/exam.md`. Use only
-  banks declared there and prioritize them according to that exam's config.
-- When no bank exists, author an original scenario from the authoritative
-  first-party sources listed in `exam.md`; never borrow another exam's stems.
+- Read the skills outline, authoritative sources, and question-style guidance
+  in `exams/<active-exam>/exam.md`.
+- In every quiz, drill, case-study, and mock-exam mode, author original
+  scenarios from those first-party sources. Never reproduce third-party
+  question banks, exam dumps, or paid practice-test content, or borrow
+  another exam's stems.
 - Match any style references declared in `exam.md`: concrete scenario,
   explicit constraints, four plausible options (A-D) for single-answer items
   (multi-select follows its own declared format), and a per-option rationale on
