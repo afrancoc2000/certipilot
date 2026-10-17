@@ -33,62 +33,37 @@ documentation when local material is missing.
 
 ### Studying in Copilot CLI
 
-Use interactive mode for quizzes, mocks, and tutor checks:
+Copilot CLI separates **conversation mode** from **tool permissions**:
+
+- **Interactive mode** waits for your next message after each turn. Use it for
+  quizzes, mocks, tutoring, and anything that needs your answer.
+- **Autopilot mode** automatically continues across model turns. Use it for a
+  well-defined implementation or investigation that does not need learner input.
+- **`/allow-all`** (alias `/yolo`) approves all tools, paths, and URLs for the
+  current session. It does not enable Autopilot or leave Interactive mode.
+
+Start a normal Interactive session:
 
 ```powershell
-copilot --mode interactive
+copilot
 ```
 
-In an existing Autopilot session, use `/autopilot` to toggle it off before
-continuing study. Autopilot automatically continues after a response instead of
-waiting for an answer, which can bury the question under repeated reminders.
-Resumed sessions retain their own mode; starting new sessions in interactive
-mode does not change an already resumed Autopilot session.
+If you trust the workspace and want to remove approval prompts without leaving
+Interactive mode, enter:
 
-The [question-last contract](AGENTS.md#question-last-delivery) keeps required
-saves and handoffs before the final question and suppresses routine narrative
-receipts. Tool rows and review notices such as "First pass was accepted" belong
-to the CLI interface, not the study response; repository instructions cannot
-combine them into one collapsible bucket. `/compact` reduces model context
-usage, not notification clutter on screen.
-
-#### Preapproved study saves without Autopilot
-
-On Windows, start a fresh interactive CLI conversation using the
-[study launcher](.github/study.ps1):
-
-```powershell
-.\.github\study.ps1
+```text
+/allow-all
 ```
 
-This does not modify global settings. It approves direct edits only to each
-exam's `progress.md` and two fixed temporary input files. Tracking commands run
-through the [restricted helper](.github/study-helper.ps1), which fixes the
-repository root and allows only the existing coverage/session commands.
-It does not approve arbitrary Python, PowerShell, file writes, or all tools.
-Other operations, including study-plan edits, may still prompt.
+The launch equivalent is `copilot --allow-all`. This is broad access, not a
+sandbox: Copilot can use the same files, commands, and network access available
+to your account. Repeating `/allow-all` does not disable it; use `/permissions`
+to change permission mode or start a fresh session for a clean state.
 
-The launcher starts a new CLI conversation; the agent can resume the saved
-exam checkpoint without inheriting an old CLI session's permission mode.
-It refuses to launch over an existing broad default permission mode or
-`COPILOT_ALLOW_ALL` override. Approved commands still validate inputs, hashes,
-and genuine answers; approval does not bypass the tracking contracts.
-These approvals assume the repository's helper code is trusted and unchanged;
-they are not an operating-system sandbox.
-
-For example, the agent uses the absolute helper path (substitute your checkout):
-
-```powershell
-& 'C:\Users\anafranco\Workspace\hackathon-2026\certipilot\.github\study-helper.ps1' -Tool session -Command resume -Exam ai-103 -Json
-```
-
-`record` reads `exams/<exam>/assets/.study-record-input.json`; `checkpoint`
-reads `exams/<exam>/assets/.study-checkpoint-input.json`. Both require
-`-ExpectedSha256`; prepare the normal validated payload first. `-Command cleanup`
-removes only the selected tool's fixed input file. Optional helper parameters
-are `-AsOf`, `-Json`, coverage-only `-StaleDays`, and session-only
-`-QuestionCount`. Direct invocation is important: wrapping the helper in
-`python`, `powershell`, or `pwsh` would request a different command permission.
+Use `Shift+Tab` or `/autopilot` to switch Autopilot on or off. Before starting
+or resuming turn-by-turn study, return to Interactive mode. The
+[question-last contract](AGENTS.md#question-last-delivery) keeps required saves
+and handoffs before the question, then waits for a genuine learner response.
 
 ## Runtime models and responsive turns
 

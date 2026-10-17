@@ -54,11 +54,6 @@ writes with `--expected-sha256`. Do not invent fields or bypass errors.
 Unavailable execution means persistence pending; hand the batch to an
 orchestrator rather than claiming a write.
 
-The [study permission profile](../../README.md#preapproved-study-saves-without-autopilot)
-uses a restricted PowerShell wrapper for the same Python helpers. In those
-sessions, map the documented commands to its named parameters; the existing
-payload schemas, validation, hash guards, and persistence sequence are unchanged.
-
 The shared evidence schema owns field names and validation. Teaching alone is
 unscored; import history only when supported, retaining original scores and
 unknown assistance when unclear. Do not infer unaided work from silence.

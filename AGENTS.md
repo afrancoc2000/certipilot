@@ -51,9 +51,10 @@ agent's personality or the subject of ordinary replies.
   continuations, tool completions, and review notifications are not answers or
   requests for another reminder; leave the pending item unchanged.
 - Turn-by-turn study requires interactive mode. If Autopilot is active, ask the
-  learner once to turn it off with `/autopilot` before starting or resuming
-  questions. Do not attempt to satisfy its progress loop with repeated replies,
-  dummy tools, invented answers, or advancing the session.
+  learner once to return to Interactive mode with `Shift+Tab` or `/autopilot`
+  before starting or resuming questions. Do not attempt to satisfy its progress
+  loop with repeated replies, dummy tools, invented answers, or advancing the
+  session.
 - Keep routine work in tool output and private handoffs, not a second stream
   of commentary. Surface only consequential failures or necessary clarification.
   Host-generated tool/review notifications are controlled by the client;
@@ -242,12 +243,6 @@ Reduce orchestration overhead, not learning or persistence safeguards.
   commands and routine evidence writes. Do not launch `execution-subagent`
   merely to run these commands. If direct execution is unavailable, use that
   helper with a bounded command and an explicit failure/result handoff.
-- In sessions started by [the study launcher](.github/study.ps1), invoke
-  [the restricted helper](.github/study-helper.ps1) directly by its absolute
-  path for coverage/session commands. Use its fixed exam-local input files and
-  cleanup command; retain the canonical payloads, hash guards, and save order.
-  Do not fall back to arbitrary Python or request broad permissions when a
-  scoped invocation fails; disclose the error and correct the invocation.
 - Reuse an existing quiz-agent's retained context for the same pending item
   (preparation, genuine answer, grading and review), rather than cold-starting
   another agent to redo that work. New independent tasks or phase changes may

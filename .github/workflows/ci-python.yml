@@ -61,9 +61,6 @@ jobs:
             Tee-Object -FilePath "$env:CI_REPORT_DIR/unittest.txt"
           exit $LASTEXITCODE
 
-      - name: Test study permission launcher
-        run: .\.github\tests\test-study-permissions.ps1
-
       - name: Generate coverage reports
         if: ${{ always() && steps.tests.outcome != 'skipped' }}
         run: |

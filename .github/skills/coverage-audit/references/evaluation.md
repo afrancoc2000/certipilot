@@ -23,17 +23,6 @@ These checks do not prove that an AI correctly diagnosed a misconception,
 understood a source, generated an unambiguous item, or followed every instruction.
 Keyword/link checks are wiring tests, not pedagogical evaluations.
 
-## Study permission profile
-
-Run `pwsh -NoProfile -File .github\tests\test-study-permissions.ps1` on Windows.
-The synthetic launcher/helper checks cover command and root restrictions,
-fixed payload routing, missing inputs, failed helper execution, targeted cleanup,
-interactive launch arguments, and rejection of broad configured permissions.
-They do not launch a model or prove the installed CLI will approve a live call.
-Verify a real study turn separately: the directly invoked helper and fixed
-progress/payload writes should not prompt; unrelated commands should still
-request permission. Do not test by inventing learner answers.
-
 ## Executable workflow contracts
 
 [test_workflows.py](../tests/test_workflows.py) uses temporary synthetic catalogs,
