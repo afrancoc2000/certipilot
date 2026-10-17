@@ -50,11 +50,11 @@ Once resolved, `<active-exam>` is the folder name under `exams/` (for example
 
 | Resource | Path |
 | --- | --- |
-| Exam config (domains, sources, URLs, banks) | `exams/<active-exam>/exam.md` |
+| Exam config (domains, authoritative sources, question-style guidance) | `exams/<active-exam>/exam.md` |
 | Progress / agent memory | `exams/<active-exam>/assets/progress.md` |
 | Canonical evidence / private checkpoint | `exams/<active-exam>/assets/coverage.json`, `exams/<active-exam>/assets/session.json` |
 | Study plans | `exams/<active-exam>/assets/study-plans/` |
-| Study material | `exams/<active-exam>/material/` (course, cheat-sheets) |
+| Original study material | `exams/<active-exam>/material/` |
 | Local practice results (never committed) | `exams/<active-exam>/material/test-exams/` |
 | Cross-exam master / mixed plan | `assets/` (top level) |
 
@@ -71,7 +71,7 @@ exam's domains, source hierarchy, MS Learn URLs, and which local references exis
   exam intent. Never switch exams silently.
 
 - Never mix material across exams in one session: while AZ-104 is active, do not
-  quiz from AZ-305 banks or cite AZ-305 material, and vice versa.
-- If the active exam's `exam.md` is missing or a referenced bank does not exist
-  yet, say so and fall back to Microsoft Learn (flagged) rather than borrowing
-  another exam's content.
+  use AZ-305 material to author questions or explanations, and vice versa.
+- If the active exam's `exam.md` or optional original study material is missing,
+  say so and fall back to authoritative first-party documentation for that exam
+  (flagged) rather than borrowing another exam's content.
