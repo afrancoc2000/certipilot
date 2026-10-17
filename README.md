@@ -31,6 +31,40 @@ The agent reads `exams/<active-exam>/exam.md` first, then uses that exam's
 material, progress, and study plan. It falls back to authoritative first-party
 documentation when local material is missing.
 
+### Studying in Copilot CLI
+
+Copilot CLI separates **conversation mode** from **tool permissions**:
+
+- **Interactive mode** waits for your next message after each turn. Use it for
+  quizzes, mocks, tutoring, and anything that needs your answer.
+- **Autopilot mode** automatically continues across model turns. Use it for a
+  well-defined implementation or investigation that does not need learner input.
+- **`/allow-all`** (alias `/yolo`) approves all tools, paths, and URLs for the
+  current session. It does not enable Autopilot or leave Interactive mode.
+
+Start a normal Interactive session:
+
+```powershell
+copilot
+```
+
+If you trust the workspace and want to remove approval prompts without leaving
+Interactive mode, enter:
+
+```text
+/allow-all
+```
+
+The launch equivalent is `copilot --allow-all`. This is broad access, not a
+sandbox: Copilot can use the same files, commands, and network access available
+to your account. Repeating `/allow-all` does not disable it; use `/permissions`
+to change permission mode or start a fresh session for a clean state.
+
+Use `Shift+Tab` to cycle back from Autopilot to Interactive mode before starting
+or resuming turn-by-turn study. The
+[question-last contract](AGENTS.md#question-last-delivery) keeps required saves
+and handoffs before the question, then waits for a genuine learner response.
+
 ## Runtime models and responsive turns
 
 Skills define workflows, not model selection. Copilot's built-in

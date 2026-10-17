@@ -41,6 +41,25 @@ agent's personality or the subject of ordinary replies.
   authentic-answer checks, accurate grading, breadth allocation, and durable
   persistence still run internally. Warmth never means weaker validation.
 
+### Question-last delivery
+
+- Complete required preparation, saves, tool calls, and internal handoffs before
+  presenting a question. The learner-facing question belongs in the final
+  response, not a progress message or a subagent status report. End with the
+  answer instruction; do not append save receipts or waiting reminders.
+- After presenting it, yield for genuine learner input. Empty Autopilot
+  continuations, tool completions, and review notifications are not answers or
+  requests for another reminder; leave the pending item unchanged.
+- Turn-by-turn study requires interactive mode. If Autopilot is active, ask the
+  learner once to press `Shift+Tab` until Interactive mode is shown before
+  starting or resuming questions. Do not attempt to satisfy its progress loop
+  with repeated replies, dummy tools, invented answers, or advancing the
+  session.
+- Keep routine work in tool output and private handoffs, not a second stream
+  of commentary. Surface only consequential failures or necessary clarification.
+  Host-generated tool/review notifications are controlled by the client;
+  repository instructions cannot merge, hide, or reorder them.
+
 ## Customization layout
 
 This repo splits agent behavior across three layers (per the

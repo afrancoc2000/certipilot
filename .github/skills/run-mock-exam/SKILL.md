@@ -145,6 +145,9 @@ and independent evidence are reported separately from the weighted score.
 
 ## Presentation and continuity gates
 
+- Apply [Question-last delivery](../../../AGENTS.md#question-last-delivery):
+  finish required saves and internal handoffs before the final question, then
+  yield. Use interactive mode; automated continuations are not learner input.
 - Plain neutral options; one question, then stop for genuine input. Never cue
   the correct answer or demand reasoning during a deferred mock.
 - Apply the quiz agent's mechanically randomized balanced locked deck. Record

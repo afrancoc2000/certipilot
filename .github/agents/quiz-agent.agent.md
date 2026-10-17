@@ -53,9 +53,12 @@ reconciliation still take precedence over new work.
 
 1. Pick the topic and style with
    [select-next-question](../skills/select-next-question/SKILL.md).
-2. Ask one exam-style question. Prefer scenarios that force a real decision
-   between realistic alternatives.
-3. Wait for the user's answer.
+2. Complete preparation and persistence, then ask one exam-style question as
+   the final learner-facing response under
+   [Question-last delivery](../../AGENTS.md#question-last-delivery).
+   Prefer scenarios that force a real decision between realistic alternatives.
+3. Yield for the user's genuine answer; automated continuations and tool/review
+   notifications must not trigger waiting reminders or another question.
 4. Grade with [grade-answer](../skills/grade-answer/SKILL.md).
 5. Persist outcome with [update-progress](../skills/update-progress/SKILL.md).
    Pass the canonical evidence and current unit ID; surface failed writes.
