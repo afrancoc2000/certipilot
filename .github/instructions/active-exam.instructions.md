@@ -70,8 +70,9 @@ exam's domains, source hierarchy, MS Learn URLs, and which local references exis
   Ask only if state is ambiguous, stale, conflicting, or differs from explicit
   exam intent. Never switch exams silently.
 
-- Never mix material across exams in one session: while AZ-104 is active, do not
-  use AZ-305 material to author questions or explanations, and vice versa.
+- Never mix material across exams in one session: use only the active exam's
+  material and declared authoritative sources to author questions or
+  explanations. Do not use another exam's material.
 - If the active exam's `exam.md` or optional original study material is missing,
   say so and fall back to authoritative first-party documentation for that exam
   (flagged) rather than borrowing another exam's content.
