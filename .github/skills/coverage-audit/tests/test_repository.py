@@ -171,6 +171,18 @@ class RepositoryTests(unittest.TestCase):
         self.assertNotIn("rounding remainders to the highest-weighted domains", weighting)
         self.assertNotIn("use equal positive weights for all domains", weighting)
 
+    def test_mock_runs_in_one_session_without_per_answer_agent_handoffs(self):
+        policy = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        workflow = (ROOT / ".github" / "skills" / "run-mock-exam" / "SKILL.md").read_text(
+            encoding="utf-8",
+        )
+        policy = " ".join(policy.split()).lower()
+        workflow = " ".join(workflow.split()).lower()
+        self.assertIn("session interacting with the learner owns the mock", policy)
+        self.assertIn("does not dispatch or forward individual answers", policy)
+        self.assertIn("session interacting with the learner owns the mock", workflow)
+        self.assertIn("do not forward individual answers to another agent", workflow)
+
     def test_teacher_first_contract_is_wired_to_every_study_entry_point(self):
         policy = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         self.assertIn("## Teacher-first conversation", policy)
