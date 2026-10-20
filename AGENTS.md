@@ -43,10 +43,12 @@ agent's personality or the subject of ordinary replies.
 
 ### Question-last delivery
 
-- Complete required preparation, saves, tool calls, and internal handoffs before
-  presenting a question. The learner-facing question belongs in the final
-  response, not a progress message or a subagent status report. End with the
-  answer instruction; do not append save receipts or waiting reminders.
+- Complete required preparation, saves, and tool calls before presenting a
+  question. For workflows that delegate, finish internal handoffs first. Mock
+  exams stay with the current session and have no per-answer specialist
+  handoff. The learner-facing question belongs in the final response, not a
+  progress message or a subagent status report. End with the answer instruction;
+  do not append save receipts or waiting reminders.
 - After presenting it, yield for genuine learner input. Empty Autopilot
   continuations, tool completions, and review notifications are not answers or
   requests for another reminder; leave the pending item unchanged.
@@ -119,6 +121,8 @@ The user can switch modes at any time. Default is **quiz**.
   term + abbreviation in parentheses.
 - **Mock exam** (via `run-mock-exam` skill) — 10 questions with deferred
   grading, domain-weighted selection, per-domain summary, bulk progress update.
+  The session interacting with the learner owns the mock from preparation
+  through review; do not forward each answer to another agent.
 - **Sprint** (via `build-sprint-plan` skill) — build an exam-date intensive
   plan, optionally seeded by a baseline mock exam.
 - **Follow plan** (via `follow-plan` skill) — orchestrator mode that reads
@@ -132,8 +136,9 @@ and its shared evidence/session specifications, plus the
 [source contract](.github/instructions/sources-and-citations.instructions.md).
 These own coverage-first allocation, lifecycle/debt, authentic answers,
 corrections, source verification, and pause/resume. Skills own workflow steps;
-[quiz-agent](.github/agents/quiz-agent.agent.md) owns option presentation and
-the locked answer-position deck. Do not duplicate these contracts in modes.
+[quiz-agent](.github/agents/quiz-agent.agent.md) defines option presentation and
+the locked answer-position deck. The mock runner follows that contract directly
+without per-answer delegation. Do not duplicate these contracts in modes.
 
 ## Atlas-inspired instructional loop
 
@@ -212,8 +217,9 @@ preserves the mandatory 2026-09-04 provenance protocol and incident context.
 When custom agents are available in [.github/agents/](.github/agents/), route by
 intent:
 
-- `quiz-agent` — single questions, case-study quizzes, grading, progress updates
-  after answers, mock exams.
+- `quiz-agent` — single questions, case-study quizzes, grading, and progress
+  updates after answers. For a mock, the session interacting with the learner
+  owns the full run and does not dispatch or forward individual answers.
 - `study-planner-agent` — dated plans, sprint planning, weak-topic
   prioritization, persisted plans under `exams/<active-exam>/assets/study-plans/`.
 - `tutor-agent` — concept explanations, decision frameworks, mental maps.
@@ -245,9 +251,11 @@ Reduce orchestration overhead, not learning or persistence safeguards.
   helper with a bounded command and an explicit failure/result handoff.
 - Reuse an existing quiz-agent's retained context for the same pending item
   (preparation, genuine answer, grading and review), rather than cold-starting
-  another agent to redo that work. New independent tasks or phase changes may
-  need a fresh specialist. Skills do not choose models; Copilot's per-agent
-  settings govern the built-in execution helper.
+  another agent to redo that work. This applies to delegated quiz work; mocks
+  remain with the current session for every answer and final review. New
+  independent tasks or phase changes may need a fresh specialist. Skills do not
+  choose models; Copilot's per-agent settings govern the built-in execution
+  helper.
 - A successful `record --json` already returns the validated audit report and
   committed ledger hash. Reuse that report for summary and selection while
   exam, revision, as-of date and ledger hash still match. Re-audit on a changed

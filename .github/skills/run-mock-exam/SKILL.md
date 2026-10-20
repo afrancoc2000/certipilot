@@ -113,9 +113,11 @@ and independent evidence are reported separately from the weighted score.
    item. Do not start until validation and durable checkpointing succeed; report
    unavailable storage rather than claim a resumable mock.
 3. Use [select-next-question](../select-next-question/SKILL.md) while building
-   the manifests, not between user answers. During the live mock, read the next
-   item directly from the cached public manifest so question transitions are
-   immediate.
+   the manifests, not between user answers. The session interacting with the
+   learner owns the mock from preparation through final review; do not forward
+   individual answers to another agent or redispatch the mock between turns.
+   During the live mock, read the next item directly from the cached public
+   manifest so question transitions are immediate.
 4. Ask one question per turn. Accept the answer. Do **not** grade, hint,
    reveal, restate, or comment on the correct option while the mock is in
    progress.
@@ -146,8 +148,9 @@ and independent evidence are reported separately from the weighted score.
 ## Presentation and continuity gates
 
 - Apply [Question-last delivery](../../../AGENTS.md#question-last-delivery):
-  finish required saves and internal handoffs before the final question, then
-  yield. Use interactive mode; automated continuations are not learner input.
+  finish required saves before the final question, then yield. Keep the full
+  mock in the current session without per-answer agent handoffs. Use interactive
+  mode; automated continuations are not learner input.
 - Plain neutral options; one question, then stop for genuine input. Never cue
   the correct answer or demand reasoning during a deferred mock.
 - Apply the quiz agent's mechanically randomized balanced locked deck. Record
