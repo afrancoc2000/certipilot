@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Certipilot · Tu espacio de estudio</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="client.js"></script>
+</head>
+<body>
+    <main>
+        <header>
+            <div class="brand"><span class="mark" aria-hidden="true">C</span><span>Certipilot</span></div>
+            <button id="refresh" class="quiet" type="button">Actualizar</button>
+        </header>
+        <section class="intro">
+            <p class="eyebrow">TU ESPACIO DE ESTUDIO</p>
+            <h1>Entender. Practicar.<br>Volver a intentarlo.</h1>
+            <p class="lead">Tu examen y tus planes aquí. La conversación, con tu agente.</p>
+        </section>
+        <div id="notice" role="status" aria-live="polite"></div>
+        <section class="card selection" aria-labelledby="exam-heading">
+            <div><p class="eyebrow">01 · ELIGE TU RUMBO</p><h2 id="exam-heading">Examen de estudio</h2></div>
+            <label for="exam">Selecciona un examen explícitamente</label>
+            <select id="exam" disabled><option value="">Cargando exámenes…</option></select>
+            <p id="exam-note" class="muted">No se ha establecido un examen activo.</p>
+        </section>
+        <div id="workspace" hidden>
+            <section class="card" aria-labelledby="continue-heading">
+                <p class="eyebrow">02 · RETOMA EL HILO</p>
+                <h2 id="continue-heading">Tu siguiente paso</h2>
+                <p id="checkpoint-note"></p>
+                <button id="resume" class="primary" type="button" data-study>Continuar sesión guardada <span aria-hidden="true">→</span></button>
+                <p id="evidence-note" class="muted small"></p>
+            </section>
+            <section class="card" aria-labelledby="plans-heading">
+                <p class="eyebrow">03 · APRENDE CON INTENCIÓN</p>
+                <div class="section-title"><h2 id="plans-heading">Planes de estudio</h2><button id="planner" class="quiet" type="button" data-study>Crear un plan</button></div>
+                <p class="muted">Archivos locales, no ejemplos. El agente comprobará fechas y examen antes de ejecutarlos.</p>
+                <div id="plans"></div>
+                <article id="plan-preview" hidden>
+                    <p id="plan-path" class="muted small"></p>
+                    <pre id="plan-content"></pre>
+                    <button id="follow" class="primary" type="button" data-study>Estudiar con este plan <span aria-hidden="true">→</span></button>
+                </article>
+            </section>
+            <section class="card" aria-labelledby="study-heading">
+                <p class="eyebrow">04 · DEL CONCEPTO A LA PRÁCTICA</p>
+                <h2 id="study-heading">Empieza una conversación</h2>
+                <button id="quiz" class="action-card" type="button" data-study><strong>Practicar una pregunta <span aria-hidden="true">→</span></strong><span>Un escenario original, tu razonamiento y una explicación.</span></button>
+                <label for="topic">¿Qué quieres entender?</label>
+                <textarea id="topic" rows="3" maxlength="2000" placeholder="Escribe un concepto o una duda sobre este examen"></textarea>
+                <button id="tutor" class="secondary" type="button" data-study>Explorar con tutor <span aria-hidden="true">→</span></button>
+            </section>
+        </div>
+        <footer>Solo este repositorio · Sin puntuaciones inventadas<br>Las acciones se envían al chat que abrió este canvas. Usa modo Interactive.</footer>
+    </main>
+</body>
+</html>

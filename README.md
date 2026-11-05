@@ -65,6 +65,20 @@ or resuming turn-by-turn study. The
 [question-last contract](AGENTS.md#question-last-delivery) keeps required saves
 and handoffs before the question, then waits for a genuine learner response.
 
+## Canvas in GitHub Copilot App
+
+The project extension in [`.github/extensions/certipilot/`](.github/extensions/certipilot/README.md)
+provides a Spanish study canvas: select an exam, preview local study plans,
+and start or continue study in the repository session that opened it.
+After enabling/loading project extensions, ask **"Abre el canvas Certipilot"**
+in an Interactive repository session. Existing sessions may need a restart.
+No npm dependencies or global installation are needed.
+
+The canvas reads only this checkout. Ignored plans and checkpoints may be
+absent in a new worktree; it does not copy private files, invent progress,
+or infer an active exam from unvalidated Markdown. The agent still owns
+source verification, checkpoint validation and study evidence.
+
 ## Runtime models and responsive turns
 
 Skills define workflows, not model selection. Copilot's built-in

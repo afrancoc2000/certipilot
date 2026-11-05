@@ -1,0 +1,50 @@
+:root {
+    color-scheme: light dark;
+    --bg: var(--background-color-default, light-dark(#ffffff, #0d1117));
+    --fg: var(--text-color-default, light-dark(#1f2328, #f0f3f6));
+    --muted: var(--text-color-muted, light-dark(#59636e, #a4afbc));
+    --line: var(--border-color-default, light-dark(#d1d9e0, #343d49));
+    --accent: var(--true-color-blue, light-dark(#0969da, #79c0ff));
+    --soft: var(--true-color-blue-muted, light-dark(#eef6ff, #121f32));
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif); font-size: var(--text-body-medium, 16px); line-height: var(--leading-body-medium, 1.6); }
+main { max-width: 1000px; margin: auto; padding: 28px clamp(20px, 5vw, 64px) 36px; }
+header, .brand, .section-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { justify-content: flex-start; font-size: 19px; font-weight: 650; letter-spacing: -.5px; }
+.mark { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--accent); color: var(--accent); border-radius: 12px; }
+.intro { padding: 46px 0 30px; }
+.eyebrow { color: var(--accent); font-size: 12px; font-weight: 650; letter-spacing: 1.8px; margin: 0 0 12px; }
+h1 { font-family: var(--font-sans-display, var(--font-sans, "Segoe UI", sans-serif)); font-size: clamp(32px, 6vw, 49px); letter-spacing: -1.6px; line-height: 1.12; font-weight: var(--font-weight-semibold, 600); margin: 0 0 20px; }
+h2 { font-size: 22px; line-height: 1.3; letter-spacing: -.5px; margin: 0 0 16px; }
+.lead { color: var(--muted); font-size: 18px; max-width: 520px; }
+.card { border: 1px solid var(--line); border-radius: 18px; padding: clamp(20px, 4vw, 30px); margin-bottom: 20px; }
+.selection { border-top: 3px solid var(--accent); }
+.muted, footer { color: var(--muted); }
+.small { font-size: 13px; overflow-wrap: anywhere; }
+label { display: block; font-weight: 550; margin: 14px 0 8px; }
+select, textarea { width: 100%; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 9px; padding: 13px; font: inherit; }
+select { text-overflow: ellipsis; }
+textarea { resize: vertical; }
+button { cursor: pointer; font: inherit; font-weight: 600; border-radius: 9px; padding: 11px 16px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); transition: border-color .15s, background .15s; }
+button:hover:not(:disabled) { border-color: var(--accent); background: var(--soft); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--color-focus-outline, var(--accent)); outline-offset: 3px; }
+.quiet { padding: 7px 12px; font-size: 14px; white-space: nowrap; }
+.primary { background: var(--soft); border-color: var(--accent); width: 100%; text-align: left; }
+.primary span, .action-card strong span { float: right; }
+.secondary { margin-top: 12px; }
+.action-card { display: grid; gap: 6px; width: 100%; text-align: left; padding: 18px; margin: 12px 0 24px; }
+.action-card span { font-size: 14px; color: var(--muted); font-weight: 400; }
+.action-card strong span { color: var(--accent); font-size: 20px; }
+.plan-item { display: block; width: 100%; text-align: left; margin: 10px 0; overflow-wrap: anywhere; }
+.plan-item[aria-pressed="true"] { border-color: var(--accent); background: var(--soft); }
+.plan-item small { display: block; color: var(--muted); font-weight: 400; }
+#plan-preview { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 12px; }
+pre { font: inherit; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 500px; overflow: auto; padding: 16px; background: var(--soft); border-radius: 9px; }
+#notice:not(:empty) { border-left: 3px solid var(--accent); background: var(--soft); padding: 15px 18px; margin-bottom: 24px; border-radius: 6px; }
+#notice[data-error="true"] { border-color: var(--true-color-red, #cf222e); }
+footer { text-align: center; font-size: 13px; padding-top: 12px; }
+[hidden] { display: none !important; }
+@media (max-width: 430px) { .section-title { align-items: flex-start; flex-direction: column; gap: 0; } h1 { font-size: 34px; } }
+@media (prefers-reduced-motion: reduce) { button { transition: none; } }
