@@ -1,0 +1,38 @@
+name: CI Canvas
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/extensions/certipilot/**'
+      - '.github/workflows/ci-canvas.yml'
+  push:
+    branches: [main]
+    paths:
+      - '.github/extensions/certipilot/**'
+      - '.github/workflows/ci-canvas.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  canvas:
+    name: Canvas (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check extension and renderer syntax
+        run: node --check .github/extensions/certipilot/extension.mjs && node --check .github/extensions/certipilot/client.js
+      - name: Run isolated canvas contracts
+        run: node --test .github/extensions/certipilot/tests/canvas.test.mjs
