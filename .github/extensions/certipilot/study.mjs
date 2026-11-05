@@ -133,7 +133,9 @@ export function createStudyService(root, { send, getMode }) {
                 follow: "Quiero seguir este plan. Invoca follow-plan con esta ruta explícita:",
                 resume: "Quiero continuar mi sesión guardada, sin reconstruir respuestas ni cambiar el ítem pendiente.",
             };
-            if (!Object.hasOwn(commands, action)) throw new StudyError("Acción de estudio no reconocida.");
+            if (typeof action !== "string" || !Object.hasOwn(commands, action)) {
+                throw new StudyError("Acción de estudio no reconocida.");
+            }
             if (action === "tutor" && (typeof topic !== "string" || !topic.trim() || topic.length > 2000)) {
                 throw new StudyError("Escribe un tema de hasta 2000 caracteres.");
             }

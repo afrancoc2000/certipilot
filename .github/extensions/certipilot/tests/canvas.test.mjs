@@ -89,6 +89,8 @@ test("invalid inputs, missing checkpoint, and missing plan never dispatch", asyn
     const { service, sent } = await fixture(t);
     for (const input of [
         null, [], {}, { examId: "one", action: "wrong" }, { examId: "one", action: "constructor" },
+        ...["quiz", "tutor", "planner", "follow", "resume"].map((action) => ({ examId: "one", action: [action] })),
+        ...[null, true, 1, {}].map((action) => ({ examId: "one", action })),
         { examId: "one", action: "tutor", topic: " " },
         { examId: "one", action: "tutor", topic: "a".repeat(2001) },
         { examId: "one", action: "follow", planPath: "../x" },
